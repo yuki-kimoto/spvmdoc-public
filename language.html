@@ -223,7 +223,7 @@
 </ul>
 <h4 id="language-lex-identifier-package-name">Package Name</h4><!-- 2019/2/27 almost ok -->
 <p>
-  Package Name is one or more alphabet characters of ASCII Code or "::".
+  Package Name is one or more alphabet(a-zA-Z), number(0-9), underscore(_) or "::" of ASCII Code.
 </p>
 <p>
   It is not necessary to include "::" in the Package Name.
@@ -232,18 +232,22 @@
   Package Name must start a uppercase letter in ASCII Code
 </p>
 <p>
-  "::" cannot be continued. Last characters cannot end with "::".
+  "::" cannot be continued twice. Last characters cannot end with "::".
+</p>
+<p>
+  Underscore cannot be continued twice.
 </p>
 <pre>
 # Valid Package Name
 Foo
 Foo::Bar
-Foo::Bar::Baz
+Foo::Bar::Baz3
 Foo::bar
 Foo_Bar::Baz_Baz
 
 # Invalid Package Name
 foo
+_Foo
 Foo::Bar::
 Foo__Bar
 </pre>
@@ -252,24 +256,18 @@ Foo__Bar
 </p>
 <h4 id="language-lex-identifier-sub-name">Subroutine Name</h4><!-- 2019/2/27 almost ok -->
 <p>
-  Subroutine Nameは、"ASCII Codeにおける
-<p>
-  Alphabetあるいは
+  Subroutine Name is one or more alphabet(a-zA-Z), number(0-9), or underscore(_) of ASCII Code.
 </p>
 <p>
-  Underscoreの一文字以上"です。
-</p>
+  First character must not number character.
 </p>
 <p>
-  
-<p>
-  Underscoreは、二つ以上続いてはいけません。
-</p>
+  Underscore cannot be continued twice.
 </p>
 <pre>
 # Valid Subroutine Name
 FOO
-FOO_BAR
+FOO_BAR3
 foo
 foo_bar
 _foo
@@ -280,88 +278,73 @@ foo__bar
 </pre>
 <h4 id="language-lex-identifier-field-name">Field Name</h4><!-- 2019/2/27 almost ok -->
 <p>
-  Field Nameは、"ASCII Codeにおける
-<p>
-  Alphabetあるいは
+  Field Name is one or more alphabet(a-zA-Z), number(0-9), or underscore(_) of ASCII Code.
 </p>
 <p>
-  Underscoreの一文字以上"です。
+  First character must not number character.
 </p>
-</p>
-<p>
   
 <p>
-  Underscoreは、二つ以上続いてはいけません。
-</p>
+  Underscore cannot be continued twice.
 </p>
 <pre>
 # Valid Field Name
 FOO
-FOO_BAR
+FOO_BAR3
 foo
 foo_bar
 _foo
 _foo_bar_
 
 # Invalid Field Name
+3foo
 foo__bar
 </pre>
 <h4 id="language-lex-identifier-package-var-name">Package Variable Name</h4><!-- 2019/2/27 maybe ok -->
 <p>
-  Package Variable Nameは、先頭が"$"で始まり、その後"ASCII Codeにおける
-<p>
-  Alphabetあるいは
+  Package Variable Name starts with "$", followed more alphabet(a-zA-Z), number(0-9), underscore(_) or "::" of ASCII Code.
 </p>
 <p>
-  Underscoreの一文字以上"と"::"の組み合わせが続きます。"::"は含まれていなくてもかまいません。
-</p>
+  Followed character must not start with number.
 </p>
 <p>
-  
-<p>
-  Underscoreは、二つ以上続いてはいけません。
+  "::" cannot be continued twice. Last characters cannot end with "::".
 </p>
+<p>
+  Underscore cannot be continued twice.
 </p>
 <pre>
 # Valid Package Variable Name
 $FOO::BAR
-$Foo::Bar
+$Foo::Bar3
 $FOO
 $FOO_BAR
 $foo
 
 # Invalid Package Variable Name
 $FOO__BAR
-$
-</pre>
-<h4 id="language-lex-identifier-lex-var-name">Lexical Variable Name</h4><!-- 2019/2/27 maybe ok -->
-<p>
-  Lexical Variable Nameは、先頭が"$"で始まり、その後"ASCII Codeにおける
-<p>
-  Alphabetあるいは
-</p>
-<p>
-  Underscoreの一文字以上"が続きます。
-</p>
-</p>
-<p>
-  
-<p>
-  Underscoreは、二つ以上続いてはいけません。
-</p>
-</p>
-<pre>
+$3FOO
+
+&lt;h4 id="language-lex-identifier-lex-var-name"&gt;Lexical Variable Name&lt;/h4&gt;&lt;!-- 2019/2/27 maybe ok --&gt;
+
+Lexical Variable Name starts with "$", followed more alphabet characters of ASCII Code.
+
+Followed character must not start with number.
+
+Underscore cannot be continued twice.
+
+&lt;pre&gt;
 # Valid Lexical Variable Name
 $foo
-$foo_bar
+$foo_bar3
 $_foo
 $FOO
 
 # Invalid Lexical Variable Name
 $foo__bar
-$
+$3foo
 </pre>
-<h3 id="language-lex-keyword">Keyword</h3><!-- 2019/2/27 maybe ok -->
+<h3 id="language-lex-keyword">Keywords</h3><!-- 2019/2/27 maybe ok -->
 <p>
   Keywords in SPVM are the followings.
 </p>
@@ -373,14 +356,14 @@ public precompile pointer_t return require rw ro self switch
 sub string short scalar undef unless use void mulnum_t while
 weaken wo __END__ __PACKAGE__ __FILE__ __LINE__
 </pre>
-<h3 id="language-lex-separator">Separator</h3><!-- 2019/2/27 almost ok -->
+<h3 id="language-lex-separator">Separators</h3><!-- 2019/2/27 almost ok -->
 <p>
   Separators in SPVM are the followings.
 </p>
 <pre>
 ( ) { } [ ] ; , -&gt; =&gt;
 </pre>
-<h3 id="language-lex-operator">Operator </h3><!-- 2019/2/27 almost ok -->
+<h3 id="language-lex-operator">Operators</h3><!-- 2019/2/27 almost ok -->
 <p>
   Operators in SPVM are the followings.
 </p>
