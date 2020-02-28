@@ -1445,6 +1445,7 @@ package Foo {
 <h2 id="language-package-var">Package Variable </h2>
 <ul class="list">
   <li><a href="#language-package-var-definition">Package Variable Definition</a></li>
+  <li><a href="#language-package-var-descriptor">Package Variable Descriptor</a></li>
   <li><a href="#language-package-var-initial-value">Package Variable Initial Value</a></li>
   <li><a href="#language-package-var-access">Package Variable Access</a></li>
 </ul>
@@ -1462,33 +1463,29 @@ our PACKAGE_VARIABLE_NAME : TYPE;
   Package Variable must be defined directly under <a href="#language-package-definition">Package Definition</a>.
 </p>
 <p>
-  Package Variable Definition must specify <a href="#language-type">Type</a>. <a href="#language-type-numeric">Numeric Type</a> and <a href="#language-type-object">Object Type</a> can be specified for Type.
+  Package Variable Definition must specify <a href="#language-type">Type</a>. The Type must be <a href="#language-type-numeric">Numeric Type</a> or <a href="#language-type-object">Object Type</a>.
 </p>
 <p>
-  Package Variable Definitionには"<a href="#language-type">Type</a>"が必要です。Type Name には<a href="#language-type-numeric">Numeric Type</a>と<a href="#language-type-object">Object Type</a>を指定できます。
+  Package Variable Name must follows the rule specified in <a href="#language-lex-identifier-package-var-name">Package Variable Name</a>, and must not contain "::". Otherwise a compile-time error occurs.
 </p>
 <p>
-  Package Variable Nameは,<a href="#language-lex-identifier-package-var-name">Package Variable Name</a>で定義されている名前の規則に従い,かつ"::"が含まれていてはいけません。otherwise a compile-time error occurs.
-</p>
-<p>
-  Package Variable 定義には,Descriptorを合わせて指定することができます。複数のDescriptorを空白を使って並べることができます。
+  Package Variable Descriptor can be specified together in Package Variable definition.
 </p>
 <pre>
-our Package Variable Name : Descriptor Type Name ;
+our PACKAGE_VARIABLE_NAME : DESCRIPTOR TYPE;
+our PACKAGE_VARIABLE_NAME : DESCRIPTOR1 DESCRIPTOR2 DESCRIPTORN TYPE;
 </pre>
+<h3 id="language-package-var-descriptor">Package Variable Descriptor</h3>
 <p>
-  <b>Package Variable Descriptor</b>
-</p>
-<p>
-  Package Variable で指定できるDescriptorの一覧です。
+  List of Package Variable Descriptors.
 </p>
 <table>
   <tr>
     <th>
-      Descriptor Name
+      Descriptor
     </th>
     <th>
-      役割
+      Description
     </th>
   </tr>
   <tr>
@@ -1496,7 +1493,7 @@ our Package Variable Name : Descriptor Type Name ;
       <b>public</b>
     </td>
     <td>
-      このPackage Variable は,外部のPackage からアクセスできます。
+      This Package Variable is public. This Package Variable can be accessed from other package.
     </td>
   </tr>
   <tr>
@@ -1504,7 +1501,7 @@ our Package Variable Name : Descriptor Type Name ;
       <b>private</b>
     </td>
     <td>
-      このPackage Variable は,外部のPackage からアクセスできません。デフォルトの設定です。
+      This Package Variable is private. This Package Variable can't be accessed from other package. This is default setting of Package Variable.
     </td>
   </tr>
   <tr>
@@ -1512,7 +1509,7 @@ our Package Variable Name : Descriptor Type Name ;
       <b>ro</b>
     </td>
     <td>
-      このPackage Variable は,読み込み用のPackage Variable アクセッサを持ちます。Package Variable アクセッサ名は,Package Variable Nameから"$"を除いたものです。Package Variable Nameが"$FOO"の場合は,Package Variable アクセッサ名は"FOO"になります。
+      This Package Variable creates Read Accessor. Read Accessor name is the same as Package Variable Name except removing "$". For example, If the Package Variable Name is "$FOO", Read Accessor name is "FOO".
     </td>
   </tr>
   <tr>
@@ -1520,7 +1517,7 @@ our Package Variable Name : Descriptor Type Name ;
       <b>wo</b>
     </td>
     <td>
-      このPackage Variable は,書き込み用のPackage Variable アクセッサを持ちます。Package Variable アクセッサ名は,"SET_Package Variable Nameから$を除いたもの"になります。Package Variable Nameが"$FOO"の場合は,Package Variable アクセッサ名は"SET_FOO"になります。
+      This Package Variable creates Write Accessor. Write Accessor name is the same as Package Variable Name except removing "$" and adding "SET_" to top. For example, If the Package Variable Name is "$FOO", Read Accessor name is "SET_FOO".
     </td>
   </tr>
   <tr>
@@ -1528,30 +1525,30 @@ our Package Variable Name : Descriptor Type Name ;
       <b>rw</b>
     </td>
     <td>
-      このPackage Variable は,読み込み用のPackage Variable アクセッサと書き込み用のPackage Variable アクセッサを持ちます。読み込み用のPackage Variable アクセッサ名は"ro"でDescriptionしたものと同じです。書き込み用のPackage Variable アクセッサ名は"wo"でDescriptionしたものと同じです。
+      This Package Variable creates Read accessor and Write Accessor.
     </td>
   </tr>
 </table>
 <p>
-  "public"と"private"の両方のDescriptorが指定された場合は,a compile-time error occurs
+  If both "public" and "private" Descriptors are specified, a compile-time error occurs.
 </p>
 <p>
-  "ro""wo""rw"のひとつより多くが同時に指定されている場合は,a compile-time error occurs
+  If more than one of "ro", "wo", and "rw" are specified at the same time, a compile-time error occurs
 </p>
 <p>
-  Package Variable アクセッサとは,Package Variable にアクセスするためのクラスメソッドのことです。
+  Read Accessor of Package Variable has no arguments and the return type is same as the type of Package Variable.
 </p>
 <p>
-  書き込み用のPackage Variable アクセッサのReturn Valueは"void Type"です。
+  Write Acessor of Package Variable has one argument and the type is same as the type of Package Variable. The type of return value is <a href="#language-type-void">void Type</a>.
 </p>
 <p>
-  SPVMのソースコードの中からPackage Variable アクセッサが呼び出された場合は,Package Variable アクセッサはInline Expansionされます。それ以外の場合は,Inline Expansionされません。
+  Read Accessor and Write Accessor is 
 </p>
 <p>
-  <b>Package Variable 定義のExample</b>
+  Inline Expansion optimization is performed to Read Accessor and Write Accessor. You don't have to worry about the performance penalty of using accessors.
 </p>
 <p>
-  Package Variable 定義のExampleです。
+  <b>Package Variable Definition Example:</b>
 </p>
 <pre>
 package Foo {
@@ -1570,10 +1567,10 @@ package Foo {
 </pre>
 <h3 id="language-package-var-initial-value">Package Variable Initial Value</h3>
 <p>
-  Package Variable は,コンパイルが終了して,実行時に入る前に,<a href="#language-type-initial-value">Type Initial Value</a>で初期化されます。
+  Package Variable is initialized with <a href="#language-type-initial-value">Type Initial Value</a> after compilation and before execution.
 </p>
 <p>
-  この初期値は,<a href="#language-begin-block">BEGIN Block</a>を使うことで,変更することができます。
+  This initial value can be changed by using <a href="#language-begin-block">BEGIN Block</a>.
 </p>
 <pre>
 package Foo {
@@ -1586,13 +1583,13 @@ package Foo {
 </pre>
 <h3 id="language-package-var-access">Package Variable Access</h3>
 <p>
-  Package Variable Accessとは,Package Variable にアクセスして,値を取得したり,設定したりする操作のことです。
+  Package Variable Access is an operation to access Package Variable to get or set a value.
 </p>
 <p>
-  Package Variable の値の取得については,<a href="#language-expression-get-package-var">Package Variable の値の取得</a>を見てください。
+  See <a href="#language-expression-get-package-var">Package Variable Value Getting</a> for how to get the value of Package Variable.
 </p>
 <p>
-  Package Variable の値の設定については,<a href="#language-expression-set-package-var">Package Variable の値の設定</a>を見てください。
+  See <a href="#language-expression-set-package-var">Package Variable Value Setting</a> for the setting of the value of Package Variable.
 </p>
 <h2 id="language-field">フィールド</h2>
 <ul class="list">
@@ -3117,8 +3114,8 @@ $point_ref-&gt;{x} = 1;
 <ul class="list">
   <li><a href="#language-expression-get-lex-var">Lexical Variable の値の取得</a></li>
   <li><a href="#language-expression-set-lex-var">Lexical Variable の値の設定</a></li>
-  <li><a href="#language-expression-get-package-var">Package Variable の値の設定</a></li>
-  <li><a href="#language-expression-set-package-var">Package Variable の値の取得</a></li>
+  <li><a href="#language-expression-get-package-var">Package Variable Value Setting</a></li>
+  <li><a href="#language-expression-set-package-var">Package Variable Value Getting</a></li>
   <li><a href="#language-expression-get-exception-var">例外変数の値の設定</a></li>
   <li><a href="#language-expression-set-exception-var">例外変数の値の取得</a></li>
   <li><a href="#language-literal">Literal</a></li>
@@ -3185,7 +3182,7 @@ $var = Right Expression
 <p>
   代入前に,すでに$varにオブジェクトが代入されていた場合は,そのオブジェクトのReference Countが1減らされます。
 </p>
-<h3 id="language-expression-get-package-var">Package Variable の値の取得</h3>
+<h3 id="language-expression-get-package-var">Package Variable Value Getting</h3>
 <p>
   Package Variable の値を取得するにはthe following syntax を使用します。
 </p>
@@ -3199,7 +3196,7 @@ $クラス名::Package Variable Name
 $Package Variable Name
 </pre>
 <p>
- Package Variable の値の取得は,<a href="#language-expression">式</a>を返します。
+ Package Variable Value Gettingは,<a href="#language-expression">式</a>を返します。
 </p>
 <p>
   定義されていないPackage Variable の値を取得しようとした場合は,a compile-time error occurs
@@ -3208,7 +3205,7 @@ $Package Variable Name
   Package 外側からプライベートなPackage Variable にアクセスしようとした場合は,a compile-time error occurs
 </p>
 <p>
-  <b>Package Variable の値の取得のExample</b>
+  <b>Package Variable Value Getting Example:</b>
 </p>
 <pre>
 package Foo {
@@ -3220,7 +3217,7 @@ package Foo {
   }
 }
 </pre>
-<h3 id="language-expression-set-package-var">Package Variable の値の設定</h3>
+<h3 id="language-expression-set-package-var">Package Variable Value Setting</h3>
 <p>
   Package Variable の値を設定するにはthe following syntax を使用します。
 </p>
@@ -3242,7 +3239,7 @@ $Package Variable Name = Right Expression
   Package 外側からプライベートなPackage Variable にアクセスしようとした場合は,a compile-time error occurs
 </p>
 <p>
-  <b>Package Variable の値の設定のExample</b>
+  <b>Package Variable Value Setting Example:</b>
 </p>
 <pre>
 package Foo {
