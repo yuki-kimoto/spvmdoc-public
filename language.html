@@ -37,7 +37,7 @@
   SPVM is in beta testing for the 1.0 release. Language Specification will be changed without warning.
 </p>
 <p>
-  Last modified 2020-03-23
+  Last modified 2020-03-27
 </p>
 <ul>
   <li><a href="#language-c99">C99 compliant</a></li>
@@ -959,7 +959,7 @@ sub_names
     <td>VAR</td><td>var</td>
   </tr>
   <tr>
-    <td>CONSTANT</td><td>Literal </td>
+    <td>CONSTANT</td><td>Literal</td>
   </tr>
   <tr>
     <td>PACKAGE_VAR_NAME</td><td>Package Variable Name</td>
@@ -2563,7 +2563,7 @@ switch (Expression) {
 <h4 id="language-literal-integer">Integer Literal</h4>
 <h5>Decimal Representation of Integer Literal</h5>
 <p>
-  The numeric part of Decimal Representation of Integer Literal is represented by one or more consecutive characters from "0" to "9".
+  Decimal Representation of Integer Literal is represented by one or more consecutive characters from "0" to "9".
 </p>
 <p>
   Can be prefixed with "+" or "-".
@@ -2601,23 +2601,21 @@ switch (Expression) {
 123_456_789
 -123_456_789L
 </pre>
+<h5>Hexadecimal Representation of Integer Literal</h5>
 <p>
-  <b>16進数表現</b>
+  Hexadecimal Representation of Integer Literal is represented by the following rule.
 </p>
 <p>
-  Integer Literal  の数値部は<b>16進数</b>を使って表現することができます。
+  Hexadecimal Representation of Integer Literal starts with "0x" or "0X".
 </p>
 <p>
- 数値部を16進数を使って表現するときは"0x"から始めます。
+  It is followed by one or more consecutive characters "0" to "9", "a" to "f", or "A" to "F"..
 </p>
 <p>
-  その後ろに"0～9""a～f""A～F"のひとつ以上の連続したCharacterが続きます。
+  Other rules are same as Decimal Representation of Integer Literal
 </p>
 <p>
-  Invalid 16進数表現は,a compile-time error occurs
-</p>
-<p>
-  Integer Literal  を16進数で表現したExampleです。
+  <b>Hexadecimal Representation of Integer Literal Example:</b>
 </p>
 <pre>
 0x3b4f
@@ -2625,23 +2623,21 @@ switch (Expression) {
 0xDeL
 0xFFFFFFFF_FFFFFFFF
 </pre>
+<h5>Octal Representation of Integer Literal</h5>
 <p>
-  <b>8進数表現</b>
+  Octal Representation of Integer Literal is represented by the following rule.
 </p>
 <p>
-  Integer Literal  の数値部は<b>8進数</b>を使って表現することができます。
+  Octal Representation of Integer Literal starts with "0".
 </p>
 <p>
- 数値部を8進数を使って表現するときは"0"から始めます。
+  It is followed by one or more consecutive characters "0" to "7".
 </p>
 <p>
-  その後ろに"0～7"のひとつ以上の連続したCharacterが続きます。
+  Other rules are same as Decimal Representation of Integer Literal
 </p>
 <p>
-  Invalid 8進数表現は,a compile-time error occurs
-</p>
-<p>
-  Integer Literal  を8進数で表現したExampleです。
+  <b>Octal Representation of Integer Literal Example:</b>
 </p>
 <pre>
 0755
@@ -2649,23 +2645,18 @@ switch (Expression) {
 0666L
 0655_755
 </pre>
+<h5>Binary Representation of Integer Literal</h5>
 <p>
-  <b>2進数表現</b>
+  Binary Representation of Integer Literal is represented by the following rule.
 </p>
 <p>
-  Integer Literal  の数値部は<b>2進数</b>を使って表現することができます。
+  Binary Representation of Integer Literal starts with "0b" or "0B".
 </p>
 <p>
- 数値部を2進数を使って表現するときは"0b"から始めます。
+  It is followed by one or more consecutive characters "0" or "1".
 </p>
 <p>
-  その後ろに"0"か"1"のひとつ以上の連続したCharacterが続きます。
-</p>
-<p>
-  Invalid 2進数表現は,a compile-time error occurs
-</p>
-<p>
-  Integer Literal  を2進数で表現したExampleです。
+  <b>Binary Representation of Integer Literal Example:</b>
 </p>
 <pre>
 0b0101
@@ -2675,73 +2666,63 @@ switch (Expression) {
 </pre>
 <h4 id="language-literal-floating-point">Floating Point Literal</h4>
 <p>
-  Floating Point Literal は"符号部""数値部""指数部""サフィックス"から構成されます。
+  Floating Point Literal consists of <b>Sign Part</b>, <b>Numeric Part</b>, <b>Exponent Part</b> and <b>Suffix</b>.
+</p>
+<pre>
+# Floating Point Literal
+[Sign Part][Numeric Part][Exponent Part][Suffix Part]
+</pre>
 <p>
-<p>
-  Floating Point Literal には"10進数Floating Point Literal "と"16進数Floating Point Literal "があります。
+  Floating Point Literal is <b>Decimal Floating Point Literal</b> or <b>Hexadecimal Floating Point Literal</b>.
 </p>
 <p>
-  "符号部"は"+"か"-"で表現されます。"符号部"の存在は,任意です。"符号部"が存在する場合は,先頭にある必要があります。
+  <b>Sign Part</b> is represented by "+" or "-". Sign Part is optional.
 </p>
 <p>
-  "10進数Floating Point Literal "は,数値部が"一桁以上の10進数字"で始まる必要があります。
+  Numeric Part of Decimal Floating Point Literal starts one or more "0" to "9".
 </p>
 <p>
-  "10進数字"とは"0～9"のことです。
+  Numeric Part of Hexadecimal Floating Point Literal starts "0x" or "0X", and is followed by "0" to "9", "a" to "f", or "A" to "F".
 </p>
 <p>
-  "10進数Floating Point Literal "は,数値部に"小数点"が含まれているか,含まれていない場合は"指数部"あるいは"サフィックス"が必要です。
+  For that the Literal is Floating Point Literal, Numeric Part contains "." or, The Literal have Exponent Part, or have Suffix Part.
 </p>
 <p>
-  "小数点"とは"."のことです。
+  Numeric part can contain "_". This is just a Numeric Separator and is ignored.
 </p>
 <p>
-  "16進数Floating Point Literal "は,数値部が"0x"あるいは"0X"で始まり,その後ろに"一桁以上の16進数字"が続く必要があります。
+  Hexadecimal Floating Point Literal needs Exponent Part.
 </p>
 <p>
-  16進数字とは"0～9""a～f""A～F"のことです。
+  <b>Exponent Part</b> is consist of <b>Exponential Notation</b> and <b>Signed Decimal Integer</b>.
+</p>
+<pre>
+# Exponent Part
+[Exponential Notation][Signed Decimal Integer]
+</pre>
+<p>
+  Exponential Notation is "e" or "E" for Decimal Floating Point Literal, and "p" or "P" for Hexadecimal Floating Point Literal.
 </p>
 <p>
-  "16進数Floating Point Literal "は,"数値部"に"小数点"を含むことができます。
+  The meaning of Exponent Part is decimal shift for Decimal Floating Point Literal, or binary shift for Hexadecimal Floating Point Literal.
 </p>
 <p>
-  "数値部"はアンダーライン"_"を含むことができます。これは単なるSeparatorで,無視されます。
+  If Suffix Part is "f" or "F", the <a href="#language-type">Type</a> of Floating Point Literal is <a href="#language-type-float">float Type</a>.
 </p>
 <p>
-  "16進数Floating Point Literal "は,"指数部"が必要です。
+  If Suffix Part is "d" or "D", the <a href="#language-type">Type</a> of Floating Point Literal is <a href="#language-type-double">double Type</a>.
 </p>
 <p>
-  "指数部"は"指数表現"と"符号付10進整数"で構成されます。
+  If Suffix Part is omitted, the <a href="#language-type">Type</a> of Floating Point Literal is <a href="#language-type-double">double Type</a>.
 </p>
 <p>
-  "指数表現"は"10進数Floating Point Literal "の場合は"e"あるいは"E","16進数Floating Point Literal "の場合は"p"あるいは"P"になります。
+  If Floating Point Literal is <a href="#language-type-float">float Type</a>, the Floating Point Literal is converted to float value using C standard "strtof" function. If the conversion fails, a compile-time error occurs.
 </p>
 <p>
-  "指数部"の意味は"10進数Floating Point Literal "の場合は,10進数による桁移動,"16進数Floating Point Literal "の場合は,2進数による桁移動になります。
+  If Floating Point Literal is <a href="#language-type-double">double Type</a>, the Floating Point Literal is converted to double value using C standard "strtod" function. If the conversion fails, a compile-time error occurs.
 </p>
 <p>
-  末尾に"f"あるいは"F"のサフィックスをつけると,Floating Point Literal のTypeは"float Type"になります。
-</p>
-<p>
-  末尾に"d"あるいは"D"のサフィックスをつけると,Floating Point Literal のTypeは"double Type"になります。
-</p>
-<p>
-  サフィックスが省略された場合は,Floating Point Literal のTypeは"double Type"になります。
-</p>
-<p>
-  Floating Point Literal が"float Type"の場合はC標準の"strtof関数"を使って,Stringからfloat Typeへの変換が行われます。変換が失敗した場合は,a compile-time error occurs
-</p>
-<p>
-  Floating Point Literal が"double Type"の場合はC標準の"strtod関数"を使って,Stringからdouble Typeへの変換が行われます。変換が失敗した場合は,a compile-time error occurs
-</p>
-<p>
-  無限大を表現するFloating Point Literal はありません。標準関数である<a href="#stdfunc-INFINITY">INFINITY関数</a><a href="#stdfunc-INFINITYF">INFINITYF関数</a>を使用してください。
-</p>
-<p>
-  非値を表現するFloating Point Literal はありません。標準関数である<a href="#stdfunc-NAN">NAN関数</a><a href="#stdfunc-NANF">NANF関数</a>を使用してください。
-</p>
-<p>
-  Floating Point Literal のExampleです
+  <b>Floating Point Literal Example:</b>
 </p>
 <pre>
 1.32
@@ -4498,7 +4479,7 @@ my $num = +10;
   <a href="#language-expression">Expression</a>に対して,<a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,Unary Minus Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Typeにおける演算がDefinitionされます。
+  その後,Unary Minus Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>における演算がDefinitionされます。
 </p>
 <pre>
 -x
@@ -4532,7 +4513,7 @@ Left Expression + Right Expression
   Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,Addition Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Typeにおける演算がDefinitionされます。
+  その後,Addition Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>における演算がDefinitionされます。
 </p>
 <pre>
 x + y;
@@ -4560,7 +4541,7 @@ Left Expression - Right Expression
   Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,Subtraction Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Typeにおける演算がDefinitionされます。
+  その後,Subtraction Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>における演算がDefinitionされます。
 </p>
 <pre>
 x - y;
@@ -4588,7 +4569,7 @@ Left Expression * Right Expression
   Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,Multiplication Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Typeにおける演算がDefinitionされます。
+  その後,Multiplication Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>における演算がDefinitionされます。
 </p>
 <pre>
 x * y;
@@ -4616,7 +4597,7 @@ Left Expression / Right Expression
   Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,Division Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Typeにおける演算がDefinitionされます。
+  その後,Division Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>における演算がDefinitionされます。
 </p>
 <pre>
 x / y;
@@ -5065,7 +5046,7 @@ Left Expression 数値比較Operator  Right Expression
   Numeric Typeの比較の場合は,Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,数値比較Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,float Type,double Type,Object Type における演算がDefinitionされます。
+  その後,数値比較Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>,Object Type における演算がDefinitionされます。
 </p>
 <pre>
 # Numeric Typeの比較,Object Type の比較
@@ -6597,13 +6578,13 @@ my $num = 1 + 2;
 <p>
   See <a href="#language-expression-operator-arithmetic">Arithmetic Operator</a> for floating-point calculation rules.
 </p>
-<h4 id="language-type-float">float Type</h4>
+<h4 id="language-type-float"><a href="#language-type-float">float Type</a></h4>
 <p>
-  float Typeは,単精度浮動小数点(32bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99のfloat Typeと同じTypeです。
+  <a href="#language-type-float">float Type</a>は,単精度浮動小数点(32bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99の<a href="#language-type-float">float Type</a>と同じTypeです。
 </p>
-<h4 id="language-type-double">double Type</h4>
+<h4 id="language-type-double"><a href="#language-type-double">double Type</a></h4>
 <p>
-  double Typeは,倍精度浮動小数点(64bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99のdouble Typeと同じTypeです。
+  <a href="#language-type-double">double Type</a>は,倍精度浮動小数点(64bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99の<a href="#language-type-double">double Type</a>と同じTypeです。
 </p>
 <h4 id="language-type-package">Package Type</h4>
 <p>
@@ -7479,10 +7460,10 @@ my $str : string = $num;
   次のルールが適用されます。
 </p>
 <p>
-  1. 一方のExpressionが,double Typeの場合は,他方のTypeはdouble Typeに変換されます。
+  1. 一方のExpressionが,<a href="#language-type-double">double Type</a>の場合は,他方のTypeは<a href="#language-type-double">double Type</a>に変換されます。
 </p>
 <p>
-  2. 一方のExpressionが,float Typeの場合は,他方のTypeはfloat Typeに変換されます。
+  2. 一方のExpressionが,<a href="#language-type-float">float Type</a>の場合は,他方のTypeは<a href="#language-type-float">float Type</a>に変換されます。
 </p>
 <p>
   3. 一方のExpressionが,<a href="#language-type-long">long Type</a>の場合は,他方のTypeは<a href="#language-type-long">long Type</a>に変換されます。
@@ -7592,7 +7573,7 @@ while (条件部) {
   Expressionが<a href="#language-type-int">int Type</a> の場合は,その値が返されます。
 </p>
 <p>
-  Expressionが<a href="#language-type-long">long Type</a>,float Type,double Type,Object Type である場合は,C99におけるthe following 演算と完全に一致する演算を行い,結果が返されます。
+  Expressionが<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>,Object Type である場合は,C99におけるthe following 演算と完全に一致する演算を行い,結果が返されます。
 </p>
 <pre>
 !!x
