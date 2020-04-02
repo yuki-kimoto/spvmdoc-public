@@ -37,7 +37,7 @@
   SPVM is in beta testing for the 1.0 release. Language Specification will be changed without warning.
 </p>
 <p>
-  Last modified 2020-03-27
+  Last modified 2020-04-02
 </p>
 <ul>
   <li><a href="#language-c99">C99 compliant</a></li>
@@ -69,11 +69,10 @@
   <li><a href="#language-type-inference">Type Inference</a></li>
   <li><a href="#language-type-compatible">Type Compatibility</a></li>
   <li><a href="#language-type-convertion">Type Convertion</a></li>
-  <li><a href="#language-exception">Exception Handling</a></li>
+  <li><a href="#language-exception">Exception</a></li>
   <li><a href="#language-garbage-collection">Garbage Collection</a></li>
   <li><a href="#language-callback">Callback</a></li>
   <li><a href="#language-weak-ref">Weaken Reference</a></li>
-  <li><a href="#language-limitation">Limitation</a></li>
 </ul>
 <h3 id="language-c99">C99 compliant</h3><!-- 2019/2/27 almost ok -->
 <ul class="list">
@@ -1894,6 +1893,9 @@ sub SUBROUTINE_NAME : RETURN_VALUE_TYPE_NAME (ARGUMENT_NAME1 : ARGUMENT_TYPE_NAM
   Argument name must be follow the rule of <a href="#language-lex-identifier-lex-var-name">Lexical Variable Name</a>.
 </p>
 <p>
+  Minimal Argument Count is 0. Max Argument Count is 255.
+</p>
+<p>
   Type of Argument must be <a href="#language-type-numeric">Numeric Type</a>, <a href="#language-type-object">Object Type</a>, or <a href="#language-type-reference">Reference Type</a>, otherwise a compile-time error occurs.
 </p>
 <p>
@@ -2552,7 +2554,7 @@ switch (Expression) {
   <li><a href="#language-literal-summary">Literal Summary</a></li>
   <li><a href="#language-literal-integer">Integer Literal</a></li>
   <li><a href="#language-literal-floating-point">Floating Point Literal</a></li>
-  <li><a href="#language-literal-character">Chracter Literal</a></li>
+  <li><a href="#language-literal-character">Charater Literal</a></li>
   <li><a href="#language-literal-string">String Literal</a></li>
   <li><a href="#language-literal-string-variable-expansion">Variable Expansion</a></li>
 </ul>
@@ -2738,26 +2740,26 @@ switch (Expression) {
 0x3d3d.edP3
 0x3d3d.edP-3f
 </pre>
-<h4 id="language-literal-character">Chracter Literal </h4>
+<h4 id="language-literal-character">Charater Literal</h4>
 <p>
-  Chracter Literal は,シングルクォート"'"で囲まれます。
+  <b>Charater Literal</b> represents one character of ASCII code.
 </p>
 <p>
-  Chracter Literal の内容は"ひとつのAsciiの印字可能Character"あるいは"ひとつのエスケープCharacter"です。
+  Character Literal is enclosed in single quotes "'".
 </p>
 <p>
-  Chracter Literal のTypeは"<a href="#language-type-byte">byte Type</a>"になります。
+  Content of Character Literal is one printable ASCII character or one Escape Character of Character Literal.
 </p>
 <p>
-  Invalid Chracter Literal の場合は,a compile-time error occurs
+  Charater Literal のTypeは"<a href="#language-type-byte">byte Type</a>"になります。
 </p>
 <p>
-  <b>エスケープCharacter</b>
+  <a href="#language-type">Type</a> of Charater Literal is <a href="#language-type-byte">byte Type</a>.
 </p>
 <table class="toc">
   <tr>
     <th>
-      エスケープCharacter
+      Escape Characters of Character Literal
     </th>
     <th>
       Description
@@ -2768,7 +2770,7 @@ switch (Expression) {
       <b>\0</b>
     </td>
     <td>
-      Ascii Codeの0"NUL"
+      ASCII Code 0 NUL
     </td>
   </tr>
   <tr>
@@ -2776,7 +2778,7 @@ switch (Expression) {
       <b>\a</b>
     </td>
     <td>
-      Ascii Codeの7"BEL"
+      ASCII Code 7 BEL
     </td>
   </tr>
   <tr>
@@ -2784,7 +2786,7 @@ switch (Expression) {
       <b>\b</b>
     </td>
     <td>
-      Ascii Codeの8"BS"
+      ASCII Code 8 BS
     </td>
   </tr>
   <tr>
@@ -2792,7 +2794,7 @@ switch (Expression) {
       <b>\t</b>
     </td>
     <td>
-      Ascii Codeの9"HT"
+      ASCII Code 9 HT
     </td>
   </tr>
   <tr>
@@ -2800,7 +2802,7 @@ switch (Expression) {
       <b>\n</b>
     </td>
     <td>
-      Ascii Codeの10"LF"
+      ASCII Code 10 LF
     </td>
   </tr>
   <tr>
@@ -2808,7 +2810,7 @@ switch (Expression) {
       <b>\f</b>
     </td>
     <td>
-      Ascii Codeの12"FF"
+      ASCII Codeの12"FF"
     </td>
   </tr>
   <tr>
@@ -2816,7 +2818,7 @@ switch (Expression) {
       <b>\r</b>
     </td>
     <td>
-      Ascii Codeの13"CR"
+      ASCII Code 13 CR
     </td>
   </tr>
   <tr>
@@ -2824,7 +2826,7 @@ switch (Expression) {
       <b>\"</b>
     </td>
     <td>
-      Ascii Codeの34"""
+      ASCII Code 34 "
     </td>
   </tr>
   <tr>
@@ -2832,7 +2834,7 @@ switch (Expression) {
       <b>\'</b>
     </td>
     <td>
-      Ascii Codeの39"'"
+      ASCII Code 39 '
     </td>
   </tr>
   <tr>
@@ -2840,30 +2842,30 @@ switch (Expression) {
       <b>\\</b>
     </td>
     <td>
-      Ascii Codeの92"\"
+      ASCII Code 92 \
     </td>
   </tr>
   <tr>
     <td>
-      <b>\xの後ろに二桁の16進数</b>
+      <b>\x + tow hexadecimal numbers</b>
     </td>
     <td>
-      直接Ascii Codeを指定します。16進数は"0～9""a～f""A～F"で表現します。
+      Specify ASCII code by hexadecimal. Hexadecimal numbers are "0" to "9", "a" to "z", "A" to "Z".
     </td>
   </tr>
 </table>
 <p>
-  <b>Chracter Literal のExample</b>
+  <b>Charater Literal Example:</b>
 </p>
 <p>
-  Chracter Literal のExampleです。
+  <b>Charater Literal</b> represents one character of ASCII code.
 </p>
 <pre>
-# Chracter Literal 
+# Charater Literal 
 'a'
 'x'
 
-# エスケープCharacterを使ったChracter Literal 
+# Charater Literal using Escape Character
 '\a'
 '\b'
 '\t'
@@ -2876,26 +2878,20 @@ switch (Expression) {
 '\x0D'
 '\x0A'
 </pre>
-<h4 id="language-literal-string">String Literal </h4>
+<h4 id="language-literal-string">String Literal</h4>
 <p>
-  String Literal は,ダブルクォート"""で囲まれます。
+  <b>String Literal</b> represents String.
 </p>
 <p>
-  String Literal の内容は"0個以上のAsciiの印字可能CharacterあるいはエスケープCharacter"です。
+  String Literal is enclosed in double quotes '"'.
 </p>
 <p>
-  String Literal のTypeは"stringType"になります。
-</p>
-<p>
-  Invalid String Literal の場合は,a compile-time error occurs
-</p>
-<p>
-  <b>エスケープCharacter</b>
+  The content of String Literal is zero or more ASCII printable Characters or Escape Characters of String Literal".
 </p>
 <table class="toc">
   <tr>
     <th>
-      エスケープCharacter
+      Escape Character of String Literal
     </th>
     <th>
       Description
@@ -2906,7 +2902,7 @@ switch (Expression) {
       <b>\0</b>
     </td>
     <td>
-      Ascii Codeの0"NUL"
+      ASCII Code 0 NUL
     </td>
   </tr>
   <tr>
@@ -2914,7 +2910,7 @@ switch (Expression) {
       <b>\a</b>
     </td>
     <td>
-      Ascii Codeの7"BEL"
+      ASCII Code 7 BEL
     </td>
   </tr>
   <tr>
@@ -2922,7 +2918,7 @@ switch (Expression) {
       <b>\b</b>
     </td>
     <td>
-      Ascii Codeの8"BS"
+      ASCII Code 8 BS
     </td>
   </tr>
   <tr>
@@ -2930,7 +2926,7 @@ switch (Expression) {
       <b>\t</b>
     </td>
     <td>
-      Ascii Codeの9"HT"
+      ASCII Code 9 HT
     </td>
   </tr>
   <tr>
@@ -2938,7 +2934,7 @@ switch (Expression) {
       <b>\n</b>
     </td>
     <td>
-      Ascii Codeの10"LF"
+      ASCII Code 10 LF
     </td>
   </tr>
   <tr>
@@ -2946,7 +2942,7 @@ switch (Expression) {
       <b>\f</b>
     </td>
     <td>
-      Ascii Codeの12"FF"
+      ASCII Code 12 FF
     </td>
   </tr>
   <tr>
@@ -2954,7 +2950,7 @@ switch (Expression) {
       <b>\r</b>
     </td>
     <td>
-      Ascii Codeの13"CR"
+      ASCII Code 13 CR
     </td>
   </tr>
   <tr>
@@ -2962,7 +2958,7 @@ switch (Expression) {
       <b>\"</b>
     </td>
     <td>
-      Ascii Codeの34"""
+      ASCII Code 34 "
     </td>
   </tr>
   <tr>
@@ -2970,7 +2966,7 @@ switch (Expression) {
       <b>\'</b>
     </td>
     <td>
-      Ascii Codeの39"'"
+      ASCII Code 39 '
     </td>
   </tr>
   <tr>
@@ -2978,23 +2974,23 @@ switch (Expression) {
       <b>\\</b>
     </td>
     <td>
-      Ascii Codeの92"\"
+      ASCII Code 92 \
     </td>
   </tr>
   <tr>
     <td>
-      <b>\xの後ろに二桁の16進数</b>
+      <b>\x + two hexadecimal numbers</b>
     </td>
     <td>
-      直接Ascii Codeを指定します。16進数は"0～9""a～f""A～F"で表現します。
+      Specify ASCII code by hexadecimal. Hexadecimal numbers are "0" to "9", "a" to "z", "A" to "Z". <br>For example, \x0D.
     </td>
   </tr>
   <tr>
     <td>
-      <b>\N{}の中の複数桁の16進数</b>
+      <b>\N{U+} + hexadecimal numbers after U+</b>
     </td>
     <td>
-      Unicodeのコードポイントを16進数で指定します。UTF-8に変換されます。16進数は"0～9""a～f""A～F"で表現します。
+      Specify the Unicode code point in hexadecimal. Hexadecimal numbers are expressed as "0" to "9", "a" to "f", "A" to "F".<br>For example, \N{U+3046}.<br>The code point is converted to UTF-8. 
     </td>
   </tr>
   <tr>
@@ -3002,7 +2998,7 @@ switch (Expression) {
       <b>\s</b>
     </td>
     <td>
-      Ascii Codeの92,115の並び"\s"
+      ASCII Code 92,115 \s
     </td>
   </tr>
   <tr>
@@ -3010,7 +3006,7 @@ switch (Expression) {
       <b>\S</b>
     </td>
     <td>
-      Ascii Codeの92,83の並び"\S"
+      ASCII Code 92,83 \S
     </td>
   </tr>
   <tr>
@@ -3018,7 +3014,7 @@ switch (Expression) {
       <b>\d</b>
     </td>
     <td>
-      Ascii Codeの92,100の並び"\d"
+      ASCII Code 92,100 \d
     </td>
   </tr>
   <tr>
@@ -3026,7 +3022,7 @@ switch (Expression) {
       <b>\D</b>
     </td>
     <td>
-      Ascii Codeの92,68の並び"\D"
+      ASCII Code 92,68 \D
     </td>
   </tr>
   <tr>
@@ -3034,7 +3030,7 @@ switch (Expression) {
       <b>\w</b>
     </td>
     <td>
-      Ascii Codeの92,119の並び"\w"
+      ASCII Code 92,119 \w
     </td>
   </tr>
   <tr>
@@ -3042,40 +3038,34 @@ switch (Expression) {
       <b>\W</b>
     </td>
     <td>
-      Ascii Codeの92,87の並び"\W"
+      ASCII Code 92,87 \W
     </td>
   </tr>
   <tr>
     <td>
-      <b>\の後ろに"a～z""A～Z""0-9"""""'""\""$"以外のAscii Codeがきた場合</b>
+      <b>\ + ASCII Code Punctuation Character(33 to 47, 58 to 64, 91 to 96, 123 to 125)</b>
     </td>
     <td>
-      Ascii Codeの92,アスキーコードで表現されるCharacterの並び。たとえば"\-"の場合は"\-"。
+      ASCII Code 92, Number of ASCII Code Punctuation Character. For eample, \- represents \-. \+ represents \+.
     </td>
   </tr>
 </table>
 <p>
-  Unicodeのコードポイントを指定するエスケープCharacter以外は,<a href="#language-literal-character">Chracter Literal</a>のエスケープCharacterと共通です。
-</p>
-<p>
-  <b>String Literal のExample</b>
-</p>
-<p>
-  String Literal のExampleです。
+  <b>String Literal Example:</b>
 </p>
 <pre>
 # String Literal 
 "abc"
 "あいう"
 
-# エスケープCharacterを使ったString Literal 
+# Escape Character of String Literal 
 "abc\tdef\n"
 "\x0D\x0A"
 "\N{U+3042}\N{U+3044}\N{U+3046}"
 </pre>
 <h4 id="language-literal-string-variable-expansion">Variable Expansion</h4>
 <p>
-  String Literal 中のLexical Variable ,Package Variable ,Dereference ,Fieldアクセス,定数の添え字のArrayアクセス,例外変数の場合は,Variable Expansionが行われます。
+  <b>Variable Expansion</b> applys <a href="#language-lex-var">Lexical Variable</a>, <a href="#language-package-var">Package Variable</a>, <a href="#language-ref-deref">Dereference</a>, <a href="#language-field-access">Field Access</a>, <a href="#language-array-access">Array Access</a>, <a href="#language-exception-var">Exception Variable</a> in String Literal.
 </p>
 <pre>
 "AAA $foo BBB"
@@ -3087,7 +3077,7 @@ switch (Expression) {
 "AAA $@ BBB"
 </pre>
 <p>
-  上記は,the following ように展開されます。
+  The above is expanded as the following.
 </p>
 <pre>
 "AAA" . $foo . "BBB"
@@ -3099,78 +3089,91 @@ switch (Expression) {
 "AAA" . $@ . "BBB"
 </pre>
 <p>
-  変数名の終わりを表すために"{"と"}"で変数名を囲むことができます。
+  The variable name can besurround with "{" and "}" to indicate the end of the variable name.
 </p>
 <pre>
 "AAA ${foo}_ccc BBB"
 </pre>
 <p>
-  上記は,the following ように展開されます。
+<p>
+  The above is expanded as the following.
+</p>
 </p>
 <pre>
 "AAA " . ${foo} . "_ccc BBB"
 </pre>
 <p>
-  "{"と"}"の囲みがない場合は,変数名としてValid Stringまでを変数として解釈します。Dereference の場合も同じです。
+  If there is no enclosing "{" and "}", up to the valid part as a variable name is interpreted as a Variable. Dereference interpreting is same as this.
 </p>
 <p>
-  変数名の後ろに"->"が続いた場合は,Fieldアクセス,あるいは,Arrayアクセスと解釈します。
+  If "->" follows the variable name, it is interpreted as <a href="#language-field-access">Field Access</a> or <a href="#language-array-access">Array Access</a>.
 </p>
 <p>
-  1. その後ろに,続くCharacterが"a-z""A-Z""0-9""_""{""["であった場合は,解釈を進めます。
+  [1] If the following Characters are "a-z" "A-Z" "0-9" "_" "{" "[", proceed with the interpretation.
 </p>
 <p>
-  2. "1."の後ろに続くCharacterが"}""]"であった場合は,その次のCharacterが"->""{""["であった場合は,解釈を進め,1に戻ります。otherwise 解釈を止めます。
+  [2] If the Character following [1] is "}", or "]", then if the next Character is "->", "{", or "[", proceed with the interpretation and return back to [1]. Otherwise stop interpreting.
 </p>
 <p>
-  末尾の$はVariable Expansionの開始としては扱われず"$"として扱われます。
+  The trailing $ is not treated as the start of Variable Expansion. It is treated as "$".
 </p>
 <pre>
 "AAA$"
 </pre>
 <h3 id="language-string">String</h3>
 <p>
-  SPVMのStringのデータ表現は,<a href="#language-type-byte">byte Type</a>のArrayです。特別な内部表現を持たない,単なるバイト列です。
+  SPVM String is <a href="#language-type-array-byte">byte[] Type</a>. 
 </p>
 <pre>
+# String is Array of byte Type
 my $string = new byte[3];
 $string-&gt;[0] = 'a';
 $string-&gt;[1] = 'b';
 $string-&gt;[2] = 'c';
 </pre>
 <p>
-  <a href="#language-type-byte">byte Type</a>のArrayは,<a href="#language-type-string">String Type</a>に代入できます。String Typeは,コンパイル時には要素を変更できないTypeですが,実行時は<a href="#language-type-byte">byte Type</a>のArrayになります。
+  <a href="#language-type-array-byte">byte[] Type</a> can be assigned to <a href="#language-type-string">string Type</a>. The address of String is copied to the distination Variable.
 </p>
 <pre>
 my $string_const : string = $string;
 </pre>
 <p>
-  <a href="#language-literal-string">String Literal</a>を代入することによって,Stringを作成できます。String Literal を元にしたstringTypeの新しいStringを返します。
+  <a href="#language-type-string">string Type</a> is same as <a href="#language-type-array-byte">byte[] Type</a>, but can't set the element value.
+</p>
+<pre>
+# Compile Time Error
+$string_const-&gt;[0] = 'd';
+</pre>
+<p>
+  String can be created by assigning <a href="#language-literal-string">String Literal</a>. a new String that is return  a new String based on String Literal.
+</p>
+<p>
+  A new String is created that copies the value of the String Literal. The Type of the returned string is <a href="#language-type-string">string Type</a>.
 </p>
 <pre>
 my $string_const = "abc";
 </pre>
 <p>
-  byte[]はC言語の"char*",String TypeはC言語の"const char*"に該当するように設計されています。
+  <a href="#language-type-array-byte">byte [] Type</a> is designed to represent "<b>char *</b>" type in C language.
+</p>
+<p>
+  <a href="#language-type-string">string Type</a> is designed to represent "<b>const char *</b>" type in C language.
 </p>
 <h3 id="language-undef">Undefined Value</h3>
 <p>
-  未Definitionは"undef"で表現されます。
+  Undefined Value is "undef"
 </p>
 <pre>
 undef
 </pre>
 <p>
-  Undefined Valueは,任意のObject Type の変数に代入することができます。
+  Undefined Value can be assigned to all <a href="#language-type-object">Object Type</a> variable.
 </p>
 <p>
-  Undefined ValueはObject Type の値と"==""!="Operator を使用して,比較することができます。Undefined Valueは,生成されたオブジェクトと等しくない事が保証されます。
+  Undefined Value can be compared with the value of Object Type using "==" Operator or "!=" Operator. Undefined Value is guaranteed not to be equal to the created object.
 </p>
 <p>
-  未Definitionは条件部で使われた場合は,偽になります。
-</p>
-<p>
-  Undefined Valueは,エクステンションにおいてC言語の値として利用された場合は,0と等しくなることが保証されます。
+  If Undefined Value is used in the Condition Part, it will be false.
 </p>
 <h3 id="language-array">Array</h3>
 <ul class="list">
@@ -3180,47 +3183,47 @@ undef
 </ul>
 <h4 id="language-array-summary">Array Summary</h4>
 <p>
-  Arrayとは,複数の値の連続領域を表現するためのデータ構造です。
+  Array is a data structure for continuous multiple values.
 </p>
 <p>
-  Arrayには次の種類があります。
+  There are the following types of Array.
 </p>
 <ul class="list">
   <li>
-    <a href="#language-type-numeric">Numeric Type</a>のArray
+    Numeric Type Array
   </li>
   <li>
-    Object Type のArray
+    Object Type Array
   </li>
   <li>
-    Multi Numeric TypeのArray
+    Multi Numeric Type Array
   </li>
 </ul>
 <p>
-  <a href="#language-type-numeric">Numeric Type</a>のArrayとは,<a href="#language-type-numeric">Numeric Type</a>の値が連続に並んだArrayのことです。
+  Numeric Type Array is Array that element type is <a href="#language-type-numeric">Numeric Type</a>.
 </p>
 <p>
-  Object Type のArrayとは,<a href="#language-type-object">Object Type</a>の値が連続に並んだArrayのことです。
+  Numeric Type Array is Array that element type is <a href="#language-type-object">Object Type</a>.
 </p>
 <p>
-  Multi Numeric TypeのArrayとは,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値が連続に並んだArrayのことです。
+  Numeric Type Array is Array that element type is <a href="#language-type-multi-numeric">Multi Numeric Type</a>.
 </p>
 <h4 id="language-array-summary">Create Array</h4>
 <p>
-  Arrayを生成については,<a href="#language-expression-new-array">Create Array</a>を見てください。
+  See <a href="#language-expression-new-array">Create Array</a> to create Array.
 </p>
 <h4 id="language-array-access">Array Access</h4>
 <p>
-  Array Accessとは,Arrayにアクセスして,値を取得したり,設定したりする操作のことです。また,the following 記述そのものを指します。
+  Array Access is an operation to access the element of Array to get or set the value.
 </p>
 <pre>
-Array-&gt;[添え字]
+ARRAY-&gt;[INDEX]
 </pre>
 <p>
-  Arrayの取得については,<a href="#language-expression-get-array-element">Get Array Element Value</a>を見てください。
+  See <a href="#language-expression-get-array-element">Get Array Element Value</a> to get the element value of Array.
 </p>
 <p>
-  Arrayの設定については,<a href="#language-expression-set-set-array-element">Set Array Element Value</a>を見てください。
+  See <a href="#language-expression-set-array-element">Set Array Element Value</a> to set the element value of Array.
 </p>
 <h3 id="language-mulnum">Multi Numeric Value</h3>
 <ul class="list">
@@ -3532,6 +3535,7 @@ $point_ref-&gt;{x} = 1;
   Expression is a syntax component that can be evaluated as a value.
 </p>
 <ul class="list">
+  <li><a href="#language-expression-operator">Operator</a></li>
   <li><a href="#language-expression-get-lex-var">Get Lexical Variable Value</a></li>
   <li><a href="#language-expression-set-lex-var">Set Lexical Variable Value</a></li>
   <li><a href="#language-expression-set-package-var">Get Package Variable Value</a></li>
@@ -3552,24 +3556,16 @@ $point_ref-&gt;{x} = 1;
   <li><a href="#language-expression-typecast">Type Cast</a></li>
   <li><a href="#language-expression-new">Create Object</a></li>
   <li><a href="#language-expression-new-array">Create Array</a></li>
-  <li><a href="#language-garbage-collection">Garbage Collection</a></li>
   <li><a href="#language-expression-array-init">Array Initialization</a></li>
-  <li><a href="#language-expression-operator-array-length">Array Length Operator</a></li>
-  <li><a href="#language-expression-operator-string-length">String Length Operator</a></li>
-  <li><a href="#language-expression-operator-arithmetic">Arithmetic Operator</a></li>
-  <li><a href="#language-expression-operator-bit">Bit Operator</a></li>
-  <li><a href="#language-expression-operator-shift">Shift Operator</a></li>
-  <li><a href="#language-expression-operator-concat">String連結Operator</a></li>
-  <li><a href="#language-expression-operator-ref">Reference Operator</a></li>
-  <li><a href="#language-expression-operator-assign">Assignment Operator</a></li>
-  <li><a href="#language-expression-operator-array-length">Array Length Operator</a></li>
-  <li><a href="#language-expression-operator-string-length">String Length Operator</a></li>
-  <li><a href="#language-expression-operator-scalar">Scalar Operator</a></li>
   <li><a href="#language-expression-current-package">Get Current Package Name</a></li>
   <li><a href="#language-expression-current-file">Get Current File Name</a></li>
   <li><a href="#language-expression-current-line">Get Current Line Number</a></li>
   <li>(Expression)</li>
 </ul>
+<h4 id="language-expression-operator">Operator</h4>
+<p>
+  <a href="#language-operator">Operator</a> is a Expression.
+</p>
 <h4 id="language-expression-get-lex-var">Get Lexical Variable Value</h4>
 <p>
   Get Lexical Variable Valueをするには,Lexical Variable 自体を記述します。
@@ -3676,7 +3672,7 @@ package Foo {
 </pre>
 <h4 id="language-expression-get-exception-var">Get Exception Variable Value</h4>
 <p>
-  例外変数の値を取得するにはthe following syntax を使用します。
+  Exception Variableの値を取得するにはthe following syntax を使用します。
 </p>
 <pre>
 $@
@@ -3685,7 +3681,7 @@ $@
  Get Exception Variable Valueは,<a href="#language-expression">Expression</a>を返します。
 </p>
 <p>
- Get Exception Variable Valueは,<a href="#language-type-string">String Type</a>の値を返します。
+ Get Exception Variable Valueは,<a href="#language-type-string">string Type</a>の値を返します。
 </p>
 <p>
   <b>Get Exception Variable ValueのExample</b>
@@ -3704,7 +3700,7 @@ if (my $message = $@) {
 </pre>
 <h4 id="language-expression-set-exception-var">Set Exception Variable Value</h4>
 <p>
-  例外変数の値を設定するにはthe following syntax を使用します。
+  Exception Variableの値を設定するにはthe following syntax を使用します。
 </p>
 <pre>
 $@ = Right Expression
@@ -3716,7 +3712,7 @@ $@ = Right Expression
  Set Exception Variable Valueは,<a href="#language-expression">Expression</a>を返します。
 </p>
 <p>
- Set Exception Variable Valueは,設定後の例外変数の値を返します。これは,<a href="#language-type-string">String Type</a>です。
+ Set Exception Variable Valueは,設定後のException Variableの値を返します。これは,<a href="#language-type-string">string Type</a>です。
 </p>
 <p>
   <b>Set Exception Variable ValueのExample</b>
@@ -4357,26 +4353,26 @@ package Foo::Bar {
   <li><a href="#language-expression-operator-left-shift">Left Shift Operator</a></li>
   <li><a href="#language-expression-operator-arithmetic-right-shift">Arithmetic Right Shift Operator</a></li>
   <li><a href="#language-expression-operator-logical-right-shift">Logical Right Shift Operator</a></li>
-  <li><a href="#language-expression-operator-comparison">比較Operator</a></li>
-  <li><a href="#language-expression-operator-comparison-numeric">数値比較Operator</a></li>
-  <li><a href="#language-expression-operator-comparison-string">String比較Operator</a></li>
+  <li><a href="#language-expression-operator-comparison">Comparison Operator</a></li>
+  <li><a href="#language-expression-operator-comparison-numeric">Numeric Comparison Operator</a></li>
+  <li><a href="#language-expression-operator-comparison-string">String Comparison Operator</a></li>
   <li><a href="#language-expression-operator-isa">isa Operator</a></li>
-  <li><a href="#language-expression-operator-logical">論理Operator</a></li>
+  <li><a href="#language-expression-operator-logical">Logical Operator</a></li>
   <li><a href="#language-expression-operator-logical-and">Logical AND Operator</a></li>
   <li><a href="#language-expression-operator-logical-or">Logical OR Operator</a></li>
   <li><a href="#language-expression-operator-logical-not">Logical NOT Operator</a></li>
-  <li><a href="#language-expression-operator-concat">String連結Operator</a></li>
+  <li><a href="#language-expression-operator-concat">String Concatenation Operator</a></li>
   <li><a href="#language-expression-operator-assign">Assignment Operator</a></li>
   <li><a href="#language-expression-operator-assign-special">Special Assignment Operator</a></li>
   <li><a href="#language-expression-operator-ref">Reference Operator</a></li>
   <li><a href="#language-expression-operator-array-length">Array Length Operator</a></li>
   <li><a href="#language-expression-operator-string-length">String Length Operator</a></li>
   <li><a href="#language-expression-operator-scalar">Scalar Operator</a></li>
-  <li><a href="#language-expression-operator-isweak">isweakOperator</a></li>
+  <li><a href="#language-expression-operator-isweak">isweak Operator</a></li>
 </ul>
 <h4 id="language-expression-operator-summary">Operator Summary </h4>
 <p>
-  Operator は,<a href="#language-expression-operator-unary">Unary Operator</a>,<a href="#language-expression-operator-binary">Binary Operator</a>,<a href="#language-expression-operator-inc">Increment Operator</a>,<a href="#language-expression-operator-dec">Decrement Operator</a>,<a href="#language-expression-operator-comparison">比較Operator</a>,<a href="#language-expression-operator-logical">論理Operator</a>,<a href="#language-expression-operator-assign">Assignment Operator</a>からなります。
+  Operator は,<a href="#language-expression-operator-unary">Unary Operator</a>,<a href="#language-expression-operator-binary">Binary Operator</a>,<a href="#language-expression-operator-inc">Increment Operator</a>,<a href="#language-expression-operator-dec">Decrement Operator</a>,<a href="#language-expression-operator-comparison">Comparison Operator</a>,<a href="#language-expression-operator-logical">Logical Operator</a>,<a href="#language-expression-operator-assign">Assignment Operator</a>からなります。
 </p>
 <h4 id="language-expression-operator-unary">Unary Operator  </h4>
 <p>
@@ -4399,7 +4395,7 @@ UNARY_OPERATOR Expression
 Left Expression Binary Operator   Right Expression
 </pre>
 <p>
-  Binary Operator  には,<a href="#language-expression-operator-add">Addition Operator</a>,<a href="#language-expression-operator-subtract">Subtraction Operator</a>,<a href="#language-expression-operator-multiply">Multiplication Operator</a>,<a href="#language-expression-operator-divide">Division Operator</a>,<a href="#language-expression-operator-remainder">Remainder Operator</a>,<a href="#language-expression-operator-bit-and">Bit AND Operator</a>,<a href="#language-expression-operator-bit-or">Bit OR Operator</a>,<a href="#language-expression-operator-logical-and">Logical AND Operator</a>,<a href="#language-expression-operator-logical-or">Logical OR Operator</a>,<a href="#language-expression-operator-shift">Shift Operator</a>,<a href="#language-expression-operator-concat">String連結Operator</a>があります。
+  Binary Operator  には,<a href="#language-expression-operator-add">Addition Operator</a>,<a href="#language-expression-operator-subtract">Subtraction Operator</a>,<a href="#language-expression-operator-multiply">Multiplication Operator</a>,<a href="#language-expression-operator-divide">Division Operator</a>,<a href="#language-expression-operator-remainder">Remainder Operator</a>,<a href="#language-expression-operator-bit-and">Bit AND Operator</a>,<a href="#language-expression-operator-bit-or">Bit OR Operator</a>,<a href="#language-expression-operator-logical-and">Logical AND Operator</a>,<a href="#language-expression-operator-logical-or">Logical OR Operator</a>,<a href="#language-expression-operator-shift">Shift Operator</a>,<a href="#language-expression-operator-concat">String Concatenation Operator</a>があります。
 </p>
 <h4 id="language-expression-operator-sequential">Sequential Operator </h4>
 <p>
@@ -4946,25 +4942,25 @@ Left Expression &gt;&gt;&gt; Right Expression
 <p>
   Logical Right Shift Operator は,例外を発生させません。
 </p>
-<h4 id="language-expression-operator-comparison">比較Operator </h4>
+<h4 id="language-expression-operator-comparison">Comparison Operator </h4>
 <p>
-  比較Operator とは,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
+  Comparison Operator とは,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
 </p>
 <pre>
-Left Expression 比較Operator  Right Expression
+Left Expression Comparison Operator  Right Expression
 </pre>
 <p>
-  比較Operator には,<a href="#language-expression-operator-comparison-numeric">数値比較Operator</a>,<a href="#language-expression-operator-comparison-string">String比較Operator</a>,isa Operator があります。
+  Comparison Operator には,<a href="#language-expression-operator-comparison-numeric">Numeric Comparison Operator</a>,<a href="#language-expression-operator-comparison-string">String Comparison Operator</a>,isa Operator があります。
 </p>
-<h4 id="language-expression-operator-comparison-numeric">数値比較Operator </h4>
+<h4 id="language-expression-operator-comparison-numeric">Numeric Comparison Operator </h4>
 <p>
-  数値比較Operator とは,数値あるいはオブジェクトのアドレスを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
+  Numeric Comparison Operator とは,数値あるいはオブジェクトのアドレスを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
 </p>
 <pre>
-Left Expression 数値比較Operator  Right Expression
+Left Expression Numeric Comparison Operator  Right Expression
 </pre>
 <p>
-  数値比較Operator の一覧です。
+  Numeric Comparison Operator の一覧です。
 </p>
 <table>
   <tr>
@@ -5046,7 +5042,7 @@ Left Expression 数値比較Operator  Right Expression
   Numeric Typeの比較の場合は,Left ExpressionとRight Expressionに対して,<a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a>が行われます。
 </p>
 <p>
-  その後,数値比較Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>,Object Type における演算がDefinitionされます。
+  その後,Numeric Comparison Operator は,C99におけるthe following 演算と完全に一致する演算を行います。<a href="#language-c99-type">C99とのTypeの対応</a>に応じた,<a href="#language-type-int">int Type</a> ,<a href="#language-type-long">long Type</a>,<a href="#language-type-float">float Type</a>,<a href="#language-type-double">double Type</a>,Object Type における演算がDefinitionされます。
 </p>
 <pre>
 # Numeric Typeの比較,Object Type の比較
@@ -5060,23 +5056,23 @@ Left Expression 数値比較Operator  Right Expression
 (int32_t)(x &lt;= y);
 </pre>
 <p>
-  数値比較Operator のReturn ValueのTypeは,<a href="#language-type-int">int Type</a> です。
+  Numeric Comparison Operator のReturn ValueのTypeは,<a href="#language-type-int">int Type</a> です。
 </p>
 <p>
-  数値比較Operator は,例外を発生させません。
+  Numeric Comparison Operator は,例外を発生させません。
 </p>
-<h4 id="language-expression-operator-comparison-string">String比較Operator </h4>
+<h4 id="language-expression-operator-comparison-string">String Comparison Operator </h4>
 <p>
-  String比較Operator とは,Stringを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
+  String Comparison Operator とは,Stringを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
 </p>
 <pre>
-Left Expression String比較Operator  Right Expression
+Left Expression String Comparison Operator  Right Expression
 </pre>
 <p>
   Left ExpressionとRight Expressionは,<a href="#language-type-string-compatible">String Compatible Type</a>でなければなりません。
 </p>
 <p>
-  String比較Operator の一覧です。
+  String Comparison Operator の一覧です。
 </p>
 <table>
   <tr>
@@ -5133,11 +5129,11 @@ Left Expression String比較Operator  Right Expression
   </tr>
 </table>
 <p>
-  String比較Operator のReturn ValueのTypeは,<a href="#language-type-int">int Type</a> です。条件が満たされた場合は1を,そうでない場合は0を返します。
+  String Comparison Operator のReturn ValueのTypeは,<a href="#language-type-int">int Type</a> です。条件が満たされた場合は1を,そうでない場合は0を返します。
 </p>
 <h4 id="language-expression-operator-isa">isa Operator </h4>
 <p>
-  数値比較Operator とは,数値あるいはオブジェクトのアドレスを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
+  Numeric Comparison Operator とは,数値あるいはオブジェクトのアドレスを比較するために,Left ExpressionとRight Expressionの間に置かれるOperator で,<a href="#language-expression">Expression</a>を返すOperator のことをいいます。
 </p>
 <p>
   isa Operator とはは,Typeの適合性をチェックするためのOperator で,<a href="#language-expression">Expression</a>を返します。
@@ -5157,12 +5153,12 @@ Left Expression isa 右Type
 <p>
   3. 右Typeが,<a href="#language-type-callback">Callback Type</a>であった場合は,実行時にLeft ExpressionのTypeがClass Typeであり,そのClassがCallback Typeを満たすかどうかをチェックします。満たした場合は<a href="#language-type-int">int Type</a> の1を,そうでない場合は0を返します。Left ExpressionのTypeは,Object Type でなければなりません。otherwise a compile-time error occurs.
 </p>
-<h4 id="language-expression-operator-logical">論理Operator </h4>
+<h4 id="language-expression-operator-logical">Logical Operator </h4>
 <p>
-  論理Operator は,論理演算を行うOperator のことで,><a href="#language-expression-operator-logical-and">Logical AND Operator</a>,<a href="#language-expression-operator-logical-or">Logical OR Operator</a>,<a href="#language-expression-operator-logical-not">Logical NOT Operator</a>からなります。
+  Logical Operator は,論理演算を行うOperator のことで,><a href="#language-expression-operator-logical-and">Logical AND Operator</a>,<a href="#language-expression-operator-logical-or">Logical OR Operator</a>,<a href="#language-expression-operator-logical-not">Logical NOT Operator</a>からなります。
 </p>
 <p>
-  論理Operator は,<a href="#language-expression">Expression</a>を返します。
+  Logical Operator は,<a href="#language-expression">Expression</a>を返します。
 </p>
 <h4 id="language-expression-operator-logical-and">Logical AND Operator </h4>
 <p>
@@ -5239,33 +5235,33 @@ Left Expression || Right Expression
 <p>
   Logical NOT Operator は,例外を発生させません。
 </p>
-<h4 id="language-expression-operator-concat">String連結Operator </h4>
+<h4 id="language-expression-operator-concat">String Concatenation Operator </h4>
 <p>
-  String連結Operator は"."で表現される<a href="#language-expression-operator-binary">Binary Operator</a>です。
+  String Concatenation Operator は"."で表現される<a href="#language-expression-operator-binary">Binary Operator</a>です。
 </p>
 <pre>
 Left Expression . Right Expression
 </pre>
 <p>
-  Left ExpressionあるいはRight Expressionが,<a href="#language-type-numeric">Numeric Type</a>であった場合は,<a href="#language-type-convertion-numeric-to-string">Numeric-to-String Type Convertion</a>によってStringに変換されます。
+  Left ExpressionあるいはRight Expressionが,<a href="#language-type-numeric">Numeric Type</a>であった場合は,<a href="#language-type-convertion-numeric-to-string">Numeric-to-<a href="#language-type-string">string Type</a> Convertion</a>によってStringに変換されます。
 </p>
 <p>
   Left ExpressionとRight Expressionはどちらも<a href="#language-type-string-compatible">String Compatible Type</a>でなければなりません。otherwise コンパイルエラーになります。
 </p>
 <p>
-  String連結Operator は,Left ExpressionとRight Expressionで表現される<a href="#language-string">String</a>を連結し,新しいStringを返します。
+  String Concatenation Operator は,Left ExpressionとRight Expressionで表現される<a href="#language-string">String</a>を連結し,新しいStringを返します。
 </p>
 <p>
-  String連結Operator は<a href="#language-expression">Expression</a>を返し,Typeは<a href="#language-type-string">String Type</a>です。
+  String Concatenation Operator は<a href="#language-expression">Expression</a>を返し,Typeは<a href="#language-type-string">string Type</a>です。
 </p>
 <p>
-  Left ExpressionとRight Expressionの両方が,<a href="#language-literal-string">String Literal</a>であった場合は,コンパイル時に連結されたString Literal が生成されます。パフォーマンスのコストを意識せずに,String連結Operator で,String Literal を連結できます。
+  Left ExpressionとRight Expressionの両方が,<a href="#language-literal-string">String Literal</a>であった場合は,コンパイル時に連結されたString Literal が生成されます。パフォーマンスのコストを意識せずに,String Concatenation Operator で,String Literal を連結できます。
 </p>
 <p>
   実行時に,Left ExpressionあるいはRight Expressionが<a href="#language-undef">Undefined Value</a>だった場合は,例外が発生します。
 </p>
 <p>
-  <b>String連結Operator のExample</b>
+  <b>String Concatenation Operator のExample</b>
 </p>
 <pre>
 my $str = "abc" . "def";
@@ -5489,9 +5485,9 @@ scalar Right Expression
 my $nums = new int[3];
 foo(scalar @$nums);
 </pre>
-<h4 id="language-expression-operator-isweak">isweakOperator</h4>
+<h4 id="language-expression-operator-isweak">isweak Operator</h4>
 <p>
-  isweakOperator は,Fieldが,<a href="#language-weak-ref">Weaken Reference</a>かを確認するOperator です。
+  isweak Operator は,Fieldが,<a href="#language-weak-ref">Weaken Reference</a>かを確認するOperator です。
 </p>
 <pre>
 isweak 変数-&gt;{Field Name};
@@ -5509,7 +5505,7 @@ isweak 変数-&gt;{Field Name};
   実行時にFieldに保存されている値が,<a href="#language-undef">Undefined Value</a>だった場合は,偽を返します。これは,<a href="#language-expression">Expression</a>です。
 </p>
 <p>
-  isweakOperator は,FieldがWeaken Referenceの場合は,<a href="#language-type-int">int Type</a> の1を,そうでない場合は0を返します。これは,<a href="#language-expression">Expression</a>です。
+  isweak Operator は,FieldがWeaken Referenceの場合は,<a href="#language-type-int">int Type</a> の1を,そうでない場合は0を返します。これは,<a href="#language-expression">Expression</a>です。
 </p>
 <h3 id="language-expression-operator-precedence">Operator Precidence</h3>
 <p>
@@ -5618,7 +5614,7 @@ isweak 変数-&gt;{Field Name};
     <td>
       Addition Operator "+"<br>
       Subtraction Operator "-"<br>
-      String連結Operator "."
+      String Concatenation Operator "."
     </td>
   </tr>
   <tr>
@@ -6133,7 +6129,7 @@ die Expression;
   Expressionは,String Compatible Typeでなければなりません。
 </p>
 <p>
-  die Statement の詳しい解説については,<a href="#language-exception">Exception Handling</a>を見てください。
+  die Statement の詳しい解説については,<a href="#language-exception">Exception</a>を見てください。
 </p>
 <h4 id="language-Statement-weaken">weaken Statement </h4>
 <p>
@@ -6344,7 +6340,7 @@ my $num = 1 + 2;
   <li><a href="#language-type-array-object">Object Array Type</a></li>
   <li><a href="#language-type-array-mulnum">Multi Numeric Array Type</a></li>
   <li><a href="#language-type-any-object-array">Any Object Array Type</a></li>
-  <li><a href="#language-type-string">String Type</a></li>
+  <li><a href="#language-type-string">string Type</a></li>
   <li><a href="#language-type-string-compatible">String Compatible Type</a></li>
   <li><a href="#language-type-multi-numeric">Multi Numeric Type</a></li>
   <li><a href="#language-type-ref">Reference Type</a></li>
@@ -6625,7 +6621,7 @@ package Foo : pointer_t {
 </pre>
 <h4 id="language-type-object">Object Type </h4>
 <p>
-  Object Type とは<a href="#language-type-class">Class Type</a><a href="#language-type-callback">Callback Type</a><a href="#language-type-array">Array Type</a><a href="#language-type-string">String Type</a><a href="#language-type-any-object">Any Object Type</a>を合わせたものをいいます。"Multi Numeric Type""Reference Type "は含みません。
+  Object Type とは<a href="#language-type-class">Class Type</a><a href="#language-type-callback">Callback Type</a><a href="#language-type-array">Array Type</a><a href="#language-type-string">string Type</a><a href="#language-type-any-object">Any Object Type</a>を合わせたものをいいます。"Multi Numeric Type""Reference Type "は含みません。
 </p>
 <p>
   Object Type の値は"Any Object Type "に代入できます。
@@ -6850,7 +6846,7 @@ my $object : object = new Foo[3];
 </p>
 <h4 id="language-type-basic">Basic Type</h4>
 <p>
-  次元を持たないTypeをBasic Typeと呼びます。<a href="#language-type-numeric">Numeric Type</a>,<a href="#language-type-package">Package Type</a>,<a href="#language-type-any-object">Any Object Type</a>,<a href="#language-type-string">String Type</a>は,Basic Typeです。
+  次元を持たないTypeをBasic Typeと呼びます。<a href="#language-type-numeric">Numeric Type</a>,<a href="#language-type-package">Package Type</a>,<a href="#language-type-any-object">Any Object Type</a>,<a href="#language-type-string">string Type</a>は,Basic Typeです。
 </p>
 <h4 id="language-type-array">Array Type</h4>
 <p>
@@ -6933,7 +6929,7 @@ int[][][]
 byte[]
 </pre>
 <p>
-  <a href="#language-type-string">String Type</a>は,コンパイル時にはString Typeとして扱われますが,実行時にはbyte[] Typeになります。
+  <a href="#language-type-string">string Type</a>は,コンパイル時には<a href="#language-type-string">string Type</a>として扱われますが,実行時にはbyte[] Typeになります。
 </p>
 <h4 id="language-type-array-object">Object Array Type</h4>
 <p>
@@ -7015,9 +7011,9 @@ $array-&gt;[0] = SPVM::Int-&gt;new(5);
 <p>
   Any Object Array Typeの要素の値の設定においては,要素のTypeが,ArrayのType Dimensionよりも1だけ小さくなっているかの実行時チェックが入ります。チェックに失敗した場合は,例外が発生します。Any Object Array Typeは,実行時Type安全性を保証します。
 </p>
-<h4 id="language-type-string">String Type</h4>
+<h4 id="language-type-string"><a href="#language-type-string">string Type</a></h4>
 <p>
-  String Typeは,Stringを表現するTypeです。stringによって表現します。C言語の"const char*"を表現するために設計されました。
+  <a href="#language-type-string">string Type</a>は,Stringを表現するTypeです。stringによって表現します。C言語の"const char*"を表現するために設計されました。
 </p>
 <pre>
 my $str : string;
@@ -7043,10 +7039,10 @@ my $ch = $str-&gt;[1];
 $str-&gt;[1] = 'd';
 </pre>
 <p>
-  String Typeは,コンパイルが終わった後は,バイトTypeのArrayとまったく同じものになります。たとえば,一つ目の表現は,二つ目の表現として扱われます。
+  <a href="#language-type-string">string Type</a>は,コンパイルが終わった後は,バイトTypeのArrayとまったく同じものになります。たとえば,一つ目の表現は,二つ目の表現として扱われます。
 </p>
 <pre>
-# isa String Type
+# isa &lt;a href="#language-type-string"&gt;string Type&lt;/a&gt;
 if ($str isa string) {
 
 }
@@ -7060,7 +7056,7 @@ if ($str isa byte[]) {
   SPVMのStringは,変更不可ですが,これは,コンパイル時チェックであることに注意してください。
 </p>
 <p>
-  String Typeは,byte[] Typeに,キャストすることができ,実行時にStringを変更することができます。
+  <a href="#language-type-string">string Type</a>は,byte[] Typeに,キャストすることができ,実行時にStringを変更することができます。
 </p>
 <pre>
 my $bytes = (byte[])$str;
@@ -7071,7 +7067,7 @@ $bytes-&gt;[1] = 'd';
 </p>
 <h4 id="language-type-string-compatible">String Compatible Type</h4>
 <p>
-  String Compatible Typeとは,<a href="#language-type-string">String Type</a>と<a href="#language-type-array-byte">byte[] Type</a>のことを言います。
+  String Compatible Typeとは,<a href="#language-type-string">string Type</a>と<a href="#language-type-array-byte">byte[] Type</a>のことを言います。
 </p>
 <p>
   String Compatible Typeの値が生成される場合には,値のために確保されたメモリ領域の最後のひとつ後ろは"\0"になることが保証されます。(たとえば"abc"であれば"c"の後ろは"\0")SPVM言語から見た場合,この"\0"は意味を持ちませんが,ネイティブAPIを使う場合は,String Compatible Typeを,C言語のStringとして扱うことができます。
@@ -7164,10 +7160,10 @@ my $num2 : int;
 $num1 = $num2;
 </pre>
 <p>
-  <b>移動元のTypeがbyte[] Typeで,移動先のTypeがString Typeの場合</b>
+  <b>移動元のTypeがbyte[] Typeで,移動先のTypeが<a href="#language-type-string">string Type</a>の場合</b>
 </p>
 <p>
-  移動元のTypeがbyte[] Typeで,移動先のTypeがString Typeの場合は,Type Compatibilityがあります。
+  移動元のTypeがbyte[] Typeで,移動先のTypeが<a href="#language-type-string">string Type</a>の場合は,Type Compatibilityがあります。
 </p>
 <pre>
 my $bytes = new byte[3];
@@ -7210,7 +7206,7 @@ my $objets : object[] = new int[3];
   <li><a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a></li>
   <li><a href="#language-type-convertion-numeric-narrowing">Numeric Narrowing Type Convertion</a></li>
   <li><a href="#language-type-convertion-numeric-widening">Numeric Widening Type Convertion</a></li>
-  <li><a href="#language-type-convertion-numeric-to-string">Numeric-to-String Type Convertion</a></li>
+  <li><a href="#language-type-convertion-numeric-to-string">Numeric-to-<a href="#language-type-string">string Type</a> Convertion</a></li>
   <li><a href="#language-type-convertion-boxing">Boxing Type Convertion</a></li>
   <li><a href="#language-type-convertion-unboxing">Unboxing Type Convertion</a></li>
   <li><a href="#language-type-convertion-bool">Bool Type Convertion</a></li>
@@ -7335,7 +7331,7 @@ my $num : int = (int)4;
   </tr>
   <tr>
     <td>
-      <b>String Type</b>
+      <b><a href="#language-type-string">string Type</a></b>
     </td>
     <td>
       <b>Numeric Type</b>
@@ -7427,10 +7423,10 @@ my $num : int = $object;
 my $num_obj = SPVM::Int-&gt;new(3);
 my $num : int = $num_obj;
 </pre>
-  移動元のTypeがNumeric Typeで,移動先のTypeが,String Typeの場合は,<a href="#language-type-convertion-numeric-to-string">Numeric-to-String Type Convertion</a>が行われます。the following 場合の例では,数値の"123"がString""123""に変換されたものが代入されます。
+  移動元のTypeがNumeric Typeで,移動先のTypeが,<a href="#language-type-string">string Type</a>の場合は,<a href="#language-type-convertion-numeric-to-string">Numeric-to-<a href="#language-type-string">string Type</a> Convertion</a>が行われます。the following 場合の例では,数値の"123"がString""123""に変換されたものが代入されます。
 </p>
 <pre>
-# String Typeへの暗黙のBoxing Type Convertion
+# &lt;a href="#language-type-string"&gt;string Type&lt;/a&gt;への暗黙のBoxing Type Convertion
 my $num = 123;
 my $str : string = $num;
 </pre>
@@ -7482,7 +7478,7 @@ my $str : string = $num;
   <li><a href="#language-expression-operator-remainder">Remainder Operator</a></li>
   <li><a href="#language-expression-operator-bit-and">Bit AND Operator</a></li>
   <li><a href="#language-expression-operator-bit-or">Bit OR Operator</a></li>
-  <li><a href="#language-expression-operator-comparison-numeric">数値比較Operator</a></li>
+  <li><a href="#language-expression-operator-comparison-numeric">Numeric Comparison Operator</a></li>
 </ul>
 <h4 id="language-type-convertion-numeric-narrowing">Numeric Narrowing Type Convertion</h4>
 <p>
@@ -7581,16 +7577,16 @@ while (条件部) {
 <p>
   ExpressionがObject Type の場合は,Undefined Valueの場合は0,そうでない場合は1が返されます。
 </p>
-<h3 id="language-exception">Exception Handling </h3>
+<h3 id="language-exception">Exception</h3>
 <ul class="list">
-  <li><a href="#language-exception-summary">Exception Handling の概要</a></li>
+  <li><a href="#language-exception-summary">Exception の概要</a></li>
   <li><a href="#language-exception-occur">例外の発生</a></li>
-  <li><a href="#language-exception-catch">例外変数のキャッチ</a></li>
-  <li><a href="#language-exception-var">例外変数</a></li>
+  <li><a href="#language-exception-catch">Exception Variableのキャッチ</a></li>
+  <li><a href="#language-exception-var">Exception Variable</a></li>
 </ul>
-<h4 id="language-exception-summary">Exception Handling の概要</h4>
+<h4 id="language-exception-summary">Exception の概要</h4>
 <p>
-  SPVMはException Handling の仕組みを持っています。Exception Handling は,例外の発生と例外のキャッチからなります。
+  SPVMはException の仕組みを持っています。Exception は,例外の発生と例外のキャッチからなります。
 </p>
 <h4 id="language-exception-occur">例外の発生</h4>
 <p>
@@ -7623,17 +7619,17 @@ eval {
 };
 </pre>
 <p>
-  eval Blockで例外をキャッチした場合は,プログラムの終了は止められ,<a href="#language-exception-var">例外変数</a>に<a href="#language-exception-occur">例外の発生</a>で指定したメッセージが代入されます。
+  eval Blockで例外をキャッチした場合は,プログラムの終了は止められ,<a href="#language-exception-var">Exception Variable</a>に<a href="#language-exception-occur">例外の発生</a>で指定したメッセージが代入されます。
 </p>
-<h4 id="language-exception-var">例外変数</h4>
+<h4 id="language-exception-var">Exception Variable</h4>
 <p>
-  例外変数は"$@"で表現されるグローバル変数のことです。
+  Exception Variableは"$@"で表現されるグローバル変数のことです。
 </p>
 <pre>
 $@
 </pre>
 <p>
-  例外変数は,本当の意味では,グローバル変数ではありません。例外変数は,実は,スレッド変数です。SPVMはシングルスレッド設計なので,例外変数は,グローバル変数として振舞うように見えます。ネイティブにおいてスレッドを利用する場合に,違いがあります。
+  Exception Variableは,本当の意味では,グローバル変数ではありません。Exception Variableは,実は,スレッド変数です。SPVMはシングルスレッド設計なので,Exception Variableは,グローバル変数として振舞うように見えます。ネイティブにおいてスレッドを利用する場合に,違いがあります。
 </p>
 <p>
   Get Exception Variable Valueについては,<a href="#language-expression-get-exception-var">Get Exception Variable Value</a>を見てください。
@@ -7879,28 +7875,7 @@ $comparator-&gt;{bar} = $bar;
 }
 </pre>
 <p>
-  Weaken Reference関連のSyntaxとして,Weaken Referenceを解除できる<a href="#language-Statement-weaken">weaken Statement</a>と,FieldがWeaken Referenceかどうかを確認できる<a href="#language-expression-operator-isweak">isweakOperator</a>があります。
-</p>
-<h3 id="language-limitation">Limitation</h3>
-<p>
-  SPVMにおけるLimitation です。
-</p>
-<h4 id="language-limitation-sub-arguments-count">Subroutine Argumentsの個数のLimitation </h4>
-<p>
-  SPVMのSubroutine Argumentsの個数の最大は256個です。
-</p>
-<p>
-  Multi Numeric Typeの引数を渡すときは,Fieldの個数が,引数の個数としてカウントされます。たとえばSPVM::Complex_2dTypeが引数で指定された場合は,2個と数えます。
-</p>
-<p>
-  Multi Numeric Reference Type の引数を渡すときは,Multi Numeric TypeのFieldの個数が,引数の個数としてカウントされます。たとえばSPVM::Complex_2d&Typeが引数で指定された場合は,2個と数えます。
-</p>
-<p>
-  もし,最大値を超えた場合は,a compile-time error occurs
-</p>
-<h4 id="language-limitation-value-type-fileds-count">Multi Numeric TypeのFieldの個数のLimitation </h4>
-<p>
-  Multi Numeric TypeのFieldの個数の最大値は,256個で,少なくともひとつのFieldが必要です。otherwise a compile-time error occurs.
+  Weaken Reference関連のSyntaxとして,Weaken Referenceを解除できる<a href="#language-Statement-weaken">weaken Statement</a>と,FieldがWeaken Referenceかどうかを確認できる<a href="#language-expression-operator-isweak">isweak Operator</a>があります。
 </p>
 
   </div>
