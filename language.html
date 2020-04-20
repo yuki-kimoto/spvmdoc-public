@@ -1813,10 +1813,10 @@ my $point = new Point;
 $point-&gt;{x} = 1;
 </pre>
 <p>
-  See <a href="#language-expression-get-field-class-based-object">Get Class Based Object Field Value</a> to get field of Class Based Object.
+  See <a href="#language-expression-get-field-class-based-object">Get Field Value</a> to get field of Class Based Object.
 </p>
 <p>
-  See <a href="#language-expression-set-field-class-based-object">Set Class Based Object Field Value</a> to set field of Class Based Object.
+  See <a href="#language-expression-set-field-class-based-object">Set Field Value</a> to set field of Class Based Object.
 </p>
 <p>
   <b>2. Multi Numeric Field Access</b>
@@ -3510,8 +3510,8 @@ $point_ref-&gt;{x} = 1;
   <li><a href="#language-expression-get-exception-var">Get Exception Variable Value</a></li>
   <li><a href="#language-expression-set-exception-var">Set Exception Variable Value</a></li>
   <li><a href="#language-expression-callsub">Subroutine Call</a></li>
-  <li><a href="#language-expression-get-field-class-based-object">Get Class Based Object Field Value</a></li>
-  <li><a href="#language-expression-set-field-class-based-object">Set Class Based Object Field Value</a></li>
+  <li><a href="#language-expression-get-field-class-based-object">Get Field Value</a></li>
+  <li><a href="#language-expression-set-field-class-based-object">Set Field Value</a></li>
   <li><a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Type Field Value</a></li>
   <li><a href="#language-expression-set-field-multi-numeric">Set Multi Numeric Type Field Value</a></li>
   <li><a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Type Field Value via Dereference</a></li>
@@ -3559,16 +3559,19 @@ $var
 $var = RIGHT_EXPRESSION
 </pre>
 <p>
-  If the assignment does not meet <a href="#language-type-compatible">Type Compatibility</a>, a compile-time error occurs.
+  If the assignment does not satisfy <a href="#language-type-compatible">Type Compatibility</a>, a compile-time error occurs.
 </p>
 <p>
   Set Lexical Variable Value Expression returns the value after setting.
 </p>
 <p>
-  When Right Expression is <a href="#language-type-object">Object Type</a>, Reference Count of the object is incremented by 1.
+  If Right Expression is <a href="#language-type-object">Object Type</a>, Reference Count of the object is incremented by 1.
 </p>
 <p>
   If an object has already been assigned to $var before the assignment, the Reference Count of that object is decremented by 1.
+</p>
+<p>
+  See <a href="#language-scope">Scope</a> to know Garbage Collection of Lexical Variable.
 </p>
 <h4 id="language-expression-get-package-var">Get Package Variable Value</h4>
 <p>
@@ -3619,6 +3622,9 @@ $PACKAGE_NAME::PACKAGE_VARIABLE_NAME = RIGHT_EXPRESSION
 $PACKAGE_VARIABLE_NAME = RIGHT_EXPRESSION
 </pre>
 <p>
+  If the assignment does not satisfy <a href="#language-type-compatible">Type Compatibility</a>, a compile-time error occurs.
+</p>
+<p>
   Set Package Variable Value Expression returns the value after setting.
 </p>
 <p>
@@ -3626,6 +3632,12 @@ $PACKAGE_VARIABLE_NAME = RIGHT_EXPRESSION
 </p>
 <p>
   If you try to access a private Package Variable from outside the Package, a compile-time error occurs.
+</p>
+<p>
+  If Right Expression is <a href="#language-type-object">Object Type</a>, Reference Count of the object is incremented by 1.
+</p>
+<p>
+  If an object has already been assigned to Package Variable before the assignment, the Reference Count of that object is decremented by 1.
 </p>
 <p>
   <b>Set Package Variable Value Example:</b>
@@ -3676,73 +3688,73 @@ $@ = RIGHT_EXPRESSION
   Returns the value of Exception Variable after setting. This is <a href="#language-type-string">string Type</a>.
 </p>
 <p>
+  The Reference Count of Right Expression is incremented by 1.
+</p>
+<p>
+  If an object has already been assigned to Exception Variable before the assignment, the Reference Count of that object is decremented by 1.
+</p>
+<p>
   <b>Set Exception Variable Value Example:</b>
 </p>
 <pre>
 $@ = "Error";
 </pre>
-<h4 id="language-expression-get-field-class-based-object">Get Class Based Object Field Value</h4>
+<h4 id="language-expression-get-field-class-based-object">Get Field Value</h4>
 <p>
-  Get Class Based Object Field Valueは,次のように記述します。
+  <b>Get Field Value Expression</b> is a Expression to get <a href="#language-field">Field</a> Value.
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name}
+INVOCANT_EXPRESSION-&gt;{FIELD_NAME}
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-class">Class Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Type Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expression is <a href="#language-type-class">Class Type</a>. If Expression is <a href="#language-type-multi-numeric">Multi Numeric Type</a> Value, The Field Access is <a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Type Field Value</a>. If Expression is <a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a> Value, The Field Access is ,<a href="#language-expression-get-field-multi-numeric-deref">. Otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameが,存在しない場合は,a compile-time error occurs
+  If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
 </p>
 <p>
-  Get Class Based Object Field Valueは,オブジェクトに保存されているFieldの値を返します。これは<a href="#language-expression">Expression</a>です。
+  Get Field Value Expression returns the value of the Field stored in the object.
 </p>
 <p>
-  返される値のTypeは,FieldのTypeです。
+  Retrun Type is The <a href="#language-type">Type</a> of Field.
 </p>
 <p>
-  <b>Get Class Based Object Field ValueのExample</b>
-</p>
-<p>
-  Get Class Based Object Field ValueのExampleです。
+  <b>Get Field Value Example:</b>
 </p>
 <pre>
 my $point = Point-&gt;new;
 my $x = $point-&gt;{x};
 </pre>
-<h4 id="language-expression-set-field-class-based-object">Set Class Based Object Field Value</h4>
+<h4 id="language-expression-set-field-class-based-object">Set Field Value</h4>
 <p>
-  Set Class Based Object Field Valueは,次のように記述します。
+  <b>Set Field Value Expression</b> is a Expression to set <a href="#language-field">Field</a> Value.
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name} = Right Expression
+INVOCANT_EXPRESSION-&gt;{FIELD_NAME} = RIGHT_EXPRESSION
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-class">Class Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric">Set Multi Numeric Type Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric-deref">Set Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expression is <a href="#language-type-class">Class Type</a>. If Invocant Expression is <a href="#language-type-multi-numeric">Multi Numeric Type</a>, the Field Access is ,<a href="#language-expression-get-field-multi-numeric">Set Multi Numeric Type Field Value</a>. If Invocant Expression is <a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>, the Field Access is <a href="#language-expression-get-field-multi-numeric-deref">Set Multi Numeric Type Field Value via Dereference</a>. Otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameが,存在しない場合は,a compile-time error occurs
+  If the assignment does not satisfy <a href="#language-type-compatible">Type Compatibility</a> of the Type of Field, a compile-time error occurs.
 </p>
 <p>
-  Right ExpressionのTypeは,FieldのTypeと同じでなければなりません。otherwise a compile-time error occurs.
+  If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
 </p>
 <p>
-  Set Class Based Object Field Valueは,設定後のオブジェクトに保存されているFieldの値を返します。これは<a href="#language-expression">Expression</a>です。
+  Set Field Value Expression returns the value of Field after setting. 
 </p>
 <p>
-  返される値のTypeは,FieldのTypeです。
+  Return Value Type is the Type of Field.
 </p>
 <p>
-  Right Expressionが,Object Type であった場合は,オブジェクトのReference Countが1増やされます。
+  If Right Expression is <a href="#language-type-object">Object Type</a>, Reference Count of the object is incremented by 1.
 </p>
 <p>
-  代入前に,すでにFieldにオブジェクトが代入されていた場合は,そのオブジェクトのReference Countが1減らされます。
+  If an object has already been assigned to Field before the assignment, the Reference Count of that object is decremented by 1.
 </p>
 <p>
-  <b>Set Class Based Object Field ValueのExample</b>
-</p>
-<p>
-  Set Class Based Object Field ValueのExampleです。
+  <b>Set Field Value Example:</b>
 </p>
 <pre>
 my $point = Point-&gt;new;
@@ -3753,10 +3765,10 @@ $point-&gt;{x} = 1;
   Get Multi Numeric Type Field Valueは,次のように記述します。
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name}
+Invocant Expression-&gt;{FIELD_NAME}
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-class">Multi Numeric Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-get-field-class-based-object">Get Class Based Object Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expressionは,<a href="#language-type-class">Multi Numeric Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-get-field-class-based-object">Get Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
 </p>
 <p>
   Field Nameが,存在しない場合は,a compile-time error occurs
@@ -3782,10 +3794,10 @@ my $re = $z-&gt;{x};
   Set Multi Numeric Type Field Valueは,次のように記述します。
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name} = Right Expression
+Invocant Expression-&gt;{FIELD_NAME} = Right Expression
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-class">Multi Numeric Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-set-field-class-based-object">Set Class Based Object Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-set-field-multi-numeric-deref">Set Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expressionは,<a href="#language-type-class">Multi Numeric Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-set-field-class-based-object">Set Field Value</a>になり,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値であった場合は,<a href="#language-expression-set-field-multi-numeric-deref">Set Multi Numeric Type Field Value via Dereference</a>になり,それ以外の場合は,a compile-time error occurs
 </p>
 <p>
   Field Nameが,存在しない場合は,a compile-time error occurs
@@ -3814,10 +3826,10 @@ $z-&gt;{x} = 2.5;
   Dereference によるGet Multi Numeric Type Field Valueは,次のように記述します。
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name}
+Invocant Expression-&gt;{FIELD_NAME}
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-get-field-class-based-object">Get Class Based Object Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Type Field Value</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-get-field-class-based-object">Get Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Type Field Value</a>になり,それ以外の場合は,a compile-time error occurs
 </p>
 <p>
   Field Nameが,存在しない場合は,a compile-time error occurs
@@ -3844,10 +3856,10 @@ my $re = $z_ref-&gt;{x};
   Dereference によるSet Multi Numeric Type Field Valueは,次のように記述します。
 </p>
 <pre>
-Invocant Expression-&gt;{Field Name} = Right Expression
+Invocant Expression-&gt;{FIELD_NAME} = Right Expression
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-set-field-class-based-object">Set Class Based Object Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-set-field-multi-numeric">Set Multi Numeric Type Field Value</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-set-field-class-based-object">Set Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-set-field-multi-numeric">Set Multi Numeric Type Field Value</a>になり,それ以外の場合は,a compile-time error occurs
 </p>
 <p>
   Field Nameが,存在しない場合は,a compile-time error occurs
@@ -5448,7 +5460,7 @@ foo(scalar @$nums);
   isweak Operator は,Fieldが,<a href="#language-weak-ref">Weaken Reference</a>かを確認するOperator です。
 </p>
 <pre>
-isweak 変数-&gt;{Field Name};
+isweak 変数-&gt;{FIELD_NAME};
 </pre>
 <p>
   オブジェクトExpressionのTypeは,<a href="#language-type-class">Class Type</a>でなければなりません。otherwise a compile-time error occurs.
@@ -6094,7 +6106,7 @@ die Expression;
   weaken Statement は,Fieldに対して,<a href="#language-weak-ref">Weaken Reference</a>を設定するStatementです。
 </p>
 <pre>
-weaken 変数-&gt;{Field Name};
+weaken 変数-&gt;{FIELD_NAME};
 </pre>
 <p>
   オブジェクトExpressionのTypeは,<a href="#language-type-class">Class Type</a>でなければなりません。otherwise a compile-time error occurs.
@@ -6155,7 +6167,7 @@ weaken $baz-&gt;{foo};
   unweaken Statementは,Fieldに対して,<a href="#language-weak-ref">Weaken Reference</a>を解除するStatementです。
 </p>
 <pre>
-unweaken 変数-&gt;{Field Name};
+unweaken 変数-&gt;{FIELD_NAME};
 </pre>
 <p>
   オブジェクトExpressionのTypeは,<a href="#language-type-class">Class Type</a>でなければなりません。otherwise a compile-time error occurs.
