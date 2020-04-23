@@ -3774,7 +3774,7 @@ INVOCANT_EXPRESSION-&gt;{FIELD_NAME}
   If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
 </p>
 <p>
-  Get Multi Numeric Field Value returns the field value in the Multi Numeric Value.
+  Get Multi Numeric Field Value Expression returns the field value in the Multi Numeric Value.
 </p>
 <p>
   Retrun Type is The <a href="#language-type">Type</a> of the Field.
@@ -3788,7 +3788,7 @@ my $re = $z-&gt;{x};
 </pre>
 <h4 id="language-expression-set-field-multi-numeric">Set Multi Numeric Field Value</h4>
 <p>
-  Set Multi Numeric Field Value Expression is a Expression to set Field Value of <a href="#language-mulnum">Multi Numeric Value</a>  using <a href="#language-expression-operator-assign">Assignment Operator</a>..
+  Set Multi Numeric Field Value Expression is a Expression to set Field Value of <a href="#language-mulnum">Multi Numeric Value</a> using <a href="#language-expression-operator-assign">Assignment Operator</a>.
 </p>
 <pre>
 INVOCANT_EXPRESSION-&gt;{FIELD_NAME} = RIGHT_EXPRESSION
@@ -3816,63 +3816,57 @@ INVOCANT_EXPRESSION-&gt;{FIELD_NAME} = RIGHT_EXPRESSION
 my $z : SPVM::Complex_2d;
 $z-&gt;{x} = 2.5;
 </pre>
-<h4 id="language-expression-get-field-multi-numeric-deref">Dereference によるGet Multi Numeric Field Value</h4>
+<h4 id="language-expression-get-field-multi-numeric-deref">Get Multi Numeric Field Value via Dereference</h4>
 <p>
-  Dereference によるGet Multi Numeric Field Valueは,次のように記述します。
+  <b>Get Multi Numeric Field Value via Dereference Expression</b> is a Expression to get Field Value of <a href="#language-mulnum">Multi Numeric Value</a> via <a href="#language-deref">Dereference</a>.
 </p>
 <pre>
-Invocant Expression-&gt;{FIELD_NAME}
+INVOCANT_EXPRESSION-&gt;{FIELD_NAME}
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-get-field">Get Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Field Value</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expression is <a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>. If Invocant Expression is <a href="#language-type-class">Class Type</a>, the Field Access is , <a href="#language-expression-get-field">Get Field Value</a>. If Invocant Expression is <a href="#language-type-multi-numeric">Multi Numeric Type</a>, the Field Access is <a href="#language-expression-get-field-multi-numeric">Get Multi Numeric Field Value</a>. Otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameが,存在しない場合は,a compile-time error occurs
+  If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
 </p>
 <p>
-  Dereference によるGet Multi Numeric Field Valueは,<a href="#language-sub-stack">Subroutine Callstack</a>に保存されている該当するFieldの値を返します。これは<a href="#language-expression">Expression</a>です。
+  Get Multi Numeric Field Value via Dereference Expression returns the field value in the Multi Numeric Value.
 </p>
 <p>
-  返される値のTypeは,FieldのTypeです。
+  Retrun Type is The <a href="#language-type">Type</a> of the Field.
 </p>
 <p>
-  <b>Dereference によるGet Multi Numeric Field ValueのExample</b>
-</p>
-<p>
-  Dereference によるGet Multi Numeric Field ValueのExampleです。
+  <b>Get Multi Numeric Field Value via Dereference Example:</b>
 </p>
 <pre>
 my $z : SPVM::Complex_2d;
 my $z_ref = \$z;
 my $re = $z_ref-&gt;{x};
 </pre>
-<h4 id="language-expression-set-field-multi-numeric-deref">Dereference によるSet Multi Numeric Field Value</h4>
+<h4 id="language-expression-set-field-multi-numeric-deref">Set Multi Numeric Field Value via Dereference</h4>
 <p>
-  Dereference によるSet Multi Numeric Field Valueは,次のように記述します。
+  Set Multi Numeric Field Value Expression via Dereference is a Expression to set Field Value of <a href="#language-mulnum">Multi Numeric Value</a> via <a href="#language-deref">Dereference</a> using <a href="#language-expression-operator-assign">Assignment Operator</a>.
 </p>
 <pre>
-Invocant Expression-&gt;{FIELD_NAME} = RIGHT_EXPRESSION
+INVOCANT_EXPRESSION-&gt;{FIELD_NAME} = RIGHT_EXPRESSION
 </pre>
 <p>
-  Invocant Expressionは,<a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>の値でなければなりません。Invocant Expressionが,<a href="#language-type-class">Class Type</a>の値であった場合は,<a href="#language-expression-set-field">Set Field Value</a>になり,<a href="#language-type-multi-numeric">Multi Numeric Type</a>の値であった場合は,<a href="#language-expression-set-field-multi-numeric">Set Multi Numeric Field Value</a>になり,それ以外の場合は,a compile-time error occurs
+  Invocant Expression is <a href="#language-type-ref-multi-numeric">Multi Numeric Reference Type</a>. If Invocant Expression is <a href="#language-type-class">Class Type</a>, <a href="#language-expression-set-field">Set Field Value</a>. If Invocant Expression is <a href="#language-type-multi-numeric">Multi Numeric Type</a>, <a href="#language-expression-set-field-multi-numeric">Set Multi Numeric Field Value</a>. Otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameが,存在しない場合は,a compile-time error occurs
+  If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
 </p>
 <p>
-  Right ExpressionのTypeは,FieldのTypeと同じでなければなりません。otherwise a compile-time error occurs.
+  Set Multi Numeric Field Value via Dereference Expression returns the value of Field after setting.
 </p>
 <p>
-  Dereference によるSet Multi Numeric Field Valueは,設定後の<a href="#language-sub-stack">Subroutine Callstack</a>に保存されている該当するFieldの値を返します。これは<a href="#language-expression">Expression</a>です。
+  The Assignment must satisfy <a href="#language-type-compatible">Type Compatibility</a>.
 </p>
 <p>
-  返される値のTypeは,FieldのTypeです。
+  Return Value Type is the Type of Field.
 </p>
 <p>
-  <b>Dereference によるSet Multi Numeric Field ValueのExample</b>
-</p>
-<p>
-  Dereference によるSet Multi Numeric Field ValueのExampleです。
+  <b>Set Multi Numeric Field Value via Dereference Example:</b>
 </p>
 <pre>
 my $z : SPVM::Complex_2d;
@@ -3881,33 +3875,28 @@ $z_ref-&gt;{x} = 2.5;
 </pre>
 <h4 id="language-expression-get-array-element">Get Array Element Value</h4>
 <p>
-  Arrayの要素の値を取得するには,次のように記述します。
+  <b>Get Array Element Value Expression</b> is a Expression to get a Element Value of <a href="#language-array">Array</a>.
+</p>
+<pre>
+ARRAY_EXPRESSION-&gt;[INDEX_EXPRESSION]
+</pre>
+<p>
+  Array Expression must be <a href="#language-type-array">Array Type</a>.
 </p>
 <p>
-<p>
-  ArrayExpression->[インデックスExpression]
-</p>
+  Index Expression must be <a href="#language-type-int">int Type</a> or the Type that become <a href="#language-type-int">int Type</a> by <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</a>.
 </p>
 <p>
-  ArrayExpressionは,<a href="#language-type-array">Array Type</a>の値でなければなりません。otherwise a compile-time error occurs.
+  Get Array Element Value Expression returns the Element Value of the Index.
 </p>
 <p>
-  インデックスExpressionは,<a href="#language-type-int">int Type</a> の値でなければなりません。otherwise a compile-time error occurs.
+  If Array Expression is <a href="#language-undef">Undefined Value</a>, a Runtime Exception occurs.
 </p>
 <p>
-  Arrayの要素の値を取得は,指定したインデックスの要素の値を返します。これは,Expressionです。
+  If Index Expression is lower than 0 or more than the max index of the Array, a Runtime Exception occurs.
 </p>
 <p>
-  実行時に,ArrayExpressionの値が,Undefined Valueである場合は,実行時例外が発生します。
-</p>
-<p>
-  実行時に,インデックスの値が,0より小さい場合,あるいは,Arrayの最大のインデックスを超えている場合は,実行時例外が発生します。
-</p>
-<p>
-  <b>Get Array Element ValueのExample</b>
-</p>
-<p>
-  Get Array Element ValueのExampleです。
+  <b>Get Array Element Value Example:</b>
 </p>
 <pre>
 my $nums = new int[3];
@@ -3921,42 +3910,37 @@ my $object = (Point)$objects-&gt;[1];
 </pre>
 <h4 id="language-expression-set-array-element">Set Array Element Value</h4>
 <p>
-  Arrayの要素の値を設定するには,次のように記述します。
+  Set Array Element Value Expression is a Expression to set a Element Value of a Array using <a href="#language-expression-operator-assign">Assignment Operator</a>.
+</p>
+<pre>
+ARRAY_EXPRESSION-&gt;[INDEX_EXPRESSION] = RIGHT_EXPRESSION
+</pre>
+<p>
+  Array Expression must be <a href="#language-type-array">Array Type</a>.
 </p>
 <p>
-<p>
-  ArrayExpression->[インデックスExpression] = RIGHT_EXPRESSION
-</p>
+  Index Expression must be <a href="#language-type-int">int Type</a> or the Type that become <a href="#language-type-int">int Type</a> by <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</a>.
 </p>
 <p>
-  ArrayExpressionは,<a href="#language-type-array">Array Type</a>の値でなければなりません。otherwise a compile-time error occurs.
+  The Assignment must satisfy <a href="#language-type-compatible">Type Compatibility</a>.
 </p>
 <p>
-  インデックスExpressionは,<a href="#language-type-int">int Type</a> の値でなければなりません。otherwise a compile-time error occurs.
+  Set Array Element Value Expression returns the value of the element after setting.
 </p>
 <p>
-  Right ExpressionのTypeは,Arrayの要素のTypeと<a href="#language-type-compatible">Type Compatibility</a>がなければなりません。otherwise a compile-time error occurs.
+  If Array Expression is <a href="#language-undef">Undefined Value</a>, a Runtime Exception occurs.
 </p>
 <p>
-  Arrayの要素の値を設定は,設定後の値を返します。これは,Expressionです。
+  If Index Expression is lower than 0 or more than the max index of the Array, a Runtime Exception occurs.
 </p>
 <p>
-  実行時に,ArrayExpressionの値が,Undefined Valueである場合は,実行時例外が発生します。
+  If Right Expression is <a href="#language-type-object">Object Type</a>, Reference Count of the object is incremented by 1.
 </p>
 <p>
-  実行時に,インデックスの値が,0より小さい場合,あるいは,Arrayの最大のインデックスを超えている場合は,実行時例外が発生します。
+  If an object has already been assigned to Field before the assignment, the Reference Count of that object is decremented by 1.
 </p>
 <p>
-  Right Expressionが,Object Type であった場合は,オブジェクトのReference Countが1増やされます。
-</p>
-<p>
-  代入前に,すでにArrayの要素にオブジェクトが代入されていた場合は,そのオブジェクトのReference Countが1減らされます。
-</p>
-<p>
-  <b>Set Array Element ValueのExample</b>
-</p>
-<p>
-  Set Array Element ValueのExampleです。
+  <b>Set Array Element Value Example:</b>
 </p>
 <pre>
 my $nums = new int[3];
@@ -3966,7 +3950,7 @@ my $points = new Point[3];
 $points-&gt;[1] = Point-&gt;new(1, 2);
 
 my $objects : oarray = $points;
-$objects-&gt;[2] = Point-&gt;new(3, 5);;
+$objects-&gt;[2] = Point-&gt;new(3, 5);
 </pre>
 <h4 id="language-expression-new">Create Object</h4>
 <p>
@@ -7062,7 +7046,7 @@ package Point_3i : mulnum_t {
 my $num : int;
 my $num_ref : int&amp; = \$num;
 
-my $point : Point_3i;;
+my $point : Point_3i;
 my $point_ref : Point_3i&amp; = \$point;
 </pre>
 <p>
@@ -7415,7 +7399,7 @@ my $str : string = $num;
   Unary Numeric Widening Type Convertionが行われるのはthe following 場合です。
 </p>
 <ul class="list">
-  <li>Arrayのインデックス</li>
+  <li>ArrayのIndex</li>
   <li>Arrayを作成する場合の次元</li>
   <li>Unary Plus Operator のオペランド</li>
   <li>Unary Minus Operator のオペランド</li>
