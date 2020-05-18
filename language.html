@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/spvmdoc-public/images/spvm-logo.png">
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
-<title>SPVM 1.0 Language Specification - SPVM Document</title>
-<meta name="description" content="SPVM 1.0 Language Specification is described in this document.">
+<title>SPVM Language Specification - SPVM Document</title>
+<meta name="description" content="SPVM Language Specification is described in this document. Current SVPM Version is 1.0 beta.">
   </head>
   <body>
     <div class="container">
@@ -29,9 +29,9 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/spvmdoc-public/language.html">SPVM 1.0 Language Specification</a></h3>
+    <h2><a href="/spvmdoc-public/language.html">SPVM Language Specification</a></h3>
 <p>
-  <b>SPVM 1.0 Language Specification</b> is described in this document.
+  <b>SPVM Language Specification</b> is described in this document. Current SVPM Version is 1.0 beta.
 </p>
 <p>
   SPVM is in beta testing for the 1.0 release. Language Specification will be changed without warning.
@@ -95,40 +95,40 @@
 <table>
   <tr>
     <th>
-      <b> SPVM type </ b>
+      <b>SPVM type</b>
     </ th>
     <th>
-      <b> C99 type </ b>
+      <b>C99 type</b>
     </ th>
     <th>
-      <b> Description </ b>
+      <b>Description</b>
     </ th>
   </ tr>
   <tr>
     <td>
-      <b> byte </ b>
+      <b>byte</b>
     </ td>
     <td>
       int8_t
     </ td>
     <td>
-      SPVM <a href="#language-type-byte"> byte type</a> matches C99 int8_t type.
+      SPVM <a href="#language-type-byte">byte type</a> matches C99 int8_t type.
     </ td>
   </ tr>
   <tr>
     <td>
-      <b> short </ b>
+      <b>short</b>
     </ td>
     <td>
       int16_t
     </ td>
     <td>
-      SPVM <a href="#language-type-short"> short type</a> matches the C99 int16_t type.
+      SPVM <a href="#language-type-short">short type</a> matches the C99 int16_t type.
     </ td>
   </ tr>
   <tr>
     <td>
-      <b> int </ b>
+      <b>int</b>
     </ td>
     <td>
       int32_t
@@ -139,50 +139,50 @@
   </ tr>
   <tr>
     <td>
-      <b> long </ b>
+      <b>long</b>
     </ td>
     <td>
       int64_t
     </ td>
     <td>
-      SPVM <a href="#language-type-long"> long type</a> matches C99 int64_t type.
+      SPVM <a href="#language-type-long">long type</a> matches C99 int64_t type.
     </ td>
   </ tr>
 <tr>
     <td>
-      <b> float </ b>
+      <b>float</b>
     </ td>
     <td>
       float
     </ td>
     <td>
-      SPVM <a href="#language-type-float"> float type</a> matches the C99 float type.
+      SPVM <a href="#language-type-float">float type</a> matches the C99 float type.
     </ td>
   <tr>
     <td>
-      <b> double </ b>
+      <b>double</b>
     </ td>
     <td>
       double
     </ td>
     <td>
-      SPVM <a href="#language-type-double"> double type</a> matches C99 double.
+      SPVM <a href="#language-type-double">double type</a> matches C99 double.
     </ td>
   </ tr>
   <tr>
     <td>
-      <b> Object type </ b>
+      <b>Object type</b>
     </ td>
     <td>
       void*
     </ td>
     <td>
-      SPVM <a href="#language-type-object"> Object Type</a> matches the C99 void* type.
+      SPVM <a href="#language-type-object">Object Type</a> matches the C99 void* type.
     </ td>
   </ tr>        
   <tr>
     <td>
-      <b> Multiple Numeric Type </ b>
+      <b>Multiple Numeric Type</b>
     </ td>
     <td>
       Numeric Array Type that matches the type and length in SPVM multiple Numeric Type fields
@@ -190,13 +190,13 @@
     <td>
       <p>
         For example, if SPVM <a href="#language-type-multi-numeric">multiple Numeric Type</a>
-      </ p>
+      </p>
       <p>
         <b>package Point_2i: mulnum_t {has x: int; has y: int;}</b>
-      </ p>
+      </p>
       <p>
         matches the type declared in C99
-      </ p>
+      </p>
       <p>
         <b>int32_t var[2];</b>
       </p>
@@ -391,7 +391,7 @@ weaken wo __END__ __PACKAGE__ __FILE__ __LINE__
   Separators in SPVM are the followings.
 </p>
 <pre>
-( ) { } [ ] ; , -&gt; =&gt;
+( ) { } [ ] ; , -&gt;=&gt;
 </pre>
 <h4 id="language-lex-separator-fat-comma">Fat Comma</h4>
 <p>
@@ -427,7 +427,7 @@ weaken wo __END__ __PACKAGE__ __FILE__ __LINE__
 ==  &lt;=  &gt;=  !=  &amp;&amp;  ||  ++  --
 +   -   *   /   &amp;   |   ^   %   &lt;&lt;   &gt;&gt;   &gt;&gt;&gt;
 +=  -=  *=  /=  &amp;=  |=  ^=  %=  &lt;&lt;=  &gt;&gt;=  &gt;&gt;&gt;=
-\   $   @   .   .=
+\   $  @   .   .=
 </pre>
 <h3 id="language-parsing">Syntax Parsing</h3>
 <h4 id="language-parsing-syntax-definition">Syntax Parsing Definition</h4><!-- 2019/2/27 not ok -->
@@ -2022,7 +2022,7 @@ sub foo : int () { return 5 + 3; }
   Method is Subroutine that has <a href="#language-type-self">self Type</a> as its first argument.
 </p>
 <pre>
-sub SUB_NAME : TYPE  ($self : self, ARGUMENT2 : TYPE2, ARGUMENT3 : TYPE3, ARGUMENTN : TYPEN) {
+sub SUB_NAME : TYPE  ($self : self, ARGUMENT2 : TYPE2, ARGUMENT3 : TYPE3, ARGUMENTN : TYPEn) {
 
 }
 </pre>
@@ -2087,13 +2087,13 @@ void()
 <ul class="list">
   <li>
     <a href="#language-enum-definition">Enumeration Definition</a>
-  </li>
+ </li>
   <li>
     <a href="#language-enum-descriptor">Enumeration Descriptor</a>
-  </li>
+ </li>
   <li>
     <a href="#language-enum-call">Enumeration Call</a>
-  </li>
+ </li>
 </ul>
 <h4 id="language-enum-definition">Enumeration Definition</h4>
 <p>
@@ -2495,7 +2495,7 @@ eval {
 </p>
 <pre>
 # if Block
-if (Expression) {
+if (EXPRESSION) {
 
 }
 </pre>
@@ -2505,7 +2505,7 @@ if (Expression) {
 </p>
 <pre>
 #elsif Block
-elsif (Expression) {
+elsif (EXPRESSION) {
 
 }
 </pre>
@@ -2535,7 +2535,7 @@ for (my $i = 0; $i &lt; 3; $i++) {
 </p>
 <pre>
 # while Block
-while (Expression) {
+while (EXPRESSION) {
 
 }
 </pre>
@@ -2544,7 +2544,7 @@ while (Expression) {
   switch Block is a scope block.
 </p>
 <pre>
-switch (Expression) {
+switch (EXPRESSION) {
 
 }
 </pre>
@@ -3114,7 +3114,7 @@ switch (Expression) {
   [2] If the Character following [1] is "}", or "]", then if the next Character is "->", "{", or "[", proceed with the interpretation and return back to [1]. Otherwise stop interpreting.
 </p>
 <p>
-  The trailing $ is not treated as the start of Variable Expansion. It is treated as "$".
+  The trailing $is not treated as the start of Variable Expansion. It is treated as "$".
 </p>
 <pre>
 "AAA$"
@@ -3153,7 +3153,7 @@ $string_const-&gt;[0] = 'd';
 my $string_const = "abc";
 </pre>
 <p>
-  <a href="#language-type-array-byte">byte [] Type</a> is designed to represent "<b>char *</b>" type in C language.
+  <a href="#language-type-array-byte">byte[] Type</a> is designed to represent "<b>char *</b>" type in C language.
 </p>
 <p>
   <a href="#language-type-string">string Type</a> is designed to represent "<b>const char *</b>" type in C language.
@@ -3190,13 +3190,13 @@ undef
 <ul class="list">
   <li>
     Numeric Type Array
-  </li>
+ </li>
   <li>
     Object Type Array
-  </li>
+ </li>
   <li>
     Multi Numeric Type Array
-  </li>
+ </li>
 </ul>
 <p>
   Numeric Type Array is Array that element type is <a href="#language-type-numeric">Numeric Type</a>.
@@ -3253,7 +3253,7 @@ package Complex_2d : mulnum_t {
 }
 </pre>
 <p>
-  Multi Numeric Type must end with "_", Number of Fields, <a href="#language-mulnum-definition"> Multi Numeric Type Suffix</a>.
+  Multi Numeric Type must end with "_", Number of Fields, <a href="#language-mulnum-definition">Multi Numeric Type Suffix</a>.
 </p>
 <p>
   The suffix must correspond to <a href="#language-type-numeric">Numeric Type</a>.
@@ -3525,7 +3525,7 @@ $point_ref-&gt;{x} = 1;
   <li><a href="#language-expression-current-file">Get Current File Name</a></li>
   <li><a href="#language-expression-current-line">Get Current Line Number</a></li>
   <li><a href="#language-expression-typecast">Type Cast</a></li>
-  <li>(Expression)</li>
+  <li>(EXPRESSION)</li>
   <li><a href="#language-operator-precedence">Operator Precidence</a></li>
 </ul>
 <h4 id="language-expression-summary">Expression Summary</h4>
@@ -3768,7 +3768,7 @@ $point-&gt;{x} = 1;
 INVOCANT_EXPRESSION-&gt;{FIELD_NAME}
 </pre>
 <p>
-  Invocant Expression is <a href="#language-type-class">Multi Numeric Type</a>. If Invocant Expression is <a href="#language-type-class">Class Type</a>, the Field Access is <a href="#language-expression-get-field">. If Invocant Expression <a href="#language-type-ref-multi-numeric"> is Multi Numeric Reference Type</a>, the Field Access is <a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Field Value via Dereference</a>. Otherwise a compile-time error occurs.
+  Invocant Expression is <a href="#language-type-class">Multi Numeric Type</a>. If Invocant Expression is <a href="#language-type-class">Class Type</a>, the Field Access is <a href="#language-expression-get-field">. If Invocant Expression <a href="#language-type-ref-multi-numeric">is Multi Numeric Reference Type</a>, the Field Access is <a href="#language-expression-get-field-multi-numeric-deref">Get Multi Numeric Field Value via Dereference</a>. Otherwise a compile-time error occurs.
   
 <p>
   If the Field Name does not found in the <a href="#language-package">Package</a>, a compile-time error occurs
@@ -4054,18 +4054,18 @@ my $nums = new int[][][3];
   Array Initialization returns an Array that has the length of the number of elements of Expression.
 </p>
 <p>
-  The type of Array is the type of Expression1 converted to Array Type. If no element is specified, it will be an Array Type of <a href="#language-type-any-object"> Any Object Type </a>.
+  The type of Array is the type of Expression1 converted to Array Type. If no element is specified, it will be an Array Type of <a href="#language-type-any-object">Any Object Type</a>.
 </p>
 <p>
-  If Expression2 or later does not satisfy <a href="#language-type-compatible"> Type Compatibility </a>, a compile error will occur.
+  If Expression2 or later does not satisfy <a href="#language-type-compatible">Type Compatibility</a>, a compile error will occur.
 </p>
 <h4 id="language-expression-callsub">Subroutine Call</h4>
 <p>
-  Subroutines defined by <a href="#language-sub-definition"> Subroutine Definition </a> can be called. There are two types of calls, <b> function call </ b> and <b> Method Call </ b>.
+  Subroutines defined by <a href="#language-sub-definition">Subroutine Definition</a> can be called. There are two types of calls, <b>function call</b> and <b>Method Call</b>.
 </p>
 <h4 id="language-expression-callsub-func">Function call</h4>
 <p>
-  Calling a function is a method of calling a Subroutine that is not <a href="#language-sub-method"> Method </a>. In <a href="#language-sub-definition"> Subroutine Definition </a>, the first argument is <a href="#language-type-self"> self Type </a> If the argument of> is specified, it becomes Method.
+  Calling a function is a method of calling a Subroutine that is not <a href="#language-sub-method">Method</a>. In <a href="#language-sub-definition">Subroutine Definition</a>, the first argument is <a href="#language-type-self">self Type</a> If the argument of> is specified, it becomes Method.
 </p>
 <p>
   You can call the function in the following way. The argument is optional. You can specify up to 255 arguments.
@@ -4089,13 +4089,13 @@ Subroutine Name(ARGS1, ARGS2, ARGS3, ..., ARGSn);
   Subroutine defined in Current Package, or Subroutine imported in Current Package
 </p>
 <p>
-  The function call receives the arguments. If the number of arguments does not match the number of arguments defined in the Subroutine Definition, a compile-time error occurs The Type of each argument and the type of the argument defined in Subroutine Definition and <a href = " If there is no # language-type-compatible "> Type Compatibility </a>, a compile-time error occurs
+  The function call receives the arguments. If the number of arguments does not match the number of arguments defined in the Subroutine Definition, a compile-time error occurs The Type of each argument and the type of the argument defined in Subroutine Definition and <a href = " If there is no # language-type-compatible ">Type Compatibility</a>, a compile-time error occurs
 </p>
 <p>
-  Calling the function returns Return Value if Return Value is other than <a href="#language-type-void"> void Type </a>.
+  Calling the function returns Return Value if Return Value is other than <a href="#language-type-void">void Type</a>.
 </p>
 <p>
-  The function call is <a href="#language-expression"> Expression </a>.
+  The function call is <a href="#language-expression">Expression</a>.
 <p>
 <p>
   <b>Subroutine 呼び出しのExample</b>
@@ -4109,22 +4109,22 @@ my $ret = bar(1, 2, 3);
 </pre>
 <h4 id="language-expression-callsub-method">Method Call</h4>
 <p>
-  Method Call is a method to call Subroutine which is <a href="#language-sub-method"> Method </a>. In <a href="#language-sub-definition"> Subroutine Definition </a>, the first argument is <a href="#language-type-self"> self Type </a> If the argument of> is specified, it becomes Method.
+  Method Call is a method to call Subroutine which is <a href="#language-sub-method">Method</a>. In <a href="#language-sub-definition">Subroutine Definition</a>, the first argument is <a href="#language-type-self">self Type</a> If the argument of> is specified, it becomes Method.
 </p>
 <p>
-  Method Call can be done with the following syntax using the object created by <a href="#language-expression-new"> Create Object </a>.
+  Method Call can be done with the following syntax using the object created by <a href="#language-expression-new">Create Object</a>.
 </p>
 <pre>
 OBJECT_EXPRESSION-&gt;SUB_NAME(ARGS1, ARGS2, ARGS3, ..., ARGSn);
 </pre>
 <p>
-  Method Call takes arguments. If the number of arguments does not match the number of arguments defined in the Subroutine Definition, a compile-time error occurs The Type of each argument and the type of the argument defined in Subroutine Definition and <a href = " If there is no # language-type-compatible "> Type Compatibility </a>, a compile-time error occurs
+  Method Call takes arguments. If the number of arguments does not match the number of arguments defined in the Subroutine Definition, a compile-time error occurs The Type of each argument and the type of the argument defined in Subroutine Definition and <a href = " If there is no # language-type-compatible ">Type Compatibility</a>, a compile-time error occurs
 </p>
 <p>
-  Method Call returns Return Value if Return Value is other than <a href="#language-type-void"> void Type </a>.
+  Method Call returns Return Value if Return Value is other than <a href="#language-type-void">void Type</a>.
 </p>
 <p>
-  Method Call is <a href="#language-expression"> Expression </a>.
+  Method Call is <a href="#language-expression">Expression</a>.
 <p>
 <p>
   <b>Method Call Example</b>
@@ -4134,13 +4134,13 @@ my $point = new Point;
 $point-&gt;set_x(3);
 </pre>
 <p>
-  Since the object created by <a href="#language-sub-new-callback-object"> Create Callback Object </a> is a normal object, you can call Method.
+  Since the object created by <a href="#language-sub-new-callback-object">Create Callback Object</a> is a normal object, you can call Method.
 </p>
 <pre>
 OBJECT_EXPRESSION-&gt;(ARGS1, ARGS2, ARGS3, ..., ARGSn);
 </pre>
 <p>
-  <b> Example that calls Method from the object created with Create Callback Object </ b>
+  <b>Example that calls Method from the object created with Create Callback Object</b>
 </p>
 <p>
   An Example that calls a Method from the object created by Create Callback Object.
@@ -4163,7 +4163,7 @@ $VARIABLE
   The variable Type must be Reference Type. otherwise a compile-time error occurs.
 </p>
 <p>
-  The value obtained by Dereference returns <a href="#language-expression"> Expression </a>.
+  The value obtained by Dereference returns <a href="#language-expression">Expression</a>.
 </p>
 <pre>
   &lt;b&gt;Example of getting value by Dereference&lt;/b&gt;
@@ -4191,7 +4191,7 @@ $VARIABLE = Expression
   The Type of Expression must match the Type of the variable when dereferenced. otherwise a compile-time error occurs.
 </p>
 <p>
-  Setting a value with Dereference returns the set value. This is <a href="#language-expression"> Expression </a>.
+  Setting a value with Dereference returns the set value. This is <a href="#language-expression">Expression</a>.
 </p>
 <pre>
   &lt;b&gt;Example of setting values ​​with Dereference&lt;/b&gt;
@@ -4333,7 +4333,7 @@ UNARY_OPERATOR EXPRESSION
 <p>
   Note that <a href="#language-operator-inc">Increment Operator</a> and <a href="#language-operator-dec">Decrement Operator</a> is not Unary Operator.
 </p>
-<h4 id="language-operator-binary">Binary Operator </h4>
+<h4 id="language-operator-binary">Binary Operator</h4>
 <p>
   Binary Operator is a Operator placed between Left <a href="#language-expresssion">Expression</a> and Right <a href="#language-expresssion">Expression</a>.
 </p>
@@ -4594,10 +4594,10 @@ Array Access++
 Dereference ++
 </pre>
 <p>
-  The target of Increment Operator is <a href="#language-lex-var"> Lexical Variable </a>, <a href="#language-package-var"> Package Variable </a>, <a href = "# language-field-access"> Field Access </a>, <a href="#language-array-access"> Array Access </a>, <a href="#language-deref"> Dereference </ must be a>. otherwise a compile-time error occurs.
+  The target of Increment Operator is <a href="#language-lex-var">Lexical Variable</a>, <a href="#language-package-var">Package Variable</a>, <a href = "# language-field-access">Field Access</a>, <a href="#language-array-access">Array Access</a>, <a href="#language-deref">Dereference </ must be a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Increment Operator target Type must be <a href="#language-type-numeric"> Numeric Type </a>. Otherwise a compilation error will occur.
+  Increment Operator target Type must be <a href="#language-type-numeric">Numeric Type</a>. Otherwise a compilation error will occur.
 </p>
 <p>
   <b>Pre Increment Operator</b>
@@ -4612,7 +4612,7 @@ Dereference ++
 (Target = (Type Cast)(Target + 1))
 </pre>
 <p>
-  For example, the prefix increment of the <a href="#language-type-byte"> byte Type </a> value is equivalent to the following Expression:
+  For example, the prefix increment of the <a href="#language-type-byte">byte Type</a> value is equivalent to the following Expression:
 </p>
 <pre>
 ($num = (byte)($num + 1))
@@ -4630,7 +4630,7 @@ Dereference ++
 (my TMP_VAR = TARGET, TARGET = (Type Cast)(TARGET + 1), TMP_VAR)
 </pre>
 <p>
-  For example, a Post Increment with a value of <a href="#language-type-byte"> byte Type </a> is equivalent to the following Expression.
+  For example, a Post Increment with a value of <a href="#language-type-byte">byte Type</a> is equivalent to the following Expression.
 </p>
 <pre>
 (my $tmp = $num, $num = (byte)($num + 1), $tmp)
@@ -4655,13 +4655,13 @@ Array Access--
 Dereference --
 </pre>
 <p>
-  Decrement Operator targets <a href="#language-lex-var"> Lexical Variable </a>, <a href="#language-package-var"> Package Variable </a>, <a href = "# language-field-access"> Field Access </a>, <a href="#language-array-access"> Array Access </a>, <a href="#language-deref"> Dereference </ must be a>. otherwise a compile-time error occurs.
+  Decrement Operator targets <a href="#language-lex-var">Lexical Variable</a>, <a href="#language-package-var">Package Variable</a>, <a href = "# language-field-access">Field Access</a>, <a href="#language-array-access">Array Access</a>, <a href="#language-deref">Dereference </ must be a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  The target type of Decrement Operator must be <a href="#language-type-numeric"> Numeric Type </a>. Otherwise a compilation error will occur.
+  The target type of Decrement Operator must be <a href="#language-type-numeric">Numeric Type</a>. Otherwise a compilation error will occur.
 </p>
 <p>
-  <b>Pre Decrement Operator </b>
+  <b>Pre Decrement Operator</b>
 </p>
 <p>
   Pre Decrement Operator returns the decremented value after decrementing.
@@ -4673,13 +4673,13 @@ Dereference --
 (TARGET = (Type Cast)(TARGET - 1))
 </pre>
 <p>
-  For example, the Pre Decrement of the value of <a href="#language-type-byte"> byte Type </a> is equivalent to the following Expression.
+  For example, the Pre Decrement of the value of <a href="#language-type-byte">byte Type</a> is equivalent to the following Expression.
 </p>
 <pre>
 ($num = (byte)($num - 1))
 </pre>
 <p>
-  <b>Post Decrement Operator </b>
+  <b>Post Decrement Operator</b>
 </p>
 <p>
   Post Decrement Operator returns the value after decrementing and before decrementing.
@@ -4691,98 +4691,98 @@ Dereference --
 (my TMP_VAR = TARGET, TARGET = (Type Cast)(TARGET - 1), TMP_VAR)
 </pre>
 <p>
-  For example, the Post Decrement of the <a href="#language-type-byte"> byte Type </a> value is equivalent to the following Expression.
+  For example, the Post Decrement of the <a href="#language-type-byte">byte Type</a> value is equivalent to the following Expression.
 </p>
 <pre>
 (my $tmp = $num, $num = (byte)($num - 1), $tmp)
 </pre>
 <h4 id="language-operator-bit">Bit Operator</h4>
 <p>
-  Bit Operator is an Operator that performs Bit operation.> <a href="#language-operator-bit-and"> Bit AND Operator </a>, <a href = "# language-operator-bit-or It consists of "> Bit OR Operator </a>, <a href="#language-operator-bit-not"> Bit NOT Operator </a>.
+  Bit Operator is an Operator that performs Bit operation.> <a href="#language-operator-bit-and">Bit AND Operator</a>, <a href = "# language-operator-bit-or It consists of ">Bit OR Operator</a>, <a href="#language-operator-bit-not">Bit NOT Operator</a>.
 </p>
 <h4 id="language-operator-bit-and">Bit AND Operator</h4>
 <p>
-  Bit AND is <a href="#language-operator-binary"> Binary Operator </a> expressed by "&".
+  Bit AND is <a href="#language-operator-binary">Binary Operator</a> expressed by "&".
 </p>
 <pre>
 LEFT_EXPRESSION &amp; RIGHT_EXPRESSION
 </pre>
 <p>
-  Left Expression and Right Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Left Expression and Right Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  <a href="#language-type-convertion-binary-numeric-widening"> Binary Numeric Widening Type Convertion </a> is performed on Left Expression and Right Expression.
+  <a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a> is performed on Left Expression and Right Expression.
 </p>
 <p>
-  After that, the operation result of Bit AND Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"> <a href="#language-type-int"> int Type </a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long"> long Type </a> is defined.
+  After that, the operation result of Bit AND Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"><a href="#language-type-int">int Type</a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long">long Type</a> is defined.
 </p>
 <pre>
 x &amp; y;
 </pre>
 <p>
-  Bit AND Operator returns <a href="#language-expression"> Expression </a>.
+  Bit AND Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  The Type of Return Value of Bit AND Operator is the type <a href="#language-type-convertion-binary-numeric-widening"> Binary Numeric Widening Type Converted </a>.
+  The Type of Return Value of Bit AND Operator is the type <a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Converted</a>.
 </p>
 <p>
-  Bit AND Operator does not raise an exception.
+  Bit AND Operator does not throw an exception.
 </p>
 <h4 id="language-operator-bit-or">Bit OR Operator</h4>
 <p>
-  Bit OR is <a href="#language-operator-binary"> Binary Operator </a> expressed by "|".
+  Bit OR is <a href="#language-operator-binary">Binary Operator</a> expressed by "|".
 </p>
 <pre>
 LEFT_EXPRESSION | RIGHT_EXPRESSION
 </pre>
 <p>
-  Left Expression and Right Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Left Expression and Right Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  <a href="#language-type-convertion-binary-numeric-widening"> Binary Numeric Widening Type Convertion </a> is performed on Left Expression and Right Expression.
+  <a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</a> is performed on Left Expression and Right Expression.
 </p>
 <p>
-  After that, the operation result of Bit OR Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"> <a href="#language-type-int"> int Type </a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long"> long Type </a> is defined.
+  After that, the operation result of Bit OR Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"><a href="#language-type-int">int Type</a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long">long Type</a> is defined.
 </p>
 <pre>
 x | y;
 </pre>
 <p>
-  Bit OR Operator returns <a href="#language-expression"> Expression </a>.
+  Bit OR Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  The Type of Return Value of Bit OR Operator is the type that is <a href="#language-type-convertion-binary-numeric-widening"> Binary Numeric Widening Type Converted </a>.
+  The Type of Return Value of Bit OR Operator is the type that is <a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Converted</a>.
 </p>
 <p>
-  Bit OR Operator does not raise an exception.
+  Bit OR Operator does not throw an exception.
 </p>
 <h4 id="language-operator-bit-not">Bit NOT Operator</h4>
 <p>
-  Bit NOT Operator is <a href="#language-operator-unary"> Unary Operator </a> represented by "~".
+  Bit NOT Operator is <a href="#language-operator-unary">Unary Operator</a> represented by "~".
 </p>
 <pre>
 ~EXPRESSION
 </pre>
 <p>
-  Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  For <a href="#language-expression"> Expression </a>, <a href="#language-type-convertion-unary-numeric-widening"> Unary Numeric Widening Type Convertion </a> Will be opened.
+  For <a href="#language-expression">Expression</a>, <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</a> Will be opened.
 </p>
 <p>
-  After that, the operation result of Bit NOT Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"> <a href="#language-type-int"> int Type </a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long"> long Type </a> is defined.
+  After that, the operation result of Bit NOT Operator performs the operation that exactly matches the following operation in C99. <a href="#language-c99-type"><a href="#language-type-int">int Type</a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long">long Type</a> is defined.
 </p>
 <pre>
 ~x
 </pre>
 <p>
-  Bit NOT Operator returns <a href="#language-expression"> Expression </a>.
+  Bit NOT Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  The Type of Return Value of Bit NOT Operator is the type <a href="#language-type-convertion-unary-numeric-widening"> Unary Numeric Widening Type Converted </a>.
+  The Type of Return Value of Bit NOT Operator is the type <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Converted</a>.
 </p>
 <p>
-  Bit NOT Operator does not raise an exception.
+  Bit NOT Operator does not throw an exception.
 </p>
 <p>
   <b>Bit NOT Operator Example</b>
@@ -4792,11 +4792,11 @@ my $num = ~0xFF0A;
 </pre>
 <h4 id="language-operator-shift">Shift Operator</h4>
 <p>
-  Shift Operator is an operator that performs Bit shift. <a href="#language-operator-left-shift"> Left Shift Operator </a>, <a href = "# language-operator-arithmetic-right-shift" > Arithmetic Right Shift Operator </a>, <a href="#language-operator-logical-right-shift"> Logical Right Shift Operator </a>.
+  Shift Operator is an operator that performs Bit shift. <a href="#language-operator-left-shift">Left Shift Operator</a>, <a href = "# language-operator-arithmetic-right-shift" > Arithmetic Right Shift Operator</a>, <a href="#language-operator-logical-right-shift">Logical Right Shift Operator</a>.
 </p>
 <h4 id="language-operator-left-shift">Left Shift Operator</h4>
 <p>
-  The left shift is <a href="#language-operator-binary"> Binary Operator </a> represented by "<<".
+  The left shift is <a href="#language-operator-binary">Binary Operator</a> represented by "<<".
 </p>
 <pre>
 LEFT_EXPRESSION &lt;&lt; RIGHT_EXPRESSION
@@ -4805,54 +4805,54 @@ LEFT_EXPRESSION &lt;&lt; RIGHT_EXPRESSION
   Left Expressionは,<a href="#language-type-integral">Integral Type</a>でなければなりません。otherwise a compile-time error occurs.
 <p>
 <p>
-  Left Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Left Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Right Expression must be <a href="#language-type-int"> int Type </a>. otherwise a compile-time error occurs.
+  Right Expression must be <a href="#language-type-int">int Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  The calculation result of Left Shift Operator is the same as the following calculation in C99. <a href="#language-c99-type"> <a href="#language-type-int"> int Type </a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long"> long Type </a> is defined.
+  The calculation result of Left Shift Operator is the same as the following calculation in C99. <a href="#language-c99-type"><a href="#language-type-int">int Type</a>, <a href according to the correspondence of Type with C99</a> Definition in = "# language-type-long">long Type</a> is defined.
 </p>
 <pre>
 x &lt;&lt; y;
 </pre>
 <p>
-  Left Shift Operator returns <a href="#language-expression"> Expression </a>.
+  Left Shift Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  Left Shift Operator does not raise an exception.
+  Left Shift Operator does not throw an exception.
 </p>
 <h4 id="language-operator-arithmetic-right-shift">Arithmetic Right Shift Operator</h4>
 <p>
-  Arithmetic Right Shift Operator is <a href="#language-operator-binary"> Binary Operator </a> represented by ">>".
+  Arithmetic Right Shift Operator is <a href="#language-operator-binary">Binary Operator</a> represented by ">>".
 </p>
 <pre>
 LEFT_EXPRESSION &gt;&gt; RIGHT_EXPRESSION
 </pre>
 <p>
-  Left Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Left Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  First, for <a href="#language-expression"> Left Expression </a>, <a href="#language-type-convertion-unary-numeric-widening"> Unary Numeric Widening Type Convertion </ a > Is done.
+  First, for <a href="#language-expression">Left Expression</a>, <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion </ a > Is done.
 </p>
 <p>
-  Right Expression must be <a href="#language-type-int"> int Type </a>. otherwise a compile-time error occurs.
+  Right Expression must be <a href="#language-type-int">int Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  The operation result of Arithmetic Right Shift Operator is the operation that exactly matches the following operation in C99. <a href="#language-type-int"> int Type </ a according to <a href = "# language-c99-type"> Type correspondence with C99 </a> for x >, <a href="#language-type-long"> long Type </a> is defined.
+  The operation result of Arithmetic Right Shift Operator is the operation that exactly matches the following operation in C99. <a href="#language-type-int">int Type </ a according to <a href = "# language-c99-type">Type correspondence with C99</a> for x >, <a href="#language-type-long">long Type</a> is defined.
 </p>
 <pre>
 x &gt;&gt; y;
 </pre>
 <p>
-  Arithmetic Right Shift Operator returns <a href="#language-expression"> Expression </a>.
+  Arithmetic Right Shift Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  Arithmetic Right Shift Operator does not raise an exception.
+  Arithmetic Right Shift Operator does not throw an exception.
 </p>
 <h4 id="language-operator-logical-right-shift">Logical Right Shift Operator</h4>
 <p>
-  Logical Right Shift Operator is <a href="#language-operator-binary"> Binary Operator </a> represented by ">>>".
+  Logical Right Shift Operator is <a href="#language-operator-binary">Binary Operator</a> represented by ">>>".
 </p>
 <pre>
 LEFT_EXPRESSION &gt;&gt;&gt; RIGHT_EXPRESSION
@@ -4861,32 +4861,32 @@ LEFT_EXPRESSION &gt;&gt;&gt; RIGHT_EXPRESSION
   Left Expressionは,<a href="#language-type-integral">Integral Type</a>でなければなりません。otherwise a compile-time error occurs.
 <p>
 <p>
-  Left Expression must be <a href="#language-type-integral"> Integral Type </a>. otherwise a compile-time error occurs.
+  Left Expression must be <a href="#language-type-integral">Integral Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Right Expression must be <a href="#language-type-int"> int Type </a>. otherwise a compile-time error occurs.
+  Right Expression must be <a href="#language-type-int">int Type</a>. otherwise a compile-time error occurs.
 <p>
 <p>
-  The calculation result of Logical Right Shift Operator is the same as the following calculation in C99. <a href="#language-type-int"> int Type </ a according to <a href = "# language-c99-type"> Type correspondence with C99 </a> for x >, <a href="#language-type-long"> long Type </a> is defined.
+  The calculation result of Logical Right Shift Operator is the same as the following calculation in C99. <a href="#language-type-int">int Type </ a according to <a href = "# language-c99-type">Type correspondence with C99</a> for x >, <a href="#language-type-long">long Type</a> is defined.
 </p>
 <pre>
 (Signed Integral Type Cast)((Unsinged Integral Type Cast)x &gt;&gt; y);
 </pre>
 <p>
-  Logical Right Shift Operator returns <a href="#language-expression"> Expression </a>.
+  Logical Right Shift Operator returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
-  Logical Right Shift Operator does not raise an exception.
+  Logical Right Shift Operator does not throw an exception.
 </p>
 <h4 id="language-operator-comparison">Comparison Operator</h4>
 <p>
-  Comparison Operator is an Operator that is placed between Left Expression and Right Expression and returns <a href="#language-expression"> Expression </a>.
+  Comparison Operator is an Operator that is placed between Left Expression and Right Expression and returns <a href="#language-expression">Expression</a>.
 </p>
 <pre>
 LEFT_EXPRESSION COMPARISON_OPERATOR RIGHT_EXPRESSION
 </pre>
 <p>
-  Comparison Operator includes <a href="#language-operator-comparison-numeric"> Numeric Comparison Operator </a>, <a href="#language-operator-comparison-string"> String Comparison Operator </a> There is, isa Operator.
+  Comparison Operator includes <a href="#language-operator-comparison-numeric">Numeric Comparison Operator</a>, <a href="#language-operator-comparison-string">String Comparison Operator</a> There is, isa Operator.
 </p>
 <h4 id="language-operator-comparison-numeric">Numeric Comparison Operator</h4>
 <p>
@@ -4975,10 +4975,10 @@ LEFT_EXPRESSION NUMERIC COMPARISON_OPERATOR RIGHT_EXPRESSION
   The types on the left and right sides must be comparable types. otherwise a compile-time error occurs.
 </p>
 <p>
-  In case of Numeric Type comparison, <a href="#language-type-convertion-binary-numeric-widening"> Binary Numeric Widening Type Conversion </a> is performed for Left Expression and Right Expression.
+  In case of Numeric Type comparison, <a href="#language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Conversion</a> is performed for Left Expression and Right Expression.
 </p>
 <p>
-  After that, the Numeric Comparison Operator performs an operation that exactly matches the following operation in C99. <a href="#language-c99-type"> <a href="#language-type-int"> int Type </a>, <a href according to the correspondence of Type with C99</a> = "# language-type-long"> long Type </a>, <a href="#language-type-float"> float Type </a>, <a href="#language-type-double"> Definition in double Type </a>, Object Type is defined.
+  After that, the Numeric Comparison Operator performs an operation that exactly matches the following operation in C99. <a href="#language-c99-type"><a href="#language-type-int">int Type</a>, <a href according to the correspondence of Type with C99</a> = "# language-type-long">long Type</a>, <a href="#language-type-float">float Type</a>, <a href="#language-type-double">Definition in double Type</a>, Object Type is defined.
 </p>
 <pre>
 # Numeric Type Comparison, Object Type Comparison
@@ -4992,20 +4992,20 @@ LEFT_EXPRESSION NUMERIC COMPARISON_OPERATOR RIGHT_EXPRESSION
 (int32_t)(x &lt;= y);
 </pre>
 <p>
-  The Return Value Type of Numeric Comparison Operator is <a href="#language-type-int"> int Type </a>.
+  The Return Value Type of Numeric Comparison Operator is <a href="#language-type-int">int Type</a>.
 </p>
 <p>
-  Numeric Comparison Operator does not raise an exception.
+  Numeric Comparison Operator does not throw an exception.
 </p>
 <h4 id="language-operator-comparison-string">String Comparison Operator</h4>
 <p>
-  String Comparison Operator is an Operator that is placed between Left Expression and Right Expression to compare Strings and returns <a href="#language-expression"> Expression </a>. ..
+  String Comparison Operator is an Operator that is placed between Left Expression and Right Expression to compare Strings and returns <a href="#language-expression">Expression</a>. ..
 </p>
 <pre>
 LEFT_EXPRESSION STRING COMPARISON_OPERATOR RIGHT_EXPRESSION
 </pre>
 <p>
-  Left Expression and Right Expression must be <a href="#language-type-string-compatible"> String Compatible Type </a>.
+  Left Expression and Right Expression must be <a href="#language-type-string-compatible">String Compatible Type</a>.
 </p>
 <p>
   A list of String Comparison Operators.
@@ -5084,10 +5084,10 @@ LEFT_EXPRESSION ISA RIGHT_TYPE
   1. If the right type is <a href="#language-type-numeric">Numeric Type</a>,<a href="#language-type-multi-numeric"</a><a href="#language-type-any-object"<a href="#language-type-any-object</a>"<a href="#language-type-ref=Reference Type</a> checks whether left Expression Type is the same as the right Type at compile time. If they were identical, <a href="#language-type-int">int Type</a> returns 1, otherwise 0.
 </p>
 <p>
-  2. If the right Type is </a> <a href="#language-type-class">Class Type, check whether the Type of Left Expression matches Class Type at run time. If matched, <a href="#language-type-int">int Type</a> returns 1, otherwise 0. The Type of Left Expression must be An Object Type. otherwise a compile-time error occurs.
+  2. If the right Type is</a> <a href="#language-type-class">Class Type, check whether the Type of Left Expression matches Class Type at run time. If matched, <a href="#language-type-int">int Type</a> returns 1, otherwise 0. The Type of Left Expression must be An Object Type. otherwise a compile-time error occurs.
 </p>
 <p>
-  3. If the right Type is </a><a href="#language-type-callback">Callback Type,the Type of Left Expression is Class Type at run time and the Class is checked to satisfy the Callback Type. If it is satisfied, returns <a href="#language-type-int">int Type</a>1,if not 0. The Type of Left Expression must be An Object Type. otherwise a compile-time error occurs.
+  3. If the right Type is</a><a href="#language-type-callback">Callback Type,the Type of Left Expression is Class Type at run time and the Class is checked to satisfy the Callback Type. If it is satisfied, returns <a href="#language-type-int">int Type</a>1,if not 0. The Type of Left Expression must be An Object Type. otherwise a compile-time error occurs.
 </p>
 <h4 id="language-operator-logical">Logical Operator</h4>
 <p>
@@ -5113,7 +5113,7 @@ LEFT_EXPRESSION &amp;&amp; RIGHT_EXPRESSION
   1. Run the <a href="#language-type-convertion-bool">Bool Type Convertion</a> to Left Expression.
 </p>
 <p>
-  2. If the value of Left Expression is non-zero, execute the <a href="#language-type-convertion-bool" <#language-type-convertion-bool" for the Right Expression, execute the </a> and return that value.
+  2. If the value of Left Expression is non-zero, execute the <a href="#language-type-convertion-bool" <#language-type-convertion-bool" for the Right Expression, execute the</a> and return that value.
 </p>
 <p>
   3. If the value of left Expression is 0, it returns that value.
@@ -5122,7 +5122,7 @@ LEFT_EXPRESSION &amp;&amp; RIGHT_EXPRESSION
   Logical AND Operator returns <a href="#language-expression">Expression</a>
 </p>
 <p>
-  Logical AND Operator does not raise an exception.
+  Logical AND Operator does not throw an exception.
 </p>
 <h4 id="language-operator-logical-or">Logical OR Operator</h4>
 <p>
@@ -5141,7 +5141,7 @@ LEFT_EXPRESSION || RIGHT_EXPRESSION
   1. Run the <a href="#language-type-convertion-bool">Bool Type Convertion</a> to Left Expression.
 </p>
 <p>
-  2. If the value of Left Expression is 0, the <a href="#language-type-convertion-bool" </a> and returns that value for Right Expression.
+  2. If the value of Left Expression is 0, the <a href="#language-type-convertion-bool"</a> and returns that value for Right Expression.
 </p>
 <p>
   3. If the value of left Expression is non-zero, it returns that value.
@@ -5163,13 +5163,13 @@ LEFT_EXPRESSION || RIGHT_EXPRESSION
   Logical NOT Operator のReturn ValueのTypeは,<a href="#language-type-int">int Type</a>.
 </p>
 <p>
-  Logical NOT Operator executes <a href="#language-type-convertion-bool" </a>=$Bool Type Convertion for Expression, returns 1 if its value is 0, and 0 if it is not 0.
+  Logical NOT Operator executes <a href="#language-type-convertion-bool"</a>=$Bool Type Convertion for Expression, returns 1 if its value is 0, and 0 if it is not 0.
 </p>
 <p>
   Logical NOT Operator returns <a href="#language-expression">Expression</a>
 </p>
 <p>
-  Logical NOT Operator does not raise an exception.
+  Logical NOT Operator does not throw an exception.
 </p>
 <h4 id="language-operator-concat">String Concatenation Operator</h4>
 <p>
@@ -5179,7 +5179,7 @@ LEFT_EXPRESSION || RIGHT_EXPRESSION
 LEFT_EXPRESSION . RIGHT_EXPRESSION
 </pre>
 <p>
-  If the Left Expression or Right Expression was </a><a href="#language-type-numeric">Numeric Type=<a href="#language-type-convertion-numeric-to-string=numeric>to-string</a> href="#language-string type-</a>=>stringtype</a> convertion </a> converts it to a String.
+  If the Left Expression or Right Expression was</a><a href="#language-type-numeric">Numeric Type=<a href="#language-type-convertion-numeric-to-string=numeric>to-string</a> href="#language-string type-</a>=>stringtype</a> convertion</a> converts it to a String.
 </p>
 </p>
 <p>
@@ -5223,7 +5223,7 @@ LEFT_EXPRESSION = RIGHTH_EXPRESSION
 </ul>
 <h4 id="language-operator-assign-special">Special Assignment Operator</h4>
 <p>
-  Special Assignment Operator is a <a href="#language-operator-binary"_binary operator</a> and <a href="#language-operator-assign">Assignment Operator</a><a href="#language-operator-binary</a> </a>.
+  Special Assignment Operator is a <a href="#language-operator-binary"_binary operator</a> and <a href="#language-operator-assign">Assignment Operator</a><a href="#language-operator-binary</a></a>.
 </p>
 <pre>
 LEFT_EXPRESSION SPECIAL_ASSIGNMENT_OPERATOR  RIGHT_EXPRESSION
@@ -5318,9 +5318,9 @@ $x &lt;&lt;= 1;
 $x &gt;&gt;= 1;
 $x &gt;&gt;&gt;= 1;
 </pre>
-<h4 id="language-operator-ref">Reference Operator </h4>
+<h4 id="language-operator-ref">Reference Operator</h4>
 <p>
-  The Reference Operator is an Operator that retrieves the address of a variable for <a href="#language-type-numeric">Numeric Type</a> or <a href="#language-type-multi-numeric">Multi Numeric Type </a>. Designed to achieve c address Operator "&".
+  The Reference Operator is an Operator that retrieves the address of a variable for <a href="#language-type-numeric">Numeric Type</a> or <a href="#language-type-multi-numeric">Multi Numeric Type</a>. Designed to achieve c address Operator "&".
 </p>
 <pre>
 \VARIABLE
@@ -5381,10 +5381,10 @@ my $length = @$nums;
 length RIGHT_EXPRESSION
 </pre>
 <p>
-  Right Expression must be <a href="#language-type-string-compatible"> String Compatible Type </a>. otherwise a compile-time error occurs.
+  Right Expression must be <a href="#language-type-string-compatible">String Compatible Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  The String Length Operator returns the length of the String as a <a href="#language-type-int"> int Type </a> value. String Length The length of the String returned by the Operator is the length when viewed as a byte string.
+  The String Length Operator returns the length of the String as a <a href="#language-type-int">int Type</a> value. String Length The length of the String returned by the Operator is the length when viewed as a byte string.
 </p>
 <p>
   String Length Operator returns the <a href="#language-expression">Expression</a>
@@ -5424,13 +5424,13 @@ foo(scalar @$nums);
 </pre>
 <h4 id="language-operator-isweak">isweak Operator</h4>
 <p>
-  Isweak Operator is an Operator that checks whether Field is </a><a href="#language-weak-ref">Weaken Reference.</a>
+  Isweak Operator is an Operator that checks whether Field is</a><a href="#language-weak-ref">Weaken Reference.</a>
 </p>
 <pre>
 isweak VARIABLE-&gt;{FIELD_NAME};
 </pre>
 <p>
-  The Type of object Expression must be </a><a href="#language-type-class">Class Type.< otherwise a compile-time error occurs.
+  The Type of object Expression must be</a><a href="#language-type-class">Class Type.< otherwise a compile-time error occurs.
 </p>
 <p>
   Field Name must be a existed Field Name. otherwise a compile-time error occurs.
@@ -5439,69 +5439,69 @@ isweak VARIABLE-&gt;{FIELD_NAME};
   The Type of the value stored in field must be <a href="#language-type-object">Object Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  If the value stored in field at run time is </a> <a href="#language-undef">Undefined Value, it returns false. This is <a href="#language-expression">Expression</a>
+  If the value stored in field at run time is</a> <a href="#language-undef">Undefined Value, it returns false. This is <a href="#language-expression">Expression</a>
 </p>
 <p>
   Isweak Operator returns <a href="#language-type-int" <</a></a> if Field is weaken reference, or 0. This is <a href="#language-expression">Expression</a>
 </p>
-<h4 id="language-operator-precedence">Operator Precidence</h4>
+<h4 id="language-operator-operator-precedence">Precidence</h4>
 <p>
-  Operator Precidenceは,the following 通りです。下にいくほど,優先順位が高くなります。
+  Operator Precidence is the following street. The lower you go, the higher your priority.
 </p>
 <table>
   <tr>
-    <th>結合方向</th>
-    <th>Operator </th>
+    <th> join direction</th>
+    <th> Operator</th>
   </tr>
   <tr>
     <td>
-      右結合
+      Right Join
     </td>
     <td>
       <ul>
-      Assignment Operator "="<br>
-      加算Assignment Operator "+="<br>
-      減算Assignment Operator "-="<br>
-      乗算Assignment Operator "*="<br>
-      除算Assignment Operator "/="<br>
-      剰余Assignment Operator "%="<br>
-      Bit ANDAssignment Operator "&="<br>
-      Bit ORAssignment Operator "|="<br>
-      Bit 排他ORAssignment Operator "^="<br>
-      左シフトAssignment Operator "<<="<br>
-      算術右シフトAssignment Operator ">>="<br>
+      Assignment Operator"=" <br>
+      Add Assignment Operator"+=" <br>
+      Subtraction Assignment Operator "-="<br>
+      Multiply Assignment Operator "*=" <br>
+      Division Assignment Operator "/=" <br>
+      Remainder Assignment Operator "%=" <br>
+      Bit ANDAssignment Operator "&=" <br>
+      Bit ORAssignment Operator "|=" <br>
+      Bit Exclusive ORAssignment Operator "^=" <br>
+      Left Shift Assignment Operator"<</<br>
+      Arithmetic Right Shift Assignment Operator ">>=" <br>
       Logical Right Shift Operator ">>>="<br>
-      String結合Assignment Operator ".="
+      String Join Assignment Operator ".="
     </td>
   </tr>
   <tr>
     <td>
-      左結合
+      Left Join
     </td>
     <td>
-      Logical OR Operator "||"
-    </td>
-  </tr>
-  <tr>
-    <td>
-      左結合
-    </td>
-    <td>
-      Logical AND Operator  "&&"
+      Logical OR Operator "| | "
     </td>
   </tr>
   <tr>
     <td>
-      左結合
+      Left Join
+    </td>
+    <td>
+      Logical AND Operator "&&"
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Left Join
     </td>
     <td>
       Bit OR Operator "|"<br>
-      Bit XOR Operator  "^"
+      Bit XOR Operator "^"
     </td>
   </tr>
   <tr>
     <td>
-      左結合
+      Left Join
     </td>
     <td>
       Bit AND Operator "&"
@@ -5509,64 +5509,64 @@ isweak VARIABLE-&gt;{FIELD_NAME};
   </tr>
   <tr>
     <td>
-      非結合
+      Non Associative
     </td>
     <td>
-      数値等価Operator "=="<br>
-      数値非等価Operator "!="<br>
-      String等価Operator "eq"<br>
-      String非等価Operator "ne"<br>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      非結合
-    </td>
-    <td>
-      数値大なりOperator ">"<br>
-      数値小なりOperator "<"<br>
-      数値大なり等価Operator ">="<br>
-      数値小なり等価Operator "<="<br>
-      String大なりOperator "gt"<br>
-      String大なり等価Operator "ge"<br>
-      String小なりOperator "lt"<br>
-      String小なり等価Operator "le"<br>
-      isa Operator "isa"
+      Numerical Equivalence Operator"==" <br>
+      Numeric inequality Operator "!=" <br>
+      String Equivalent Operator "eq"<br>
+      String Inequality Operator"ne"<br>
     </td>
   </tr>
   <tr>
     <td>
-      左結合 
+      Non Associative
     </td>
     <td>
-      Left Shift Operator  "<<"<br>
-      符号付き右Shift Operator ">>"<br>
-      符号なし右Shift Operator ">>>"
-    </td>
-  </tr>
-  <tr>
-    <td>
-      左結合
-    </td>
-    <td>
-      Addition Operator "+"<br>
-      Subtraction Operator "-"<br>
-      String Concatenation Operator "."
+      Numerical value operator ">" <br>
+      Number less Operator"""<br>
+      Numerical equivalent Operator ">=" <br>
+      Numerical or equivalent Operator "<="<br>
+      String Large Operator"gt"<br>
+      String-large or equivalent Operator"ge"<br>
+      String less Operator"lt"<br>
+      String less or equivalent Operator"le"<br>
+      isa Operator"isa"
     </td>
   </tr>
   <tr>
     <td>
-      左結合
+      Left Join 
     </td>
     <td>
-      Multiplication Operator "*"<br>
-      Division Operator "/"<br>
-      Remainder Operator "%"
+      Left Shift Operator"<<br>
+      Signed Right Shift Operator ">>" <br>
+      Unsigned Right Shift Operator ">>>"
     </td>
   </tr>
   <tr>
     <td>
-      右結合
+      Left Join
+    </td>
+    <td>
+      Addition Operator"+"<br>
+      Subtraction Operator"-" <br>
+      String StringOn Operator "."
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Left Join
+    </td>
+    <td>
+      Sand Operator"*" <br>
+      Division Operator "/" <br>
+      Remainder Operator"%"
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Right Join
     </td>
     <td>
       Logical NOT Operator "!"<br>
@@ -5584,7 +5584,7 @@ isweak VARIABLE-&gt;{FIELD_NAME};
   </tr>
   <tr>
     <td>
-      非結合
+      Non Associative
     </td>
     <td>
       Pre Increment Operator "++"<br>
@@ -5595,7 +5595,7 @@ isweak VARIABLE-&gt;{FIELD_NAME};
   </tr>
   <tr>
     <td>
-      左結合
+      Right Join
     </td>
     <td>
       Arrow Operator "->"<br>
@@ -5603,24 +5603,24 @@ isweak VARIABLE-&gt;{FIELD_NAME};
   </tr>
 </table>
 <p>
-  Operator Precidenceは"()"を使うことによって,最優先にすることができます。
+  Operator Precidence can be a top priority by using "()".
 </p>
 <pre>
-# a * b が先
+#  a * b is the first
 a * b + c
 
-# b + c が先
+# b + c is the first
 a * (b + c)
 </pre>
 <h3 id="language-statement">Statement</h3>
 <p>
-  Statementは,ひとつの処理のことで<a href="#language-scope-scope-block">Scope Block</a>の中に複数記述することができます。<a href="#language-expression">Expression</a>のように値として評価されることはありません。
+  Statement can be written more than one in <a href="#language-scope-scope-block">Scope Block</a> for a single process. <a href="#language-expression">Expression</a> is not evaluated as a value.
 </p>
 <p>
-  <b>Statementの一覧</b>
+  <b>List of Statements</b>
 </p>
 <p>
-  Statementの一覧です。
+  List of Statements
 </p>
 <ul class="list">
   <li><a href="#language-statement-if">if Statement</a></li>
@@ -5646,35 +5646,35 @@ a * (b + c)
 </ul>
 <h4 id="language-statement-if">if Statement</h4>
 <p>
-  if Statementは,条件分岐を行うためのStatementです。
+  If Statement is a statement for conditional branching.
 </p>
 <pre>
-if (Expression) {
+if (EXPRESSION) {
 
 }
 </pre>
 <p>
-  Expressionに<a href="#language-type-convertion-bool">Bool Type Convertion</a>が実行され,値が0以外の場合に,Block が実行されます。
+  Expression <a href="#language-type-convertion-bool">Bool Type Convertion</a> is executed and Block is executed if the value is non-zero.
 </p>
 <p>
-  条件を複数書きたい場合には"elsif Statement"を続けることができます。 条件判定は上から実行され,それぞれのExpressionに<a href="#language-type-convertion-bool">Bool Type Convertion</a>が実行され,値が0以外の場合に対応するBlock が実行されます。
+  If you want to write more than one condition, you can continue with "elsif Statement". The condition determination is performed from above, and each Expression is <a href="#language-type-convertion-bool">Bool Type Convertion</a> is executed, and a corresponding Block is executed if the value is non-zero.
 </p>
 <pre>
-if (Expression) {
+if (EXPRESSION) {
 
 }
-elsif(Expression) {
+elsif(EXPRESSION) {
 
 }
 </pre>
 <p>
-  "elseStatement"を使って,if Statementあるいは,elsif Statementが条件を満たさなかった場合の処理を記述することができます。if Statementとelsif Statementの条件判定がすべて偽であった場合にelseのBlock の内部のStatementが実行されます。elsif Statementは,なくてもかまいません。
+  You can use "elseStatement" to describe what happens if or if the elsif Statement does not meet the criteria. If the if statement and elsif statement condition determination are all false, the statement inside the elseBlock is executed. Elsif Statement does not have to be.
 </p>
 <pre>
-if (Expression) {
+if (EXPRESSION) {
 
 }
-elsif(Expression) {
+elsif (EXPRESSION) {
 
 }
 else {
@@ -5682,66 +5682,66 @@ else {
 }
 </pre>
 <p>
-  <b>if StatementのExample</b>
+  <b>if Statement Example</b>
 </p>
 <p>
-  if StatementのExampleです。
+  An example of if Statement.
 </p>
 <pre>
 my $flag = 1;
 
 if ($flag == 1) {
-print "One\n";
+  print "One \ n";
 }
 elsif ($flag == 2) {
-print "Tow\n";
+  print "Tow \ n";
 }
 else {
-print "Other";
+  print "Other";
 }
 </pre>
 <p>
-  if Statementは,内部的には,目には見えないSimple Blockで囲まれています。
+  The if Statement is internally surrounded by an invisible Simple Block.
 </p>
 <pre>
 {
-if (Expression) {
+  if (EXPRESSION) {
 
-}
+  }
 }
 </pre>
 <p>
-  elsifは,内部的には,if StatementとelseStatementに展開されます。
+  elsif is internally expanded into if Statement and else Statement.
 </p>
 <pre>
-# 展開前
-if (Expression1) {
+#Before deployment
+if (EXPRESSION1) {
 
 }
-elsif (Expression2) {
-
-}
-else {
-
-}
-
-# 展開後
-if (Expression1) {
-}
-else {
-if (Expression2) {
+elsif (EXPRESSION2) {
 
 }
 else {
 
 }
+
+#After deployment
+if (EXPRESSION1) {
+}
+else {
+  if (EXPRESSION2) {
+
+  }
+  else {
+
+  }
 }
 </pre>
 <p>
-  if Statementの条件部で,変数宣言を行うときは,目には見えない<a href="#language-scope-block-statement-simple">Simple Block</a>で囲まれていることと,elsifは,内部的には,if StatementとelseStatementに展開されるということを,意識してください。
+  When a variable is declared in the conditional part of if Statement, it must be surrounded by invisible <a href="#language-scope-block-statement-simple">Simple Block</a>. Be aware that elsif is internally expanded into if Statement and else Statement.
 </p>
 <pre>
-# 展開前
+#Before deployment
 my $num = 1;
 if (my $num = 2) {
 
@@ -5753,7 +5753,7 @@ else {
 
 }
 
-# 展開後
+#After deployment
 my $num = 1;
 {
   if (my $num = 2) {
@@ -5771,21 +5771,21 @@ my $num = 1;
   }
 }
 </pre>
-<h4 id="language-statement-switch">switch Statement</h4>
+<h4 id = "language-statement-switch">switch Statement</h4>
 <p>
-  switch Statementは,<a href="#language-type-int">int Type</a> の整数を条件にして,条件分岐を行うためのStatementです。条件が<a href="#language-type-int">int Type</a> の整数で,たくさんの分岐がある場合は,if Statementよりも高速です。
+  The switch statement is a statement for conditional branching with an integer of <a href="#language-type-int">int Type</a> as a condition. Faster than if Statement if the condition is an integer of <a href="#language-type-int">int Type</a> and there are many branches.
 </p>
 <pre>
-switch (条件Expression) {
-  case 定数1: {
+switch (CONDITION_EXPRESSION) {
+  case constant 1: (
 
     break;
   }
-  case 定数2: {
+  case constant 2: {
 
     break;
   }
-  case 定数n: {
+  case constant n: {
     break;
   }
   default: {
@@ -5794,36 +5794,36 @@ switch (条件Expression) {
 }
 </pre>
 <p>
-  条件Expressionは,<a href="#language-expression">Expression</a>を指定できます。条件Expressionには,<a href="#language-type-convertion-bool">Bool Type Convertion</a>が実行されます。
+  As the condition Expression, <a href="#language-expression">Expression</a> can be specified. <a href="#language-type-convertion-bool">Bool Type Convertion</a> is executed for the condition Expression.
 </p>
 <p>
-  case Statementで指定される定数は,<a href="#language-type-byte">byte Type</a>か<a href="#language-type-int">int Type</a> の定数でなければなりません。<a href="#language-type-byte">byte Type</a>の定数の場合は,コンパイル時に,<a href="#language-type-int">int Type</a> にType Convertionされます。enumTypeの値や,<a href="#language-type-int">int Type</a> のConstant Subroutine は,<a href="#language-type-int">int Type</a> の定数として,syntax 解析時に展開されるので,利用することができます。
+  The constants specified in case Statement are <a href="#language-type-byte">byte Type</a> or <a href="#language-type-int">int Type</a> constants. must be. For a constant of <a href="#language-type-byte">byte Type</a>, type conversion to <a href="#language-type-int">int Type</a> at compile time. Will be done. The value of enumType and Constant Subroutine of <a href="#language-type-int">int Type</a> are constants of <a href="#language-type-int">int Type</a>. As it is expanded at the time of syntax analysis, it can be used.
 </p>
 <p>
-  case Statementに指定される定数は,重複してはいけません。重複している場合は,a compile-time error occurs
+  The constants specified in the case statement must not overlap. If there are duplicates, a compile-time error occurs
 </p>
 <p>
-  条件Expressionで指定された値が,case Statementで指定された値にマッチした場合は,そのcase Statementの位置にジャンプします。
+  If the value specified in the condition Expression matches the value specified in the case statement, jump to the position of that case statement.
 </p>
 <p>
-  マッチしなかった場合でdefault Statementが指定されている場合は,default Statementの位置にジャンプします。default Statementが指定されていなかった場合は,switch Blockは実行されません。
+  If there is no match and a default statement is specified, jump to the default statement position. If no default statement is specified, switch block will not be executed.
 </p>
 <p>
-  switch Statementには,少なくともひとつのcase Statementが必要です。otherwise コンパイルエラーが発生します。
+  A switch statement requires at least one case statement. Otherwise a compilation error will occur.
 </p>
 <p>
-  default Statementは省略可能です。
+  The default Statement is optional.
 </p>
 <p>
-  switch Blockの直下に記述できるのはcase Statementとdefault Statementだけです。
+  Only case statement and default statement can be described directly under switch block.
 </p>
 <p>
-  caseとdefaultのBlock は省略することができます。
+  The case and default Blocks can be omitted.
 </p>
 <pre>
-switch (条件Expression) {
-  case 定数1:
-  case 定数2:
+switch (CONDITION_EXPRESSION) {
+  case constant 1:
+  case constant 2:
   {
     break;
   }
@@ -5831,17 +5831,17 @@ switch (条件Expression) {
 }
 </pre>
 <p>
-  break Statementを使用した場合は,switch Blockから抜けることができます。
+  If you use break Statement, you can exit from the switch block.
 </p>
 <pre>
-switch (条件Expression) {
-  case 定数1: {
+switch (CONDITION_EXPRESSION) {
+  case constant 1: (
     break;
   }
-  case 定数2: {
+  case constant 2: {
     break;
   }
-  case 定数n: {
+  case constant n: {
     break;
   }
   default: {
@@ -5850,77 +5850,77 @@ switch (条件Expression) {
 }
 </pre>
 <p>
-  caseのBlock が存在する場合は,最後のStatementはbreak Statementあるいは,returnl Statementでなければなりません。otherwise コンパイルエラーが発生します。
+  If a case Block exists, the last Statement must be a break Statement or a returnl Statement. Otherwise a compilation error will occur.
 </p>
 <p>
-  <b>switch StatementのExample</b>
+  <b>Switch Statement Example</b>
 </p>
 <p>
-  switch StatementのExampleです。
+  An example of a switch statement.
 </p>
 <pre>
 my $code = 2;
 switch ($code) {
   case 1: {
-  print "1\n";
+    print "1 \ n";
     break;
   }
   case 2: {
-  print "2\n";
+    print "2 \ n";
     break;
   }
   case 3: {
-  print "3\n";
+    print "3 \ n";
     break;
   }
   case 4:
   case 5:
   {
-  print "4 or 5\n"; {
+    print "4 or 5 \ n"; {
     break;
   }
   default: {
-    print "Other\n";
+    print "Other \ n";
   }
 }
 </pre>
-<h4 id="language-statement-switch">case Statement</h4>
+<h4 id = "language-statement-switch">case Statement</h4>
 <p>
-  case Statementは,switch Blockの中で使うことができる,条件を指定するためのStatementです。case Statementについての詳細は,<a href="#language-statement-switch">switch Statement</a>の解説を見てください。
+  A case statement is a Statement that can be used in a switch block to specify conditions. For more information on case statements, see the <a href="#language-statement-switch">switch Statement</a> description.
 </p>
-<h4 id="language-statement-switch">default Statement</h4>
+<h4 id = "language-statement-switch">default Statement</h4>
 <p>
-  default Statementは,switch Blockの中で使うことができる,デフォルトの条件を指定するためのStatementです。default Statementについての詳細は,<a href="#language-statement-switch">switch Statement</a>の解説を見てください。
+  The default Statement is a Statement that can be used in the switch block to specify the default condition. For more information on the default Statement, see the <a href="#language-statement-switch">switch Statement</a> description.
 </p>
-<h4 id="language-statement-while">while Statement</h4>
+<h4 id = "language-statement-while">while Statement</h4>
 <p>
-  while Statementは,繰り返しを行うためのStatementです。
+  while Statement is a Statement for repeating.
 </p>
 <pre>
-while (条件Expression) {
+while (CONDITION_EXPRESSION) {
 
 }
 </pre>
 <p>
-  条件Expressionに,<a href="#language-expresssion">Expression</a>を記述できます。条件Expressionに<a href="#language-type-convertion-bool">Bool Type Convertion</a>が実行され,値が0以外の場合に,Block が実行されます。otherwise Block を抜けます。
+  <a href="#language-expresssion">Expression</a> can be described in the condition Expression. <a href="#language-type-convertion-bool">Bool Type Convertion</a> is executed for condition Expression, and if the value is not 0, Block is executed. Exit the otherwise Block.
 </p>
 <p>
-  <b>while StatementのExample</b>
+  <b>While Statement Example</b>
 </p>
 <p>
-  while StatementのExampleです。
+  An example of a while Statement.
 </p>
 <pre>
 my $i = 0;
-while ($i &lt; 5) {
+while ($i &lt;5) {
 
-  print "$i\n";
+  print "$i \ n";
 
-  $i++;
+  $i ++;
 }
 </pre>
 <p>
-  while Blockの内部では,<a href="#language-statement-last">last Statement</a>を使って,while Blockを抜けることができます。
+  Inside the while block, you can leave the while block by using <a href="#language-statement-last">last Statement</a>.
 </p>
 <pre>
 while (1) {
@@ -5928,39 +5928,27 @@ while (1) {
 }
 </pre>
 <p>
-  while Blockの内部では,<a href="#language-statement-next">next Statement</a>を使って,次に実行される条件Expressionの直前に移動することができます。
+  Inside a while block, you can use <a href="#language-statement-next">next Statement</a> to move to the condition immediately before the next condition Expression.
 </p>
 <pre>
 my $i = 0;
-while ($i &lt; 5) {
+while ($i &lt;5) {
 
   if ($i == 3) {
-    $i++;
+    $i ++;
     next;
   }
 
-  print "$i\n";
-  $i++;
+  print "$i \ n";
+  $i ++;
 }
 </pre>
 <p>
-  while Statementは,内部的には,目には見えない<a href="#language-scope-block-statement-simple">Simple Block</a>で囲まれています。
+  The while Statement is internally enclosed by an invisible <a href="#language-scope-block-statement-simple">Simple Block</a>.
 </p>
 <pre>
 {
-  while (条件Expression) {
-
-  }
-}
-</pre>
-<p>
-  while Statementの条件部で,変数宣言を行うときは,目には見えない<a href="#language-scope-block-statement-simple">Simple Block</a>で囲まれていることを意識してください。
-</p>
-<pre>
-# 展開前
-my $num = 5;
-while (my $num = 3) {
-
+  while (CONDITION_EXPRESSION) {
   $i++;
 }
 
@@ -5973,143 +5961,141 @@ my $num = 5;
   }
 }
 </pre>
-<h4 id="language-statement-for">for Statement</h4>
+<h4 id = "language-statement-for">for Statement</h4>
 <p>
-  for Statementは,繰り返しを行うためのStatementです。
+  for Statement is a Statement for repeating.
 </p>
 <pre>
-for (初期化Expression; 条件Expression; IncrementExpression) {
+for (INITIALIZATION_EXPRESSION; CONDITIONAL_EXPRESSION; INCREMENT_EXPRESSION) {
 
 }
 </pre>
 <p>
-  初期化Expressionには,<a href="#language-expression">Expression</a>を記述できます。一般的には,ループ変数の初期化などのExpressionを記述します。初期化Expressionは省略することが可能です。
+  <a href="#language-expression">Expression</a> can be described in the initialization Expression. Generally, write Expression such as initialization of loop variable. Initialization Expression can be omitted.
 </p>
 <p>
-  条件Expression,<a href="#language-expresssion">Expression</a>を記述できます。条件Expressionに<a href="#language-type-convertion-bool">Bool Type Convertion</a>が実行され,値が0以外の場合に,Block が実行されます。otherwise Block を抜けます。
+  Condition Expression, <a href="#language-expresssion">Expression</a> can be described. <a href="#language-type-convertion-bool">Bool Type Convertion</a> is executed for condition Expression, and if the value is not 0, Block is executed. Exit the otherwise block.
 </p>
 <p>
-  IncrementExpressionには,<a href="#language-expression">Expression</a>を記述できます。一般的には,ループ変数のIncrementのExpressionを記述します。IncrementExpressionは省略することが可能です。
+  <a href="#language-expression">Expression</a> can be described in INCREMENT_EXPRESSION. Generally, Expression of Increment of loop variable is described. INCREMENT_EXPRESSION can be omitted.
 </p>
 <p>
-  for Statementはthe following while Statementと同じ意味を持ちます。IncrementExpressionは,Block の最後に実行されます。初期化Expressionは,<a href="#language-scope-block-statement-simple">Simple Block</a>に囲まれています。
+  for Statement has the same meaning as the following while Statement. INCREMENT_EXPRESSION is executed at the end of Block. Initialization Expression is enclosed in <a href="#language-scope-block-statement-simple">Simple Block</a>.
 </p>
 <pre>
 {
-  初期化Expression;
-  while (条件Expression) {
+  INITIALIZATION_EXPRESSION;
+  while (CONDITION_EXPRESSION) {
 
 
-
-    IncrementExpression;
+    INCREMENT_EXPRESSION;
   }
 }
 </pre>
 <p>
-  <b>for StatementのExample</b>
+  <b>for Statement Example</b>
 </p>
 <p>
-  for StatementのExampleです。
+  An example of for Statement.
 </p>
 <pre>
-for (my $i = 0; $i &lt; 5; $i++) {
+for (my $i = 0; $i &lt;5; $i ++) {
 
-  print "$i\n";
+  print "$i \ n";
 }
 </pre>
 <p>
-  for Blockの内部では,<a href="#language-statement-last">last Statement</a>を使って,for Blockを抜けることができます。
+  Inside the for Block, you can exit the for Block using <a href="#language-statement-last">last Statement</a>.
 </p>
 <pre>
-for (初期化Expression; 条件Expression; IncrementExpression) {
+for (INITIALIZATION_EXPRESSION; CONDITIONAL_EXPRESSION; INCREMENT_EXPRESSION) {
 
 }
 </pre>
 <p>
-  for Blockの内部では,<a href="#language-statement-next">next Statement</a>を使って,次に実行されるIncrementExpressionの直前に移動することができます。
+  Inside the for Block, you can use <a href="#language-statement-next">next Statement</a> to move immediately before the next INCREMENT_EXPRESSION to be executed.
 </p>
 <pre>
-for (my $i = 0; $i &lt; 5; $i++) {
+for (my $i = 0; $i &lt;5; $i ++) {
 
   if ($i == 3) {
     next;
   }
 }
 </pre>
-<h4 id="language-statement-return">returnl Statement</h4>
+<h4 id = "language-statement-return">returnl Statement</h4>
 <p>
-  returnl Statementを使うと,Subroutine から脱出します。モータル変数に代入されているオブジェクトは,自動的に解放されます。
+  Use the returnl Statement to get out of the Subroutine. The object assigned to the mortal variable is automatically released.
 </p>
 <pre>
 return;
 </pre>
 <p>
-  Return Valueがある場合は,<a href="#language-expression">Expression</a>を指定することができます。
+  If there is a Return Value, <a href="#language-expression">Expression</a> can be specified.
 </p>
 <pre>
-return Expression;
+return EXPRESSION;
 </pre>
 <p>
-  <a href="#language-sub-definition">Subroutine Definition</a>においてReturn ValueのTypeが<a href="#language-type-void">void Type</a>である場合は,Expressionが存在してはいけません。otherwise a compile-time error occurs.
+  If the Return Value Type in <a href="#language-sub-definition">Subroutine Definition</a> is <a href="#language-type-void">void Type</a>, Expression Must not exist. otherwise a compile-time error occurs.
 </p>
 <p>
-  <a href="#language-sub-definition">Subroutine Definition</a>においてReturn ValueのTypeが<a href="#language-type-void">void Type</a>以外の場合は,ExpressionのTypeと一致していなければなりません。otherwise a compile-time error occurs.
+  <a href="#language-sub-definition">Subroutine Definition</a>, if the Return Value Type is other than <a href="#language-type-void">void Type</a>, Expression Must match the Type of. otherwise a compile-time error occurs.
 </p>
-<h4 id="language-statement-die">die Statement</h4>
+<h4 id = "language-statement-die">die Statement</h4>
 <p>
-  die Statement は,例外を発生させるためのStatementです。
+  die Statement is a Statement for raising an exception.
 </p>
 <pre>
-die Expression;
+die EXPRESSION;
 </pre>
 <p>
-  Expressionは,String Compatible Typeでなければなりません。
+  Expression must be a String Compatible Type.
 </p>
 <p>
-  die Statement の詳しい解説については,<a href="#language-exception">Exception</a>を見てください。
-</p>
-<h4 id="language-statement-weaken">weaken Statement</h4>
+  See <a href="#language-exception">Exception</a> for a detailed explanation of the die statement.</p>
+<h4 id = "language-statement-weaken">weaken Statement</h4>
 <p>
-  weaken Statement は,Fieldに対して,<a href="#language-weak-ref">Weaken Reference</a>を設定するStatementです。
+  A weaken Statement is a Statement that sets <a href="#language-weak-ref">Weaken Reference</a> for the Field.
 </p>
 <pre>
-weaken 変数-&gt;{FIELD_NAME};
+weaken VARIABLE-&gt;{FIELD_NAME};
 </pre>
 <p>
-  オブジェクトExpressionのTypeは,<a href="#language-type-class">Class Type</a>でなければなりません。otherwise a compile-time error occurs.
+  The Type of the object Expression must be <a href="#language-type-class">Class Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameは,存在するField Nameでなければなりません。otherwise a compile-time error occurs.
+  Field Name must be an existing Field Name. otherwise a compile-time error occurs.
 </p>
 <p>
-  Fieldに保存される値のTypeは,<a href="#language-type-object">Object Type</a>でなければなりません。otherwise a compile-time error occurs.
+  The Type of the value saved in Field must be <a href="#language-type-object">Object Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  実行時にFieldに保存されている値が,<a href="#language-undef">Undefined Value</a>だった場合は,weaken Statement は,何もしません。
+  If the value stored in the Field at execution time is <a href="#language-undef">Undefined Value</a>, the weak Statement does nothing.
 </p>
 <p>
-  実行時にFieldに保存されている値が,<a href="#language-undef">Undefined Value</a>でない場合は,次のことが行われます。
+  If the value stored in the Field at runtime is not <a href="#language-undef">Undefined Value</a>, then the following is done:
 </p>
 <p>
-  1. Fieldに保存されているオブジェクトのReference Countを1減らします。
+  1. Decrement the Reference Count of the object stored in Field by 1.
 </p>
 <p>
-  2. Fieldに,Weaken Referenceフラグを設定します。
+  2. Set the Weaken Reference flag in Field.
 </p>
 <p>
-  3. Fieldに保存されているオブジェクトのバックReferenceに,Fieldを追加します。
+  3. Add Field to the back reference of the object saved in Field.
 </p>
 <p>
-  Weaken Referenceフラグは,Fieldに保存されているオブジェクトに設定されるのではなく,Field自体に設定されることに注意してください。
+  Note that the Weaken Reference flag is set on the Field itself, not on the object stored in the Field.
 </p>
 <p>
-  Fieldに保存されているオブジェクトのReference Countが,0になってしまった場合は,Weaken Referenceは作成されず,Fieldに保存されているオブジェクトは解放されます。
+  If the Reference Count of the object saved in Field becomes 0, the Weaken Reference is not created and the object saved in Field is released.
 </p>
 <p>
-  バックReferenceとは,Fieldに保存されているオブジェクトが持つデータで,Weaken Referenceフラグが設定されたFieldを知るために,追加されます。これは,複数存在することがあります。
+  Back Reference is the data of the object saved in Field, and is added to know the Field with the Weaken Reference flag set. There may be more than one.
 </p>
 <pre>
-# バックReferenceが,複数あるExample
+# There are multiple back references
 my $foo = new Foo;
 my $bar = new Bar;
 my $baz = new Baz;
@@ -6124,139 +6110,138 @@ weaken $bar-&gt;{foo};
 weaken $baz-&gt;{foo};
 </pre>
 <p>
-  上記の例では"$bar->{foo}"と"$baz->{foo}"に,Weaken Referenceフラグが立ちます。$fooで表現されるオブジェクトは,バックReference"$bar->{foo}"と"$baz->{foo}"を持ちます。
+  In the above example, "$bar->{foo}" and "$baz->{foo}" have the Weaken Reference flag set. The object represented by $foo has the back References "$bar->{foo}" and "$baz->{foo}".
 </p>
 <p>
-  バックReferenceの情報が必要なのは,<a href="#language-garbage-collection">Garbage Collection</a>が行われるときに,バックReferenceが指すFieldにUndefined Valueを代入する必要があるからです。
+  The information of the back Reference is necessary because when the <a href="#language-garbage-collection">Garbage Collection</a> is performed, it is necessary to assign the Undefined Value to the Field pointed to by the back Reference.
 </p>
-<h4 id="language-statement-unweaken">unweaken Statement</h4>
+<h4 id = "language-statement-unweaken">unweaken Statement</h4>
 <p>
-  unweaken Statementは,Fieldに対して,<a href="#language-weak-ref">Weaken Reference</a>を解除するStatementです。
+  unweaken Statement is a Statement that cancels <a href="#language-weak-ref">Weaken Reference</a> for Field.
 </p>
 <pre>
-unweaken 変数-&gt;{FIELD_NAME};
+unweaken VARIABLE-&gt;{FIELD_NAME};
 </pre>
 <p>
-  オブジェクトExpressionのTypeは,<a href="#language-type-class">Class Type</a>でなければなりません。otherwise a compile-time error occurs.
+  The Type of the object Expression must be <a href="#language-type-class">Class Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Field Nameは,存在するField Nameでなければなりません。otherwise a compile-time error occurs.
+  Field Name must be an existing Field Name. otherwise a compile-time error occurs.
 </p>
 <p>
-  Fieldに保存される値のTypeは,<a href="#language-type-object">Object Type</a>でなければなりません。otherwise a compile-time error occurs.
+  The Type of the value saved in Field must be <a href="#language-type-object">Object Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  実行時にFieldに保存されている値が,<a href="#language-undef">Undefined Value</a>だった場合は,unweaken Statementは,何もしません。
+  If the value stored in the Field at execution time is <a href="#language-undef">Undefined Value</a>, the unweaken Statement does nothing.
 </p>
 <p>
-  実行時にFieldに保存されている値が,<a href="#language-undef">Undefined Value</a>でない場合は,次のことが行われます。
+  If the value stored in the Field at runtime is not <a href="#language-undef">Undefined Value</a>, then the following is done:
 </p>
 <p>
-  1. Fieldに保存されているオブジェクトのReference Countを1増やします。
+  1. Increase the Reference Count of the object stored in the Field by 1.
 </p>
 <p>
-  2. FieldのWeaken Referenceフラグを解除します。
+  2. Clear the Weaken Reference flag of Field.
 </p>
 <p>
-  3. Fieldに保存されているオブジェクトのバックReferenceから,Fieldを削除します。
+  3. Delete the Field from the back reference of the object stored in the Field.
 </p>
-<h4 id="language-statement-next">next Statement</h4>
+<h4 id = "language-statement-next">next Statement</h4>
 <p>
-  "next Statement"は,次のループの先頭に移動するためのStatementです。<a href="#language-scope-block-statement-while">while Block</a>,<a href="#language-scope-block-statement-for">for Block</a>の中で使うことができます。
+  "next Statement" is a Statement to move to the beginning of the next loop. in <a href="#language-scope-block-statement-while">while Block</a>, <a href="#language-scope-block-statement-for">for Block</a> You can use it.
 </p>
 <pre>
 next;
 </pre>
 <p>
-  実際の動作については<a href="#language-statement-while">while Statement</a>,<a href="#language-statement-for">for Statement</a>の解説を見てください。
+  Please see the explanation of <a href="#language-statement-while">while Statement</a>, <a href="#language-statement-for">for Statement</a> for the actual operation. ..
 </p>
-<h4 id="language-statement-last">last Statement</h4>
+<h4 id = "language-statement-last">last Statement</h4>
 <p>
-  "last Statement"は,ループを脱出するためのStatementです。<a href="#language-scope-block-statement-while">while Block</a>,<a href="#language-scope-block-statement-for">for Block</a>の中で使うことができます。
+  "last Statement" is a Statement to break the loop. in <a href="#language-scope-block-statement-while">while Block</a>, <a href="#language-scope-block-statement-for">for Block</a> You can use it.
 </p>
 <p>
-  実際の動作については<a href="#language-statement-while">while Statement</a>,<a href="#language-statement-for">for Statement</a>の解説を見てください。
+  Please see the explanation of <a href="#language-statement-while">while Statement</a>, <a href="#language-statement-for">for Statement</a> for the actual operation. ..
 </p>
 <pre>
 last;
 </pre>
-<h4 id="language-statement-break">break Statement</h4>
+<h4 id = "language-statement-break">break Statement</h4>
 <p>
-  "break Statement"は,switch Blockを脱出するためのStatementです。<a href="#language-scope-block-statement-switch">switch Block</a>の中で使うことができます。
+  "break Statement" is a Statement to escape the switch block. It can be used in <a href="#language-scope-block-statement-switch">switch Block</a>.
 </p>
 <p>
-  実際の動作については<a href="#language-statement-switch">switch Statement</a>の解説を見てください。
+  See <a href="#language-statement-switch">switch Statement</a> for the actual operation.
 </p>
 <pre>
 break;
 </pre>
-<h4 id="language-statement-warn">warn Statement</h4>
+<h4 id = "language-statement-warn">warn Statement</h4>
 <p>
-  警告を発生させるにはwarnStatementを使用します。
+  Use warnStatement to throw a warning.
 </p>
 <pre>
 warn Expression;
 </pre>
 <p>
-  Expressionは,<a href="#language-type-string-compatible">String Compatible Type</a>でなければなりません。
+  Expression must be <a href="#language-type-string-compatible">String Compatible Type</a>.
 </p>
 <p>
-  末尾が改行Character"\n"であった場合は,標準エラー出力にExpressionで指定されているStringが出力されます。
+  If the end is a line feed Character "\ n", the String specified in Expression is output to the standard error output.
 </p>
 <p>
-  末尾が改行Characterでない場合は,末尾にFile Nameと行番号が追加され,標準エラー出力されます。
+  If the end is not a line feed character, File Name and line number are added to the end, and standard error is output.
 </p>
 <p>
-  Expressionで指定されたStringの長さが0あるいは,Undefined Valueであった場合は,指定されたメッセージが"Warning: something's wrong"であるとしてふるまいます。
+  If the length of String specified in Expression is 0 or Undefined Value, the specified message behaves as "Warning: something's wrong".
 </p>
 <p>
-  標準エラー出力のバッファがフラッシュされます。
+  The standard error output buffer is flushed.
 </p>
-<h4 id="language-statement-print">print Statement</h4>
+<h4 id = "language-statement-print">print Statement</h4>
 <p>
-  標準出力にStringを出力するにはprint Statementを使用します。
+  Use print Statement to print a String to standard output.
 </p>
 <pre>
 print Expression;
 </pre>
 <p>
-  Expressionは,<a href="#language-type-string-compatible">String Compatible Type</a>でなければなりません。
+  Expression must be <a href="#language-type-string-compatible">String Compatible Type</a>.
 </p>
 <p>
-  ExpressionがUndefined Valueであった場合は,何もしません。
+  If Expression is Undefined Value, do nothing.
 </p>
-<h4 id="language-statement-expression">expression Statement</h4>
+<h4 id = "language-statement-expression">expression Statement</h4>
 <p>
-  expression Statementは<a href="#language-expression">Expression</a>と";"で構成されるStatementのことです。
+  The expression Statement is a Statement consisting of <a href="#language-expression">Expression</a> and ";".
 </p>
 <pre>
 Expression;
 </pre>
 <p>
-  expression StatementのExampleです。
+  An example of an expression statement.
 </p>
 <pre>
 1;
 $var;
 1 + 2;
-foo();
+foo ();
 my $num = 1 + 2;
 </pre>
-<h4 id="language-statement-empty">empty Statement</h4>
+<h4 id = "language-statement-empty">empty Statement</h4>
 <p>
-  empty Statementは";"だけで終わるStatementのことです。
+  An empty statement is a statement that ends with just ";".
 </p>
 <pre>
 ;
 </pre>
-<h3 id="language-type"><a href="#language-type">Type</a></h3>
-<ul class="list">
+<h3 id = "language-type"><a href="#language-type">Type</a> </h3>
+<ul class = "list">
   <li><a href="#language-type-summary">Type Summary</a></li>
   <li><a href="#language-type-initial-value">Type Initial Value</a></li>
   <li><a href="#language-type-void">void Type</a></li>
   <li><a href="#language-type-numeric">Numeric Type</a></li>
-  <li><a href="#language-type-integral">Integral Type</a></li>
-  <li><a href="#language-type-byte">byte Type</a></li>
+  <li><a href="#language-type-integral">Integral Type</a></li>  <li><a href="#language-type-byte">byte Type</a></li>
   <li><a href="#language-type-short">short Type</a></li>
   <li><a href="#language-type-int"><a href="#language-type-int">int Type</a></a></li>
   <li><a href="#language-type-long">long Type</a></li>
@@ -6299,16 +6284,16 @@ my $num = 1 + 2;
   Lexical Variable Initial Value,<a href="#language-package-var-initial-value">Package Variable Initial Value</a>,Create ObjectにおけるFieldの初期値は,Type Initial Valueによって決まります。
 </p>
 <p>
-  Type Initial Valueの一覧です。データにおけるすべてのBit 列は0に設定されます。
+  A list of Type Initial Value. All Bit columns in the data are set to 0.
 </p>
 </p>
 <table>
   <tr>
     <th>
-      <b>Type Name </b>
+      <b>Type Name</b>
     </th>
     <th>
-      初期値
+      Initial Value
     </th>
   </tr>
   <tr>
@@ -6361,7 +6346,7 @@ my $num = 1 + 2;
   </tr>
   <tr>
     <td>
-      <b>Object Type </b>
+      <b>Object Type</b>
     </td>
     <td>
       undef
@@ -6372,7 +6357,7 @@ my $num = 1 + 2;
       <b>Multi Numeric Type</b>
     </td>
     <td>
-      すべてのFieldが0
+      All Field is 0
     </td>
   </tr>
 </table>
@@ -6447,15 +6432,16 @@ my $num = 1 + 2;
 <p>
   Note that SPVM has only <b>singed</b> Integral Type, and don't has <b>unsigned</b> Integral Type.
 </p>
-<h4 id="language-type-byte"><a href="#language-type-byte">byte Type</a></h4>
+<h4 id = "language-type-byte"><a href="#language-type-byte">byte Type</a></h4>
 <p>
-  <a href="#language-type-byte">byte Type</a>は,符号付8bit整数を表現する<a href="#language-type-integral">Integral Type</a>です。C99のint8_tTypeと同じTypeです。
+   <a href="#language-type-byte">byte Type</a> is <a href="#language-type-integral">Integral Type</a> that represents a signed 8-bit integer. It is the same Type as int8_tType of C99.
 </p>
-<h4 id="language-type-short">short Type</h4>
+<h4 id = "language-type-short">short Type</h4>
 <p>
-  <a href="#language-type-byte">byte Type</a>は,符号付16bit整数を表現する<a href="#language-type-integral">Integral Type</a>です。C99のint16_tTypeと同じTypeです。
+   <a href="#language-type-byte">byte Type</a> is <a href="#language-type-integral">Integral Type</a> that represents a signed 16-bit integer. It is the same Type as int16_tType of C99.
 </p>
 <h4 id="language-type-int">int Type</h4>
+<h4 id = "language-type-int">int Type</h4>
 <p>
   <b>int Type</b> is a type that represents signed 32-bit integer.
 </p>
@@ -6465,11 +6451,11 @@ my $num = 1 + 2;
 <p>
   This is a <a href="#language-type-integral">Integral Type</a>.
 </p>
-<h4 id="language-type-long"><a href="#language-type-long">long Type</a></h4>
+<h4 id = "language-type-long"><a href="#language-type-long">long Type</a></h4>
 <p>
-  <a href="#language-type-long">long Type</a>は,符号付64bit整数を表現する<a href="#language-type-integral">Integral Type</a>です。C99のint64_tTypeと同じTypeです。
+  <a href="#language-type-long">long Type</a> is <a href="#language-type-integral">Integral Type</a> that represents a signed 64-bit integer. It is the same Type as int64_tType of C99.
 </p>
-<h4 id="language-type-floating-point">Floating Point Type</h4>
+<h4 id = "language-type-floating-point">Floating Point Type</h4>
 <p>
   <b>Floating Point Type</b> are the following two.
 </p>
@@ -6477,51 +6463,51 @@ my $num = 1 + 2;
   <tr>
     <th>
       <b>Type</b>
-    </th>
+    </ th>
     <th>
       Description
-    </th>
+    </ th>
     <th>
       Size
-    </th>
-  </tr>
+    </ th>
+  </ tr>
   <tr>
     <td>
       <b>float</b>
-    </td>
+    </ td>
     <td>
-      Single precision(32bit) floating po<a href="#language-type-int">int Type</a>
-    </td>
+      Single precision (32bit) floating po <a href="#language-type-int">int Type</a>
+    </ td>
     <td>
       4 bytes
-    </td>
-  </tr>
+    </ td>
+  </ tr>
   <tr>
     <td>
       <b>double</b>
-    </td>
+    </ td>
     <td>
-      Double precision(64bit) floating po<a href="#language-type-int">int Type</a>
-    </td>
+      Double precision (64bit) floating po <a href="#language-type-int">int Type</a>
+    </ td>
     <td>
       8 bytes
-    </td>
-  </tr>
+    </ td>
+  </ tr>
 </table>
 <p>
   See <a href="#language-operator-arithmetic">Arithmetic Operator</a> for floating-point calculation rules.
 </p>
-<h4 id="language-type-float"><a href="#language-type-float">float Type</a></h4>
+<h4 id = "language-type-float"><a href="#language-type-float">float Type</a></h4>
 <p>
-  <a href="#language-type-float">float Type</a>は,単精度浮動小数点(32bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99の<a href="#language-type-float">float Type</a>と同じTypeです。
+  <a href="#language-type-floating-point">Floating Point Type <a represents a single precision floating point (32bit). / a> It is the same Type as <a href="#language-type-float">float Type</a> of C99.
 </p>
-<h4 id="language-type-double"><a href="#language-type-double">double Type</a></h4>
+<h4 id = "language-type-double"><a href="#language-type-double">double Type</a></h4>
 <p>
-  <a href="#language-type-double">double Type</a>は,倍精度浮動小数点(64bit)を表現する<a href="#language-type-floating-point">Floating Point Type</a>です。C99の<a href="#language-type-double">double Type</a>と同じTypeです。
+  <a href="#language-type-double">double Type</a> represents a double precision floating point (64bit) <a href="#language-type-floating-point">Floating Point Type</a> It is the same Type as <a href="#language-type-double">double Type</a> of C99.
 </p>
-<h4 id="language-type-package">Package Type</h4>
+<h4 id = "language-type-package">Package Type</h4>
 <p>
-  Package Typeとは<a href="#language-package-definition">Package Definition</a>によってDefinitionされるTypeのことをいいます。
+  Package Type is the Type defined by <a href="#language-package-definition">Package Definition</a>.
 </p>
 <pre>
 package Foo {
@@ -6529,7 +6515,7 @@ package Foo {
 }
 </pre>
 <p>
-  Package Typeは<a href="#language-type-class">Class Type</a><a href="#language-type-callback">Callback Type</a><a href="#language-type-multi-numeric">Multi Numeric Type</a>からなります。
+  Package Type is <a href="#language-type-class">Class Type</a> <a href="#language-type-callback">Callback Type</a> <a href = "# language-type It consists of -multi-numeric ">Multi Numeric Type</a>.
 </p>
 <pre>
 # Class Type
@@ -6538,42 +6524,50 @@ package Foo {
 }
 
 # Callback Type
-package Foo : callback_t {
+package Foo: callback_t {
 
 }
 
 # Multi Numeric Type
-package Foo : mulnum_t {
+package Foo: mulnum_t {
 
 }
 </pre>
 <p>
-  <a href="#language-type-pointer">Pointer Type</a>は,Class Typeでもあるので,Pointer TypeもPackage Typeになります。
+  <a href="#language-type-pointer">Pointer Type</a> is also Class Type, so Pointer Type will also be Package Type.
 </p>
 <pre>
 # Pointer Type
-package Foo : pointer_t {
+package Foo: pointer_t {
 
 }
 </pre>
-<h4 id="language-type-object">Object Type</h4>
+<h4 id = "language-type-object">Object Type</h4>
 <p>
-  Object Type とは<a href="#language-type-class">Class Type</a><a href="#language-type-callback">Callback Type</a><a href="#language-type-array">Array Type</a><a href="#language-type-string">string Type</a><a href="#language-type-any-object">Any Object Type</a>を合わせたものをいいます。"Multi Numeric Type""Reference Type "は含みません。
+<p>
+  What is Object Type <a href="#language-type-class">Class Type</a> <a href="#language-type-callback">Callback Type</a> <a href = "# language- type-array ">Array Type</a> <a href="#language-type-string">string Type</a> <a href="#language-type-any-object">Any Object Type</a> It is a combination of a>. "Multi Numeric Type" and "Reference Type" are not included.
+</p>
 </p>
 <p>
-  Object Type の値は"Any Object Type "に代入できます。
+<p>
+  The Object Type value can be assigned to "Any Object Type".
+</p>
 </p>
 <pre>
-my $object : object = new Foo;
-my $object : object = new Foo[];
-my $object : object = "abc";
+my $object: object = new Foo;
+my $object: object = new Foo [];
+my $object: object = "abc";
 </pre>
 <p>
-  Object Type のSizeはC99における"sizeof(void*)"の値と一致していなければなりません。
+<p>
+  The size of Object Type must match the value of "sizeof (void *)" in C99.
 </p>
-<h4 id="language-type-numeric-object">Numeric Object Type</h4>
+</p>
+<h4 id = "language-type-numeric-object">Numeric Object Type</h4>
+<p>
 <p>
   <b>Numeric Object Type</b> are the following six.
+</p>
 </p>
 <table>
   <tr>
@@ -6626,29 +6620,37 @@ my $object : object = "abc";
   </tr>
   <tr>
     <td>
-      SPVM::Double
+    SPVM::Double
     </td>
     <td>
-      Numeric Object Type with <a href="#language-type-double">double Type</a> data
+    Numeric Object Type with <a href="#language-type-double">double Type</a> data
     </td>
   </tr>
 </table>
 <p>
   For the conversion between <a href="#language-type-numeric">Numeric Type</a> and <b>Numeric Object Type</b>, see <a href="#language-type-convertion">Type Conversion</a>.
 </p>
-<h4 id="language-type-undef">Undefined Type</h4>
+<h4 id = "language-type-undef">Undefined Type</h4>
 <p>
-  Undefined Typeとは,<a href="#language-undef">Undefined Value</a>が持っているTypeのことです。明示的に利用することはできません。
+<p>
+  Undefined Type is the Type that <a href="#language-undef">Undefined Value</a> has. It cannot be used explicitly.
+</p>
 </p>
 <p>
-  Undefined Typeの値は<a href="#language-undef">Undefined Value</a>のみです。
+<p>
+  The only Undefined Type value is <a href="#language-undef">Undefined Value</a>.
+</p>
 </p>
 <p>
-  Undefined Typeの値は,Object Type に代入できます。他のTypeに代入した場合は,a compile-time error occurs
-</p>
-<h4 id="language-type-class">Class Type</h4>
 <p>
-  Class Typeとは<a href="#language-package-definition">Package Definition</a>によってDefinitionされるTypeで"Multi Numeric Type""Callback Type"ではないTypeのことをいいます。
+  The value of Undefined Type can be assigned to Object Type.If you assign to another Type, a compile-time error occurs
+</p>
+</p>
+<h4 id = "language-type-class">Class Type</h4>
+<p>
+<p>
+  Class Type is the Type defined by <a href="#language-package-definition">Package Definition</a> and is not "Multi Numeric Type" "Callback Type".
+</p>
 </p>
 <pre>
 packag Foo {
@@ -6656,45 +6658,45 @@ packag Foo {
 }
 </pre>
 <p>
-  Class Typeはnew Operator によって,オブジェクトを生成することができます。
+  Class Type can create objects by new Operator.
 </p>
 <pre>
 my $foo = new Foo;
 </pre>
 <p>
-  Class Typeは<a href="#language-type-object">Object Type</a>です。
+  Class Type is <a href="#language-type-object">Object Type</a>.
 </p>
 <p>
-  Class Typeは<a href="#language-type-package">Package Type</a>です。
+  Class Type is <a href="#language-type-package">Package Type</a>.
 </p>
 <p>
-  <a href="#language-type-pointer">Pointer Type</a>はClass Typeです。
+  <a href="#language-type-pointer">Pointer Type</a> is the Class Type.
 </p>
-<h4 id="language-type-pointer">Pointer Type</h4>
+<h4 id = "language-type-pointer">Pointer Type</h4>
 <p>
-  Pointer Typeとは<a href="#language-package-definition">Package Definition</a>において"pointer_t Descriptor"が指定されたものをいいます。
+  Pointer Type is the one that "pointer_t Descriptor" is specified in <a href="#language-package-definition">Package Definition</a>.
 </p>
 <pre>
-package Foo : pointer_t {
+package Foo: pointer_t {
 
 }
 </pre>
 <p>
-  Pointer Typeは,Class Typeの一種です。
+  Pointer Type is a type of Class Type.
 </p>
 <p>
-  Pointer Typeのデータには,C言語のポインタを保存することができます。
+  Pointer type data can store C language pointers.
 </p>
 <p>
-  Pointer Typeには,FieldをDefinitionすることはできません。Definitionされていた場合は,a compile-time error occurs
+  Field cannot be defined for Pointer Type. If it is defined, a compile-time error occurs
 </p>
-<h4 id="language-type-callback">Callback Type</h4>
+<h4 id = "language-type-callback">Callback Type</h4>
 <p>
   Callback Type is a <a href="#language-type-package">Package Type</a> with <a href="#language-package-descriptor">Package Descriptor</a> "callback_t".
 </p>
 <pre>
-package SPVM::Comparator : callback_t {
-  sub : int ($self : self, $x1 : object, $x2 : object);
+package SPVM::Comparator: callback_t {
+  sub: int ($self: self, $x1: object, $x2: object);
 }
 </pre>
 <p>
@@ -6716,123 +6718,124 @@ package SPVM::Comparator : callback_t {
   Callback Type cannot be the operand of <a href="#language-expression-new">new Statement</a>.
 </p>
 <p>
-  The variable of Callback Type can be assigned a <a href="#language-type-class">Class Type</a> object that matches the Callback Type. "matches the Callback Type" means the following two cases.
+  The variable of Callback Type can be assigned a <a href="#language-type-class">Class Type</a> object that matches the Callback Type. "Matches the Callback Type" means the following two cases.
 </p>
 <p>
   1. Class Type object with anonimouse name and the <a href="#language-sub-signature">Signature</a> is same as Callback Type
 </p>
 <pre>
 # Callback Type Definition
-package SPVM::Comparator : callback_t {
-  sub : int ($self : self, $x1 : object, $x2 : object);
+package SPVM::Comparator: callback_t {
+  sub: int ($self: self, $x1: object, $x2: object);
 }
 
 # Class Definition
 package SomeComparator {
-  sub new : int () {
+  sub new: int () {
     return new SomeComparator;
   }
 
-  sub : int ($self : self, $x1 : object, $x2 : object) {
+  sub: int ($self: self, $x1: object, $x2: object) {
 
   }
 }
 
 # The object can be assign to the variable of Callback Type
-my $comparator : SPVM::Comparator = SomeComparator-&gt;new;
+my $comparator: SPVM::Comparator = SomeComparator-&gt;new;
 </pre>
 <p>
   2. Class Type object which is created by <a href="#language-sub-new-callback-object">Create Callback Object</a> and the <a href="#language-sub-signature">Signature</a> is same as Callback Type.
 </p>
 <pre>
-# Callback TypeのDefinition
-package SPVM::Comparator : callback_t {
-  sub : int ($self : self, $x1 : object, $x2 : object);
+Definition of #Callback Type
+package SPVM::Comparator: callback_t {
+  sub: int ($self: self, $x1: object, $x2: object);
 }
 
 # The object which is created by Create Callback Object can be assign to the variable of Callback Type
-my $comparator : SPVM::Comparator = sub : int ($self : self, $x1 : object, $x2 : object) {
+my $comparator : SPVM::Comparator = sub: int ($self: self, $x1: object, $x2: object) {
 
 }
 </pre>
-<h4 id="language-type-any-object">Any Object Type</h4>
+<h4 id = "language-type-any-object">Any Object Type</h4>
 <p>
-  Any Object Type は"object"で表現します。C言語の"void*"Typeを表現するために設計されました。
+  Any Object Type is represented by "object". Designed to represent the "void *" Type in C.
+</p><pre>
+<p>
+  my $object: object;
 </p>
-<pre>
-my $object : object;
 </pre>
 <p>
-  Any Object Type には"Object Type "の値を代入できます。
+  You can substitute the value of "Object Type" for Any Object Type.
 </p>
 <pre>
-my $object : object = new Foo;
-my $object : object = "abc";
-my $object : object = new Foo[3];
+my $object: object = new Foo;
+my $object: object = "abc";
+my $object: object = new Foo [3];
 </pre>
-<h4 id="language-type-self">self Type</h4>
+<h4 id = "language-type-self">self Type</h4>
 <p>
   self Type represents the Package Type to which it belongs, and indicates that the argument is Invocant.
 </p>
 <p>
-  It can only be used as the Type of the first argument in <a href="#language-sub-definition"> Subroutine Definition </a>.
+  It can only be used as the Type of the first argument in <a href="#language-sub-definition">Subroutine Definition</a>.
 </p>
-<h4 id="language-type-void"><a href="#language-type-void">void Type</a></h4>
+<h4 id = "language-type-void"><a href="#language-type-void">void Type</a></h4>
 <p>
   <b>void Type</b> is a special Type that can only be used in Return Type of <a href="#language-sub-definition">Subroutine Definition</a> and indicates the Subroutine has no Return Value.
 </p>
-<h4 id="language-type-basic">Basic Type</h4>
+<h4 id = "language-type-basic">Basic Type</h4>
 <p>
-  A Type that does not have dimensions is called a Basic Type. <a href="#language-type-numeric"> Numeric Type </a>, <a href="#language-type-package"> Package Type </a>, <a href = "# language-type- any-object "> Any Object Type </a>, <a href="#language-type-string"> string Type </a> is a Basic Type.
+  A Type that does not have dimensions is called a Basic Type. <a href="#language-type-numeric">Numeric Type</a>, <a href="#language-type-package">Package Type </ a>, <a href = "# language-type- any-object ">Any Object Type</a>, <a href="#language-type-string">string Type</a> is a Basic Type.
 </p>
-<h4 id="language-type-array">Array Type</h4>
+<h4 id = "language-type-array">Array Type</h4>
 <p>
-  Array Type represents multiple continuous data areas. <a href="#language-type-basic"> Basic Type </a> can be an Array.
+  Array Type represents multiple continuous data areas. <a href="#language-type-basic">Basic Type</a> can be an Array.
 </p>
 <pre>
 int[]
 double[]
 Point[]
 object[]
-string[]
+string []
 </pre>
 <p>
   Array has dimensions and can express up to 255 dimensions.
 </p>
 <pre>
 # Two dimensions
-int[][]
+int[] []
 
 # Three-dimensional
-int[][][]
+int[] [] []
 </pre>
 <p>
-  Array Type is <a href="#language-type-object"> Object Type </a>.
+  Array Type is <a href="#language-type-object">Object Type</a>.
 </p>
 <p>
-  Use new Operator to create an Array. In the following example, <a href="#language-type-int"> int Type </a> Array with 3 elements is created.
-</p>
-<p>
-<p>
-  my $nums = new int[3];
-</p>
-</p>
-<p>
-  You also use new Operator when creating a multidimensional Array. The following example creates an Array of int [] Type with 3 elements.
+  Use new Operator to create an Array. In the following example, <a href="#language-type-int">int Type</a> Array with 3 elements is created.
 </p>
 <p>
 <p>
-  my $nums = new int[][3];
+  my $nums = new int [3];
 </p>
 </p>
-<h4 id="language-type-array-numeric">Numeric Array Type</h4>
 <p>
-  Numeric Array Type means <a href="#language-type-numeric"> Numeric Type </a> with the element <a href="#language-type-array"> Array Type </a> It is.
+  You also use new Operator when creating a multidimensional Array.The following example creates an Array of int[] Type with 3 elements.
+</p>
+<p>
+<p>
+  my $nums = new int[] [3];
+</p>
+</p>
+<h4 id = "language-type-array-numeric">Numeric Array Type</h4>
+<p>
+  Numeric Array Type means <a href="#language-type-numeric">Numeric Type</a> with the element <a href="#language-type-array">Array Type</a> It is.
 </p>
 <p>
   <b>Numeric Array Type list</b>
 </p>
-<ul class="list">
+<ul class = "list">
   <li>
     byte[]
   </li>
@@ -6851,26 +6854,26 @@ int[][][]
   <li>
     double[]
   </li>
-</ul>
+</ ul>
 <p>
-  Data represented by Numeric Array Type must have elements whose size is <a href="#language-type-numeric"> Numeric Type </a>, and must be consecutive by the number of Array Length.
+  Data represented by Numeric Array Type must have elements whose size is <a href="#language-type-numeric">Numeric Type</a>, and must be consecutive by the number of Array Length.
 </p>
 <p>
-  All elements of Numeric Array Type are initialized by <a href="#language-type-initial-value"> Type Initial Value </a> when Create Array is performed.
+  All elements of Numeric Array Type are initialized by <a href="#language-type-initial-value">Type Initial Value</a> when Create Array is performed.
 </p>
-<h4 id="language-type-array-byte">byte[] Type</h4>
+<h4 id = "language-type-array-byte">byte[] Type</h4>
 <p>
-  In SPVM, the byte [] Type is a special Type in that it is <a href="#language-type-string-compatible"> String Compatible Type </a>.
+  In SPVM, the byte[] Type is a special Type in that it is <a href="#language-type-string-compatible">String Compatible Type</a>.
 </p>
 <pre>
 byte[]
 </pre>
 <p>
-  <a href="#language-type-string"> string Type </a> is treated as <a href="#language-type-string"> string Type </a> at compile time, but at runtime It will be byte [] Type.
+  <a href="#language-type-string">string Type</a> is treated as <a href="#language-type-string">string Type</a> at compile time, but at runtime It will be byte[] Type.
 </p>
 <h4 id="language-type-array-object">Object Array Type</h4>
 <p>
-  Object Array Type is <a href="#language-type-array"> Array Type </a> that has the value of <a href="#language-type-object"> Object Type </a> as an element. It is.
+  Object Array Type is <a href="#language-type-array">Array Type</a> that has the value of <a href="#language-type-object">Object Type</a> as an element. It is.
 </p>
 <p>
   <b>Object Array TypeのExample</b>
@@ -6878,26 +6881,26 @@ byte[]
 <ul class="list">
   <li>
     Foo[]
-  </li>
+ </li>
   <li>
     Foo[][]
-  </li>
+ </li>
   <li>
     Comparable[]
-  </li>
+ </li>
   <li>
     object[]
-  </li>
+ </li>
 </ul>
 <p>
-  The data represented by Object Array Type must have elements of size of <a href="#language-type-object"> Object Type </a> and consecutive by the number of Array Length.
+  The data represented by Object Array Type must have elements of size of <a href="#language-type-object">Object Type</a> and consecutive by the number of Array Length.
 </p>
 <p>
-  All elements of Object Array Type are initialized by <a href="#language-type-initial-value"> Type Initial Value </a> when Create Array is performed.
+  All elements of Object Array Type are initialized by <a href="#language-type-initial-value">Type Initial Value</a> when Create Array is performed.
 </p>
 <h4 id="language-type-array-mulnum">Multi Numeric Array Type</h4>
 <p>
-  Multi Numeric Array Type means <a href="#language-type-array"> Array Type that has the value of <a href="#language-type-multi-numeric"> Multi Numeric Type </a> as an element. </a>.
+  Multi Numeric Array Type means <a href="#language-type-array">Array Type that has the value of <a href="#language-type-multi-numeric">Multi Numeric Type</a> as an element.</a>.
 </p>
 <p>
   <b>Multi Numeric Array Type Example</b>
@@ -6905,20 +6908,20 @@ byte[]
 <ul class="list">
   <li>
     Complex_2d[]
-  </li>
+ </li>
   <li>
     Complex_2f[]
-  </li>
+ </li>
 </ul>
 <p>
-  Data represented by Multi Numeric Array Type must have elements whose size is <a href="#language-type-numeric"> Multi Numeric Type </a> and must be contiguous with the number of Array Length ..
+  Data represented by Multi Numeric Array Type must have elements whose size is <a href="#language-type-numeric">Multi Numeric Type</a> and must be contiguous with the number of Array Length ..
 </p>
 <p>
-  All elements of Multi Numeric Array Type are initialized by <a href="#language-type-initial-value"> Type Initial Value </a> when Create Array is performed.
+  All elements of Multi Numeric Array Type are initialized by <a href="#language-type-initial-value">Type Initial Value</a> when Create Array is performed.
 </p>
 <h4 id="language-type-any-object-array">Any Object Array Type</h4>
 <p>
-  Any Object Array Type is an arbitrary <a href="#language-type- that has the value of <a href="#language-type-object"> Object Type </a> expressed as an oarray as an element. A Type that can be assigned the value of array "> Array Type </a>. Any Array Type can be cast to void * Type and passed to the first argument of the C language qsort function, but Any Object Array Type is not designed to realize the function corresponding to this. It was
+  Any Object Array Type is an arbitrary <a href="#language-type- that has the value of <a href="#language-type-object">Object Type</a> expressed as an oarray as an element. A Type that can be assigned the value of array ">Array Type</a>. Any Array Type can be cast to void * Type and passed to the first argument of the C language qsort function, but Any Object Array Type is not designed to realize the function corresponding to this. It was
 </p>
 <pre>
 my $array : oarray = new Point[3];
@@ -6928,10 +6931,10 @@ my $array : oarray = new object[3];
   If a value with a Type other than Object Type is assigned, a compile-time error occurs
 </p>
 <p>
-  Note that "oarrayType" is a different Type than "object [] Type". While oarrayType is a Type that can be substituted with an arbitrary Array Type value that has an Object Type value as an element, "object [] Type" is a Type that represents an "Array that has an objectType value as an element". Therefore, the value of arbitrary Array Type cannot be assigned.
+  Note that "oarrayType" is a different Type than "object[] Type". While oarrayType is a Type that can be substituted with an arbitrary Array Type value that has an Object Type value as an element, "object[] Type" is a Type that represents an "Array that has an objectType value as an element". Therefore, the value of arbitrary Array Type cannot be assigned.
 </p>
 <p>
-  Any Object Array Type is <a href="#language-type-array"> Array Type </a>. <a href="#language-operator-array-length"> Array Length Operator </a> to get length, <a href="#language-expression-set-array-element"> Set Array Element You can use Value </a>, <a href="#language-expression-get-array-element"> Get Array Element Value </a>.
+  Any Object Array Type is <a href="#language-type-array">Array Type</a>. <a href="#language-operator-array-length">Array Length Operator</a> to get length, <a href="#language-expression-set-array-element">Set Array Element You can use Value</a>, <a href="#language-expression-get-array-element">Get Array Element Value</a>.
 </p>
 <pre>
 my $array : oarray = new SPVM::Int[3];
@@ -6950,7 +6953,7 @@ $array-&gt;[0] = SPVM::Int-&gt;new(5);
 </p>
 <h4 id="language-type-string"><a href="#language-type-string">string Type</a></h4>
 <p>
-  <a href="#language-type-string"> string Type </a> is a Type that represents a String. Expressed by string. Designed to represent C "const char *".
+  <a href="#language-type-string">string Type</a> is a Type that represents a String. Expressed by string. Designed to represent C "const char *".
 </p>
 <pre>
 my $str : string;
@@ -6976,7 +6979,7 @@ my $ch = $str-&gt;[1];
 $str-&gt;[1] = 'd';
 </pre>
 <p>
-  <a href="#language-type-string"> string Type </a> will be exactly the same as the Array of bytes Type after compilation. For example, the first expression is treated as the second expression.
+  <a href="#language-type-string">string Type</a> will be exactly the same as the Array of bytes Type after compilation. For example, the first expression is treated as the second expression.
 </p>
 <pre>
 # isa string Type
@@ -6993,7 +6996,7 @@ if ($str isa byte[]) {
   Note that SPVM Strings are immutable, but this is a compile-time check.
 </p>
 <p>
-  <a href="#language-type-string"> string Type </a> can be cast to byte [] Type, and the String can be changed at runtime.
+  <a href="#language-type-string">string Type</a> can be cast to byte[] Type, and the String can be changed at runtime.
 </p>
 <pre>
 my $bytes = (byte[])$str;
@@ -7004,7 +7007,7 @@ $bytes-&gt;[1] = 'd';
 </p>
 <h4 id="language-type-string-compatible">String Compatible Type</h4>
 <p>
-  String Compatible Type is a combination of <a href="#language-type-string"> string Type </a> and <a href="#language-type-array-byte"> byte [] Type </a>. Say that.
+  String Compatible Type is a combination of <a href="#language-type-string">string Type</a> and <a href="#language-type-array-byte">byte[] Type</a>. Say that.
 </p>
 <p>
   When a String Compatible Type value is generated, it is guaranteed that the last one after the last memory area reserved for the value will be "\ 0". (For example, if it is "abc", "c" is followed by "\ 0".) From the SPVM language, this "\ 0" has no meaning, but when using the native API, String Compatible Type is It can be handled as a C language String.
@@ -7014,7 +7017,7 @@ $bytes-&gt;[1] = 'd';
   Multi Numeric Type is a type that can represent continuous numerical values.
 </p>
 <p>
-  Multi Numeric Type can be defined by specifying "mulnum_t" Descriptor in <a href="#language-package-definition"> Package Definition </a>.
+  Multi Numeric Type can be defined by specifying "mulnum_t" Descriptor in <a href="#language-package-definition">Package Definition</a>.
 </p>
 <pre>
 package Point_3i : mulnum_t {
@@ -7024,11 +7027,11 @@ package Point_3i : mulnum_t {
 }
 </pre>
 <p>
-  See <a href="#language-mulnum"> Values ​​</a> for a detailed explanation of Multi Numeric Type.
+  See <a href="#language-mulnum">Values ​​</a> for a detailed explanation of Multi Numeric Type.
 </p>
 <h4 id="language-type-ref">Reference Type</h4>
 <p>
-  Reference Type is a Type that can store the address of a variable. Add "&" after <a href="#language-type-numeric"> Numeric Type </a> or <a href="#language-type-multi-numeric"> Multi Numeric Type </a> You can define it.
+  Reference Type is a Type that can store the address of a variable. Add "&" after <a href="#language-type-numeric">Numeric Type</a> or <a href="#language-type-multi-numeric">Multi Numeric Type</a> You can define it.
 </p>
 <pre>
 my $num : int;
@@ -7038,43 +7041,43 @@ my $point : Point_3i;
 my $point_ref : Point_3i&amp; = \$point;
 </pre>
 <p>
-  Only the address of the Lexical Variable acquired by <a href="#language-operator-ref"> Reference Operator </a> can be assigned to the value of Reference Type.
+  Only the address of the Lexical Variable acquired by <a href="#language-operator-ref">Reference Operator</a> can be assigned to the value of Reference Type.
 </p>
 <p>
   If only Lexical Variable Declaration of Reference Type is performed, a compile-time error occurs
 </p>
 <p>
-  Reference Type can be used as Type of <a href="#language-lex-var-declaration"> Lexical Variable Declaration </a>. The address of the Lexical Variable must be stored by the Reference Operator. In case of only Lexical Variable Declaration, a compile-time error occurs
+  Reference Type can be used as Type of <a href="#language-lex-var-declaration">Lexical Variable Declaration</a>. The address of the Lexical Variable must be stored by the Reference Operator. In case of only Lexical Variable Declaration, a compile-time error occurs
 </p>
 <p>
-  Reference Type can be used as Type of argument in <a href="#language-sub-definition"> Subroutine Definition </a>.
+  Reference Type can be used as Type of argument in <a href="#language-sub-definition">Subroutine Definition</a>.
 </p>
 <p>
-  Reference Type cannot be used as Return Value Type in <a href="#language-sub-definition"> Subroutine Definition </a>.
+  Reference Type cannot be used as Return Value Type in <a href="#language-sub-definition">Subroutine Definition</a>.
 </p>
 <p>
-  Reference Type cannot be used as the Type of Field in <a href="#language-package-definition"> Package Definition </a>.
+  Reference Type cannot be used as the Type of Field in <a href="#language-package-definition">Package Definition</a>.
 </p>
 <p>
-  Reference Type cannot be used as the Type of Package Variable in <a href="#language-package-definition"> Package Definition </a>.
+  Reference Type cannot be used as the Type of Package Variable in <a href="#language-package-definition">Package Definition</a>.
 </p>
 <p>
   If the Reference Type is used at an Invalid location, a compile-time error occurs
 </p>
 <p>
-  See <a href="#language-ref"> Reference </a> for a detailed explanation of Reference.
+  See <a href="#language-ref">Reference</a> for a detailed explanation of Reference.
 </p>
 <h4 id="language-type-ref-numeric">Numeric Reference Type</h4>
 <p>
-  Numeric Reference Type means <a href="#language-type-numeric"> Numeric Type </a> for <a href="#language-type-ref"> Reference Type </a>. Says.
+  Numeric Reference Type means <a href="#language-type-numeric">Numeric Type</a> for <a href="#language-type-ref">Reference Type</a>. Says.
 </p>
 <h4 id="language-type-ref-multi-numeric">Multi Numeric Reference Type</h4>
 <p>
-  Multi Numeric Reference Type means <a href="#language-type-ref"> Reference Type </a> for <a href="#language-type-multi-numeric"> Multi Numeric Type </a> variables. > Means.
+  Multi Numeric Reference Type means <a href="#language-type-ref">Reference Type</a> for <a href="#language-type-multi-numeric">Multi Numeric Type</a> variables. > Means.
 </p>
 <h3 id="language-type-inference">Type Inference</h3>
 <p>
-  Omitting <a href="#language-type"> Type </a> when <a href="#language-lex-var-declaration"> Lexical Variable Declaration </a> by Type Inference can. Type Inference is always performed by the Type on the right side of Assignment Operator.
+  Omitting <a href="#language-type">Type</a> when <a href="#language-lex-var-declaration">Lexical Variable Declaration</a> by Type Inference can. Type Inference is always performed by the Type on the right side of Assignment Operator.
 </p>
 <pre>
 # int
@@ -7088,7 +7091,7 @@ my $foo = new Foo;
 </pre>
 <h3 id="language-type-compatible">Type Compatibility</h3>
 <p>
-  Type compatibility means that the value can be moved without performing <a href="#language-expression-typecast"> Type Cast </a>.
+  Type compatibility means that the value can be moved without performing <a href="#language-expression-typecast">Type Cast</a>.
 </p>
 <p>
   Types are compatible in the following cases.
@@ -7105,10 +7108,10 @@ my $num2 : int;
 $num1 = $num2;
 </pre>
 <p>
-  <b>When the source Type is byte [] Type and the destination Type is <a href="#language-type-string"> string Type </a></b>
+  <b>When the source Type is byte[] Type and the destination Type is <a href="#language-type-string">string Type</a></b>
 </p>
 <p>
-  If the source Type is byte [] Type and the destination Type is <a href="#language-type-string"> string Type </a>, there is Type Compatibility.
+  If the source Type is byte[] Type and the destination Type is <a href="#language-type-string">string Type</a>, there is Type Compatibility.
 </p>
 <pre>
 my $bytes = new byte[3];
@@ -7139,7 +7142,7 @@ $objects_dim1_dist = $objects_dim2_src;
 my $objets : object[] = new int[3];
 </pre>
 <p>
-  If the types are not compatible, <a href="#language-type-convertion-implicite"> implicit Type Convertion </a> is tried. If the implicit Type Conversion fails, a compile-time error occurs
+  If the types are not compatible, <a href="#language-type-convertion-implicite">implicit Type Convertion</a> is tried. If the implicit Type Conversion fails, a compile-time error occurs
 </p>
 <h3 id="language-type-convertion">Type Convertion</h3>
 <ul class="list">
@@ -7165,13 +7168,13 @@ my $objets : object[] = new int[3];
 (Type)Expression
 </pre>
 <p>
-  <a href="#language-type-int"> int Type </a> value is converted to <a href="#language-type-long"> long Type </a> Become.
+  <a href="#language-type-int">int Type</a> value is converted to <a href="#language-type-long">long Type</a> Become.
 </p>
 <pre>
 my $num = (long)3;
 </pre>
 <p>
-  ype Cast returns <a href="#language-expression"> Expression </a>.
+  ype Cast returns <a href="#language-expression">Expression</a>.
 </p>
 <p>
   If the source Type and the specified Type are the same, the value is simply copied.
@@ -7227,40 +7230,29 @@ my $num : int = (int)4;
       <b>Numeric Type</b>
     </td>
     <td>
-      <a href="#language-type-convertion-numeric-widening"> Numeric Type Type Convertion </a> is performed.
+      <a href="#language-type-convertion-numeric-widening">Numeric Type Type Convertion</a> is performed.
     </td>
   </tr>
   <tr>
     <td>
-      <b>Numeric Object Type </b>
+      <b>Numeric Object Type</b>
     </td>
     <td>
       <b>Numeric Type</b>
     </td>
     <td>
-      <a href="#language-type-convertion-boxing"> Boxing Type Convertion </a> is performed. Numeric Type represented by Numeric Type and Numeric Object Type must be the same. For example, if Numeric Type is int, Numeric Object Type must be SPVM::Int Type.
+      <a href="#language-type-convertion-boxing">Boxing Type Convertion</a> is performed. Numeric Type represented by Numeric Type and Numeric Object Type must be the same. For example, if Numeric Type is int, Numeric Object Type must be SPVM::Int Type.
     </td>
   </tr>
   <tr>
     <td>
-      <b>Any Object Type </b>
+      <b>Any Object Type</b>
     </td>
     <td>
       <b>Numeric Type</b>
     </td>
     <td>
-      <a href="#language-type-convertion-boxing"> Boxing Type Convertion </a> is performed.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <b>Numeric Type</b>
-    </td>
-    <td>
-      <b>Numeric Object Type </b>
-    </td>
-    <td>
-      <a href="#language-type-convertion-unboxing"> Unboxing Type Convertion </a> is performed. Numeric Type represented by Numeric Type and Numeric Object Type must be the same. For example, if Numeric Type is int, Numeric Object Type must be SPVM::Int Type.
+      <a href="#language-type-convertion-boxing">Boxing Type Convertion</a> is performed.
     </td>
   </tr>
   <tr>
@@ -7268,10 +7260,21 @@ my $num : int = (int)4;
       <b>Numeric Type</b>
     </td>
     <td>
-      <b>Any Object Type </b>
+      <b>Numeric Object Type</b>
     </td>
     <td>
-      <a href="#language-type-convertion-unboxing"> Unboxing Type Convertion </a> is performed.
+      <a href="#language-type-convertion-unboxing">Unboxing Type Convertion</a> is performed. Numeric Type represented by Numeric Type and Numeric Object Type must be the same. For example, if Numeric Type is int, Numeric Object Type must be SPVM::Int Type.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Numeric Type</b>
+    </td>
+    <td>
+      <b>Any Object Type</b>
+    </td>
+    <td>
+      <a href="#language-type-convertion-unboxing">Unboxing Type Convertion</a> is performed.
     </td>
   </tr>
   <tr>
@@ -7288,7 +7291,7 @@ my $num : int = (int)4;
 </table>
 <h4 id="language-type-convertion-numeric">Numeric Type Type Convertion</h4>
 <p>
-  Numeric Type Type Conversion is the conversion from <a href="#language-type-numeric"> Numeric Type </a> to <a href="#language-type-numeric"> Numeric Type </a>. That is.
+  Numeric Type Type Conversion is the conversion from <a href="#language-type-numeric">Numeric Type</a> to <a href="#language-type-numeric">Numeric Type</a>. That is.
 </p>
 <p>
   Numeric Type Type Conversion performs exactly the same processing as Numeric Type Type Conversion in the corresponding C language. For example, Type Conversion from int to long in SPVM is the same as Type Conversion from int32_tType to int64_tType in C language.
@@ -7303,7 +7306,7 @@ int32_t src = 5;
 int64_t dist = (int64_t)src;
 </pre>
 <p>
-  For the correspondence of Type, see <a href="#language-c99-type"> Correspondence of Type with C99 </a>.
+  For the correspondence of Type, see <a href="#language-c99-type">Correspondence of Type with C99</a>.
 </p>
 <p>
   Valid information may not be retained when converting from a large type to a small type or when converting from a floating point to an integral type. In SPVM, since the Type Conversion corresponding to C99 is performed as it is, which value is converted when the Valid information is not retained is the same as the C99 specification.
@@ -7321,7 +7324,7 @@ int64_t dist = (int64_t)src;
   Implicit Type Convertion occurs when:
 </p>
 <p>
-  If both the source and destination Type are Numeric Type and the destination Type is larger than the source Type, <a href="#language-type-convertion-numeric-widening"> Numeric Widening Type Convertion </a> is done.
+  If both the source and destination Type are Numeric Type and the destination Type is larger than the source Type, <a href="#language-type-convertion-numeric-widening">Numeric Widening Type Convertion</a> is done.
 </p>
 <pre>
 # Implicit Widening Type Convertion
@@ -7345,7 +7348,7 @@ my $num = 123;
 my $object : object = $num;
 </pre>
 <p>
-  When the source Type is Numeric Type and the destination Type is the corresponding Numeric Object Type, <a href="#language-type-convertion-boxing"> Boxing Type Convertion </a> to the corresponding Numeric Object Type a> is done.
+  When the source Type is Numeric Type and the destination Type is the corresponding Numeric Object Type, <a href="#language-type-convertion-boxing">Boxing Type Convertion</a> to the corresponding Numeric Object Type a> is done.
 </p>
 <pre>
 # Implicit Boxing Type Convertion to object Type
@@ -7353,7 +7356,7 @@ my $num = 123;
 my $object : SPVM::Int = $num;
 </pre>
 <p>
-  When the source Type is Any Object Type and the destination Type is Numeric Type, <a href="#language-type-convertion-unboxing"> Unboxing Type Convertion </a> in the corresponding Numeric Type is displayed. Will be opened. In the following case, an attempt is made to convert the SPVM::Int Type object to <a href="#language-type-int"> int Type </a>.
+  When the source Type is Any Object Type and the destination Type is Numeric Type, <a href="#language-type-convertion-unboxing">Unboxing Type Convertion</a> in the corresponding Numeric Type is displayed. Will be opened. In the following case, an attempt is made to convert the SPVM::Int Type object to <a href="#language-type-int">int Type</a>.
 </p>
 <pre>
 # Implicit Unboxing Type Convertion from objectType-
@@ -7363,7 +7366,7 @@ my $num : int = $object;
 <p>
   
 <p>
-  If the source Type is Numeric Object Type and the destination Type is the corresponding Numeric Type, <a href="#language-type-convertion-unboxing"> Unboxing Type Convertion </a> in the corresponding Numeric Type Is done.
+  If the source Type is Numeric Object Type and the destination Type is the corresponding Numeric Type, <a href="#language-type-convertion-unboxing">Unboxing Type Convertion</a> in the corresponding Numeric Type Is done.
 </p>
 </p>
 <pre>
@@ -7372,7 +7375,7 @@ my $num_obj = SPVM::Int-&gt;new(3);
 my $num : int = $num_obj;
 </pre>
 <p>
-  If the source Type is Numeric Type and the destination Type is <a href="#language-type-string"> string Type </a>, <a href = "# language-type-convertion- numeric-to-string "> Numeric-to- <a href="#language-type-string"> string Type </a> Convertion </a> is performed. In the following case, the numerical value "123" is converted to String "" 123 "" and assigned.
+  If the source Type is Numeric Type and the destination Type is <a href="#language-type-string">string Type</a>, <a href = "# language-type-convertion- numeric-to-string ">Numeric-to- <a href="#language-type-string">string Type</a> Convertion</a> is performed. In the following case, the numerical value "123" is converted to String "" 123 "" and assigned.
 </p>
 <pre>
 # mplicit Boxing Type Convertion to string Type
@@ -7381,11 +7384,11 @@ my $str : string = $num;
 </pre>
 <h4 id="language-type-convertion-numeric-type-order">Numeric Type Order</h4>
 <p>
-  <a href="#language-type-numeric"> Numeric Type </a> has the order of Type. The order of Type is "byte", "short", "int", "long", "float", "double" from the smallest.
+  <a href="#language-type-numeric">Numeric Type</a> has the order of Type. The order of Type is "byte", "short", "int", "long", "float", "double" from the smallest.
 </p>
 <h4 id="language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</h4>
 <p>
-  Unary Numeric Widening Type Convertion means that <a href="#language-expression"> Expression </a> is <a href="#language-type-byte"> byte Type </a> or short Type. In this case, perform <a href="#language-type-convertion-numeric-widening"> Numeric Widening Type Convertion </a> to <a href="#language-type-int"> int Type </a> I say that.
+  Unary Numeric Widening Type Convertion means that <a href="#language-expression">Expression</a> is <a href="#language-type-byte">byte Type</a> or short Type. In this case, perform <a href="#language-type-convertion-numeric-widening">Numeric Widening Type Convertion</a> to <a href="#language-type-int">int Type</a> I say that.
 </p>
 <p>
   Unary Numeric Widening Type Convertion is performed in the following cases.
@@ -7399,22 +7402,22 @@ my $str : string = $num;
 </ul>
 <h4 id="language-type-convertion-binary-numeric-widening">Binary Numeric Widening Type Convertion</h4>
 <p>
-  Binary Numeric Widening Type Convertion is applied to Left Expression and Right Expression in Binary Operator that takes Numeric Type on the left and right sides. <a href="#language-type-convertion-numeric-widening"> Numeric Widening Type Convertion </a>.
+  Binary Numeric Widening Type Convertion is applied to Left Expression and Right Expression in Binary Operator that takes Numeric Type on the left and right sides. <a href="#language-type-convertion-numeric-widening">Numeric Widening Type Convertion</a>.
 </p>
 <p>
   The following rules apply.
 </p>
 <p>
-  1. When one Expression is <a href="#language-type-double"> double Type </a>, the other Type is <a href="#language-type-double"> double Type </a> Is converted to>.
+  1. When one Expression is <a href="#language-type-double">double Type</a>, the other Type is <a href="#language-type-double">double Type</a> Is converted to>.
 </p>
 <p>
-  2. If one Expression is <a href="#language-type-float"> float Type </a>, the other Type is <a href="#language-type-float"> float Type </a> Is converted to>.
+  2. If one Expression is <a href="#language-type-float">float Type</a>, the other Type is <a href="#language-type-float">float Type</a> Is converted to>.
 </p>
 <p>
-  3. When one Expression is <a href="#language-type-long"> long Type </a>, the other Type is <a href="#language-type-long"> long Type </a> Is converted to>.
+  3. When one Expression is <a href="#language-type-long">long Type</a>, the other Type is <a href="#language-type-long">long Type</a> Is converted to>.
 </p>
 <p>
-  4. Otherwise, it will be converted to <a href="#language-type-int"> int Type </a>.
+  4. Otherwise, it will be converted to <a href="#language-type-int">int Type</a>.
 </p>
 <p>
   Binary Numeric Widening Type Convertion is performed in the following cases.
@@ -7431,11 +7434,11 @@ my $str : string = $num;
 </ul>
 <h4 id="language-type-convertion-numeric-narrowing">Numeric Narrowing Type Convertion</h4>
 <p>
-  Numeric Narrowing Type Conversion is a conversion rule applied when converting from a large type to a small type in <a href="#language-type-numeric"> Numeric Type </a>.
+  Numeric Narrowing Type Conversion is a conversion rule applied when converting from a large type to a small type in <a href="#language-type-numeric">Numeric Type</a>.
 </p>
 <h4 id="language-type-convertion-numeric-widening">Numeric Widening Type Convertion</h4>
 <p>
-  Numeric Widening Type Conversion is a conversion rule applied when converting from a small type to a large type in <a href="#language-type-numeric"> Numeric Type </a>.
+  Numeric Widening Type Conversion is a conversion rule applied when converting from a small type to a large type in <a href="#language-type-numeric">Numeric Type</a>.
 </p>
 <h4 id="language-type-convertion-boxing">Boxing Type Convertion</h4>
 <p>
@@ -7503,22 +7506,22 @@ CONDITION || CONDITION
 !CONDITION
 </pre>
 <p>
-  Expression specified by Bool Type Convertion is <a href="#language-type-numeric"> Numeric Type </a> or <a href="#language-type-object"> Object Type </a> or It must be <a href="#language-type-undef"> Undefined Type </a>. otherwise a compile-time error occurs.
+  Expression specified by Bool Type Convertion is <a href="#language-type-numeric">Numeric Type</a> or <a href="#language-type-object">Object Type</a> or It must be <a href="#language-type-undef">Undefined Type</a>. otherwise a compile-time error occurs.
 </p>
 <p>
-  Return Value of Bool Type Convertion is Expression of <a href="#language-type-int"> int Type </a>.
+  Return Value of Bool Type Convertion is Expression of <a href="#language-type-int">int Type</a>.
 </p>
 <p>
-  If Expression is <a href="#language-undef"> Undefined Value </a>, 0 is returned.
+  If Expression is <a href="#language-undef">Undefined Value</a>, 0 is returned.
 </p>
 <p>
-  When Expression is <a href="#language-type-numeric"> Numeric Type </a>, <a href="#language-type-convertion-unary-numeric-widening"> Unary Numeric Widening Type Convertion </a> is done.
+  When Expression is <a href="#language-type-numeric">Numeric Type</a>, <a href="#language-type-convertion-unary-numeric-widening">Unary Numeric Widening Type Convertion</a> is done.
 </p>
 <p>
-  If Expression is <a href="#language-type-int"> int Type </a>, that value is returned.
+  If Expression is <a href="#language-type-int">int Type</a>, that value is returned.
 </p>
 <p>
-  Expression is <a href="#language-type-long"> long Type </a>, <a href="#language-type-float"> float Type </a>, <a href = "# language- If it is type-double "> double Type </a>, Object Type, the operation that exactly matches the following operation in C99 is performed and the result is returned.
+  Expression is <a href="#language-type-long">long Type</a>, <a href="#language-type-float">float Type</a>, <a href = "# language- If it is type-double ">double Type</a>, Object Type, the operation that exactly matches the following operation in C99 is performed and the result is returned.
 </p>
 <pre>
 !!x
@@ -7529,23 +7532,23 @@ CONDITION || CONDITION
 <h3 id="language-exception">Exception</h3>
 <ul class="list">
   <li><a href="#language-exception-summary">Exception overview</a></li>
-  <li><a href="#language-exception-occur">Exception raised</a></li>
-  <li><a href="#language-exception-catch">Exception Variable catch</a></li>
+  <li><a href="#language-exception-occur">Throw Exception</a></li>
+  <li><a href="#language-exception-catch">Catch Exception</a></li>
   <li><a href="#language-exception-var">Exception Variable</a></li>
 </ul>
 <h4 id="language-exception-summary">Exception overview</h4>
 <p>
   SPVM has a mechanism of Exception. Exception consists of raising an exception and catching the exception.
 </p>
-<h4 id="language-exception-occur">Exception raised</h4>
+<h4 id="language-exception-occur">Throw Exception</h4>
 <p>
-  Use die Statement to raise an exception.
+  Use die Statement to throw an exception.
 </p>
 <pre>
 die EXPRESSION;
 </pre>
 <p>
-  Expressionは,<a href="#language-type-string-compatible">String Compatible Type</a>でなければなりません。
+  Expression must be <a href="#language-type-string-compatible">String Compatible Type</a>.
 </p>
 <p>
   When the die statement is executed, the stack trace and the String specified by Expression are displayed, and the program ends. The stack trace includes Package Name, Subroutine Name, File Name and line number. File Name is a relative File Name from the path where Module is loaded.
@@ -7555,7 +7558,7 @@ Error
 from TestCase::Minimal-&gt;sum2 at TestCase/Minimal.spvm line 1640
 from TestCase-&gt;main at TestCase.spvm line 1198
 </pre>
-<h4 id="language-exception-occur">Exception catch</h4>
+<h4 id="language-exception-occur">Catch Exception</h4>
 <p>
   Exception catching is a function that can stop the program from ending and get an error message when an exception is thrown.
 </p>
@@ -7568,7 +7571,7 @@ eval {
 };
 </pre>
 <p>
-  When an exception is caught by the eval Block, the program termination is stopped and <a href="#language-exception-occur"> is added to <a href="#language-exception-var"> Exception Variable </a>. The message specified in Exception raised </a> is substituted.
+  When an exception is caught by the eval Block, the program termination is stopped and <a href="#language-exception-occur">is added to <a href="#language-exception-var">Exception Variable</a>. The message specified in Exception is thrown</a> is substituted.
 </p>
 <h4 id="language-exception-var">Exception Variable</h4>
 <p>
@@ -7605,7 +7608,7 @@ $@
   <li><a href="#language-sub-capture">Capture</a></li>
 </ul>
 <p>
-  Callback Type in SPVM is a Package Type in which only one unnamed Method with no implementation is defined. If callback_tDescriptor is specified in <a href="#language-package-definition"> Package Definition </a>, it becomes Callback Type.
+  Callback Type in SPVM is a Package Type in which only one unnamed Method with no implementation is defined. If callback_tDescriptor is specified in <a href="#language-package-definition">Package Definition</a>, it becomes Callback Type.
 </p>
 <p>
   The purpose of Callback Type is to provide a Type that can be assigned to different objects when they have the same MethodDefinition. Consider that the function corresponding to the C function pointer is realized in SPVM.
@@ -7634,7 +7637,7 @@ sub : int ($self : self, $num : int);
 }
 </pre>
 <p>
-  Foo1 and Foo2 have the same MethodDefinition "sub: int ($ self: self, $ num: int)". Now suppose you want to selectively call the Foo1 or Foo2 Method.
+  Foo1 and Foo2 have the same MethodDefinition "sub: int ($self: self, $num: int)". Now suppose you want to selectively call the Foo1 or Foo2 Method.
 </p>
 <p>
   In this case, if you define a Callback TypeFooCallback with the same MethodDefinition, you can assign either object to this Type. Then you can call Method from this object.
@@ -7656,30 +7659,30 @@ else {
 my $ret = $foo-&gt;(5);
 </pre>
 <p>
-  If $ flag is 1, the anonymous Method of Foo1 is called, otherwise the anonymous Method of Foo2 is called.
+  If $flag is 1, the anonymous Method of Foo1 is called, otherwise the anonymous Method of Foo2 is called.
 </p>
 <p>
-  For more information on Callback Type, see <a href="#language-type-callback"> Callback Type </a>.
+  For more information on Callback Type, see <a href="#language-type-callback">Callback Type</a>.
 </p>
 <h4 id="language-sub-new-callback-object">Create Callback Object</h4>
 <p>
   Create Callback Object is a Syntax that creates an object that conforms to Callback Type by using a special syntax for the purpose of Callback.
 </p>
 <pre>
-sub : TYPE_NAME  ($self : self, ARGS1 : TYPE1, ARGS2 : TYPE2, ARGSN : TYPEN) {
+sub : TYPE_NAME  ($self : self, ARGS1 : TYPE1, ARGS2 : TYPE2, ARGSN : TYPEn) {
 
 }
 </pre>
 <p>
-  When Create Callback Object is performed, <a href="#language-package-definition"> Package Definition </a> is performed internally, an object based on that Package is generated, and <a href = " Returned as # language-expression "> Expression </a>. It is possible to assign to a variable like the following.
+  When Create Callback Object is performed, <a href="#language-package-definition">Package Definition</a> is performed internally, an object based on that Package is generated, and <a href = " Returned as # language-expression ">Expression</a>. It is possible to assign to a variable like the following.
 </p>
 <pre>
-my $cb_obj = sub : Type Name  ($self : self, 引数1, 引数2, ..., 引数n) {
+my $cb_obj = sub : TYPE ($self : self, ARGS1 : TYPE1, ARGS2 : TYPE2, ..., ARGSn : TYPEn) {
 
 };
 </pre>
 <p>
-  Subroutine defined by Create Callback Object must be <a href="#language-sub-method"> Method </a>. It must also be a Subroutine with no name.
+  Subroutine defined by Create Callback Object must be <a href="#language-sub-method">Method</a>. It must also be a Subroutine with no name.
 </p>
 <p>
   <b>Create Callback Object Example</b>
@@ -7690,7 +7693,7 @@ my $comparator = sub : int ($self : self, $x1 : object, $x2 : object) {
 }
 </pre>
 <p>
-  You can call Method because the object created by Create Callback Object is a normal object. For the call to Create Callback Object, see <a href="#language-expression-callsub"> Subroutine Call </a>.
+  You can call Method because the object created by Create Callback Object is a normal object. For the call to Create Callback Object, see <a href="#language-expression-callsub">Subroutine Call</a>.
 <p>
 <h4 id="language-sub-capture">Capture</h4>
 <p>
@@ -7716,16 +7719,16 @@ my $comparator = [$foo : int, $bar : long] sub : int ($self : self, $x1 : object
 }
 </pre>
 <p>
-  The variable name used in Capture must be the one with "$" added at the beginning of <a href="#language-lex-identifier-field-name"> Field Name </a>.
+  The variable name used in Capture must be the one with "$" added at the beginning of <a href="#language-lex-identifier-field-name">Field Name</a>.
 </p>
 <p>
   The Capture is actually defined as a Field of Class. Capture is a field definition and value setting syntax sugar.
 </p>
 <p>
-  If <a href="#language-lex-var"> Lexical Variable </a> with the same name as the Capture variable exists in the Scope, access the Lexical Variable.
+  If <a href="#language-lex-var">Lexical Variable</a> with the same name as the Capture variable exists in the Scope, access the Lexical Variable.
 </p>
 <p>
-  If there is a <a href="#language-package-var"> Package Variable </a> with the same name as the Capture variable, access the Capture variable.
+  If there is a <a href="#language-package-var">Package Variable</a> with the same name as the Capture variable, access the Capture variable.
 </p>
 <p>
   If you write Create Callback Object and Capture without using syntax sugar, it will be as follows.
@@ -7779,7 +7782,7 @@ $comparator-&gt;{bar} = $bar;
   Weaken Reference is a function to correctly destroy objects when a circular reference occurs in a programming language that has a Reference Count GC.
 </p>
 <p>
-  In such a case, it is possible to release correctly by setting one Field to Weaken Reference using <a href="#language-statement-weaken"> weaken Statement </a>.
+  In such a case, it is possible to release correctly by setting one Field to Weaken Reference using <a href="#language-statement-weaken">weaken Statement</a>.
 </p>
 <pre>
 {
@@ -7793,13 +7796,13 @@ $comparator-&gt;{bar} = $bar;
 }
 </pre>
 <p>
-  Before the weaken statement is executed, $ foo has a Reference Count of 2 and $bar has a Reference Count of 2.
+  Before the weaken statement is executed, $foo has a Reference Count of 2 and $bar has a Reference Count of 2.
 </p>
 <p>
-  If there is no weaken statement, the reference count of $ foo and the reference count of $bar will not be 0 and will not be released even if the scope ends.
+  If there is no weaken statement, the reference count of $foo and the reference count of $bar will not be 0 and will not be released even if the scope ends.
 </p>
 <p>
-  When a weaken statement is executed, $ foo has a Reference Count of 2 and $bar has a Reference Count of 1.
+  When a weaken statement is executed, $foo has a Reference Count of 2 and $bar has a Reference Count of 1.
 </p>
 <p>
   When the Scope ends, the Reference Count of $bar is decremented by 1 and becomes 0, so it is released correctly.
@@ -7822,7 +7825,7 @@ $comparator-&gt;{bar} = $bar;
 </pre>
 <p>
 <p>
-  As a syntax related to Weaken Reference, Weaken Reference can be released <a href="#language-statement-weaken"> weaken Statement </a>, and it can be confirmed whether Field is Weaken Reference <a href = "# language- There is an operator-isweak "> isweak Operator </a>.
+  As a syntax related to Weaken Reference, Weaken Reference can be released <a href="#language-statement-weaken">weaken Statement</a>, and it can be confirmed whether Field is Weaken Reference <a href = "# language- There is an operator-isweak ">isweak Operator</a>.
 </p>
 </p>
 
@@ -7841,9 +7844,9 @@ $comparator-&gt;{bar} = $bar;
   </div>
   <ul>
     <li><a href="/spvmdoc-public/tutorial.html">SPVM Tutorial</a></li>
-    <li><a href="/spvmdoc-public/language.html">SPVM 1.0 Language Specification</a></li>
-    <li><a href="/spvmdoc-public/exchange-api.html">SPVM 1.0 Exchange API</a></li>
-    <li><a href="/spvmdoc-public/native-api.html">SPVM 1.0 Native API</a></li>
+    <li><a href="/spvmdoc-public/language.html">SPVM Language Specification</a></li>
+    <li><a href="/spvmdoc-public/exchange-api.html">SPVM Exchange API</a></li>
+    <li><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></li>
   </ul>
 </div>
 
