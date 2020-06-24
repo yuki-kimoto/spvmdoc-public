@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/spvmdoc-public/images/spvm-logo.png">
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
-<title>SPVM Native API - SPVM Document</title>
-<meta name="description" content="SPVM Native API  is described in this document. SPVM is in beta testing for the release of 1.0. The SPVM Native API specification is subject to change without warning.">
+<title>SPVM Native API - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
+<meta name="description" content="SPVM Native API  is described in this document.">
   </head>
   <body>
     <div class="container">
@@ -32,10 +32,10 @@
     <div class="container">
   <h2 id="native-api-summary"><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></a></h2>
   <p>
-    <b> SPVM Native API </b> is described in this document. SPVM is in beta testing for the release of 1.0. The SPVM Native API specification is subject to change without warning.
+    <b> SPVM Native API </b> is described in this document.
   </p>
   <p>
-    Last Updated: May 18, 2020
+    Last Updated: 2020-06-24
   </p>
   
   <ul class="toc">
@@ -137,7 +137,7 @@ int32_t SPNATIVE__Foo__Bar__sum (SPVM_ENV* env, SPVM_VALUE* stack) {
     The function name in C of the Native Subroutine starts with "SPNATIVE__", followed by the module name "::" converted to "__", followed by "__", and ends with the subroutine name. If the correspondence with the subroutine name in SPVM is incorrect, a compile error will occur.
   </ p>
   <p>
-    There are two arguments, the first argument is "SPVM_ENV * env" which has the information of the execution environment, and the second argument is "SPVM_VALUE * stack" which is used for the argument and return value.
+    There are two arguments, the first argument is "SPVM_ENV* env" which has the information of the execution environment, and the second argument is "SPVM_VALUE* stack" which is used for the argument and return value.
   </ p>
   <p>
     The return type is "int32_t". If the subroutine raises an exception, "SPVM_EXCEPTION" is returned, otherwise "SPVM_SUCCESS" is returned.
@@ -201,10 +201,10 @@ spvm_build / work / object / Foo / Bar.dll
   
   <h4 href = "# native-api-native-sub-get-arg-stack">Arguments and stack</h4>
   <p>
-    The stack is the "SPVM_VALUE * stack" passed as the second argument in the definition of the Native Subroutine, and the arguments are stored in this.
+    The stack is the "SPVM_VALUE* stack" passed as the second argument in the definition of the Native Subroutine, and the arguments are stored in this.
   </ p>
 <pre>
-int32_t SPNATIVE__Foo__Bar__sum (SPVM_ENV * env, SPVM_VALUE * stack) {
+int32_t SPNATIVE__Foo__Bar__sum (SPVM_ENV* env, SPVM_VALUE* stack) {
 
 }
 </pre>
@@ -212,110 +212,110 @@ int32_t SPNATIVE__Foo__Bar__sum (SPVM_ENV * env, SPVM_VALUE * stack) {
     SPVM_VALUE is a C language union for storing SPVM values. You can save numeric, object, and reference values.
   </ p>
   <p>
-    Pointer to the beginning of the "SPVM_VALUE type array" of "SPVM_VALUE * stack". The value of the argument of the Native Subroutine called from SPVM side is set in this array.
+    Pointer to the beginning of the "SPVM_VALUE type array" of "SPVM_VALUE* stack". The value of the argument of the Native Subroutine called from SPVM side is set in this array.
   </ p>
   <p>
     For example, to get the value of the first argument of int type, write as follows.
   </ p>
 <pre>
-int32_t args1 = stack [0] .ival;
+int32_t args1 = stack[0].ival;
 </pre>
   <p>
     For example, to get the value of the second argument of long type, write as follows.
   </ p>
 <pre>
-int64_t args2 = stack [0] .lval;
+int64_t args2 = stack[0].lval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-byte">Get byte type argument</h4>
   <p>
     To get the SPVM byte argument, access the bval field. Assign to the C language int8_t type.
   </ p>
 <pre>
-int8_t args1 = stack [0] .bval;
+int8_t args1 = stack[0].bval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-short">Get short type argument</h4>
   <p>
     To get the short argument of SPVM, access the sval field. Assign it to the C language int16_t type.
   </ p>
 <pre>
-int16_t args1 = stack [0] .sval;
+int16_t args1 = stack[0].sval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-int">Get int type argument</h4>
   <p>
     To get the SPVM int type argument, access the ival field. Assign to the C language int32_t type.
   </ p>
 <pre>
-int32_t args1 = stack [0] .ival;
+int32_t args1 = stack[0].ival;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-long">Get long type argument</h4>
   <p>
     To get the long argument of SPVM, access the lval field. Assign to the C language int64_t type.
   </ p>
 <pre>
-int64_t args1 = stack [0] .lval;
+int64_t args1 = stack[0].lval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-float">Get float type argument</h4>
   <p>
     To get the SPVM float type argument, access the fval field. Assign to float type of C language.
   </ p>
 <pre>
-float args1 = stack [0] .fval;
+float args1 = stack[0].fval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-double">Get double type argument</h4>
   <p>
     To get the SPVM double argument, access the dval field. Assign to the C language double type.
   </ p>
 <pre>
-double args1 = stack [0] .dval;
+double args1 = stack[0].dval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-object">Get object type argument</h4>
   <p>
-    To get the SPVM object type argument, access the oval field. Assign it to void * type in C language.
+    To get the SPVM object type argument, access the oval field. Assign it to void* type in C language.
   </ p>
 <pre>
-void * args1 = stack [0] .oval;
+void* args1 = stack[0].oval;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-byte-ref">Get reference type argument of byte</h4>
   <p>
-    To get the SPVM byte reference type argument, access the bref field. Assign to the C language int8_t * type.
+    To get the SPVM byte reference type argument, access the bref field. Assign to the C language int8_t* type.
   </ p>
 <pre>
-int8_t * args1 = stack [0] .bref;
+int8_t* args1 = stack[0].bref;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-short">Get reference type argument of short</h4>
   <p>
-    To get the SPVM short reference type argument, access the sref field. Assign it to the C language int16_t * type.
+    To get the SPVM short reference type argument, access the sref field. Assign it to the C language int16_t* type.
   </ p>
 <pre>
-int16_t * args1 = stack [0] .sref;
+int16_t* args1 = stack[0].sref;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-int">Get int reference type argument</h4>
   <p>
-    To get the SPVM int reference type argument, access the iref field. Assign to the C language int32_t * type.
+    To get the SPVM int reference type argument, access the iref field. Assign to the C language int32_t* type.
   </ p>
 <pre>
-int32_t * args1 = stack [0] .iref;
+int32_t* args1 = stack[0].iref;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-long">Get reference type argument of long</h4>
   <p>
-    To get the SPVM long reference type argument, access the lref field. Assign to int64_t * type of C language.
+    To get the SPVM long reference type argument, access the lref field. Assign to int64_t* type of C language.
   </ p>
 <pre>
-int64_t * args1 = stack [0] .lref;
+int64_t* args1 = stack[0].lref;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-float">Get argument of float reference type</h4>
   <p>
-    To get the SPVM float reference type argument, access the fref field. Assign to float * type of C language.
+    To get the SPVM float reference type argument, access the fref field. Assign to float* type of C language.
   </ p>
 <pre>
-float * args1 = stack [0] .fref;
+float* args1 = stack[0].fref;
 </pre>  <h4 id="native-api-native-sub-get-arg-double">doubleのリファレンス型の引数の取得</h4>
   <p>
 <p>
-    To get the SPVM double reference type argument, access the dref field. Assign to the C language double * type.
+    To get the SPVM double reference type argument, access the dref field. Assign to the C language double* type.
   </ p>
 <pre>
-double * args1 = stack [0] .dref;
+double* args1 = stack[0].dref;
 </pre>
   <h4 id = "native-api-native-sub-get-arg-mulnum">Get multiple numeric type arguments</h4>
   <p>
@@ -325,7 +325,7 @@ double * args1 = stack [0] .dref;
     For example, in the case of the argument of SPVM :: Complex_2d type, it gets from two arguments. Note that you cannot access it by field name.
   </ p>
 <pre>
-double args_re = stack [0] .dval;
+double args_re = stack[0].dval;
 double args_im = stack [1] .dval;
 </pre>
   <h3 id = "native-api-native-sub-set-retval">Return Value</h3>
@@ -349,13 +349,13 @@ double args_im = stack [1] .dval;
     For example, to return an int type return value, write as follows.
   </ p>
 <pre>
-stack [0] .ival = 3;
+stack[0].ival = 3;
 </pre>
   <p>
     For example, to get the value of the second argument of long type, write as follows.
   </ p>
 <pre>
-stack [0] .lval = 56;
+stack[0].lval = 56;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-byte">Set return value of byte type</h4>
   <p>
@@ -363,7 +363,7 @@ stack [0] .lval = 56;
   </ p>
 <pre>
 int8_t retval;
-stack [0] .bval = retval;
+stack[0].bval = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-short">Set return value of short type</h4>
   <p>
@@ -371,7 +371,7 @@ stack [0] .bval = retval;
   </ p>
 <pre>
 int16_t retval;
-stack [0] .sval = retval;
+stack[0].sval = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-int">Set return value of int type</h4>
   <p>
@@ -379,7 +379,7 @@ stack [0] .sval = retval;
   </ p>
 <pre>
 int32_t retval;
-stack [0] .ival = retval;
+stack[0].ival = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-long">Set long type return value</h4>
   <p>
@@ -387,7 +387,7 @@ stack [0] .ival = retval;
   </ p>
 <pre>
 int64_t retval;
-stack [0] .lval = retval;
+stack[0].lval = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-float">Set return value of float type</h4>
   <p>
@@ -395,7 +395,7 @@ stack [0] .lval = retval;
   </ p>
 <pre>
 float retval;
-stack [0] .fval = retval;
+stack[0].fval = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-double">Set return value of double type</h4>
   <p>
@@ -406,11 +406,11 @@ double retval;
 </pre>
 <h4 id = "native-api-native-sub-set-retval-object">Set return value of object type</h4>
   <p>
-    To set the return value of the SPVM object type, assign it to the oval field. Assign a value of void * type in C language.
+    To set the return value of the SPVM object type, assign it to the oval field. Assign a value of void* type in C language.
   </ p>
 <pre>
-void * retval;
-stack [0] .oval = retval;
+void* retval;
+stack[0].oval = retval;
 </pre>
   <h4 id = "native-api-native-sub-set-retval-mulnum">Set multiple numeric return value</h4>
   <p>
@@ -422,7 +422,7 @@ stack [0] .oval = retval;
 <pre>
 double retval_re;
 double retval_im;
-stack [0] .dval = retval_re;
+stack[0].dval = retval_re;
 stack [1] .dval = retval_im;
 </pre>
   <h3 id = "native-api-native-call-sub">Call SPVM Subroutine</h3>
@@ -448,8 +448,8 @@ if (sub_id &lt;0) {
     Set the SPVM subroutine argument to stack before calling the subroutine.
   </ p>
 <pre>
-stack [0] .ival = 1;
-stack [0] .ival = 2;
+stack[0].ival = 1;
+stack[0].ival = 2;
 </pre>
   <p>
     To call a SPVM subroutine, use the <a href="#native-api-native-sub-api-call_sub">call_sub</a> function.
@@ -464,7 +464,7 @@ int32_t exception_flag = env-&gt;call_sub (env, sub_id, stack);
     The return value of the subroutine is stored in the first element of the stack.
   </ p>
 <pre>
-int32_t total = stack [0] .ival;
+int32_t total = stack[0].ival;
 </pre>
   <h3 id = "native-api-native-sub-scope">Native Subroutine Scope</h3>
   <p>
@@ -571,33 +571,33 @@ package MyTimeInfo: pointer_t {
 <pre>
 # MyTimeInfo.c
 
-int32_t SPNATIVE__MyTimeInfo__new (SPVM_ENV * env, SPVM_VALUE * stack) {
+int32_t SPNATIVE__MyTimeInfo__new (SPVM_ENV* env, SPVM_VALUE* stack) {
 
   // Alloc strcut tm
-  void * tm_ptr = env-&gt;alloc_memory_block_zero (sizeof (struct tm));
+  void* tm_ptr = env-&gt;alloc_memory_block_zero (sizeof (struct tm));
 
   // Create strcut tm instance
-  void * tm_obj = env-&gt;new_pointer (env, "MyTimeInfo", tm_ptr);
+  void* tm_obj = env-&gt;new_pointer (env, "MyTimeInfo", tm_ptr);
 
-  stack [0] .oval = tm_obj;
-
-  return SPVM_SUCCESS;
-}
-
-int32_t SPNATIVE__MyTimeInfo__sec (SPVM_ENV * env, SPVM_VALUE * stack) {
-  void * tm_obj = stack [0] .oval;
-
-  strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
-
-  stack [0] .ival = tm_ptr-&gt; tm_sec;
+  stack[0].oval = tm_obj;
 
   return SPVM_SUCCESS;
 }
 
-int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV * env, SPVM_VALUE * stack) {
+int32_t SPNATIVE__MyTimeInfo__sec (SPVM_ENV* env, SPVM_VALUE* stack) {
+  void* tm_obj = stack[0].oval;
 
-  void * tm_obj = stack [0] .oval;
-  strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
+  strcut tm* tm_ptr = (struct tm*) env-&gt;get_pointer (env, tm_obj);
+
+  stack[0].ival = tm_ptr-&gt; tm_sec;
+
+  return SPVM_SUCCESS;
+}
+
+int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV* env, SPVM_VALUE* stack) {
+
+  void* tm_obj = stack[0].oval;
+  strcut tm* tm_ptr = (struct tm*) env-&gt;get_pointer (env, tm_obj);
 
   env-&gt;free_memory_block (tm_ptr);
 
@@ -609,20 +609,20 @@ int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV * env, SPVM_VALUE * stack) {
   </ p>
 <pre>
 // Alloc strcut tm
-void * tm_ptr = env-&gt;alloc_memory_block_zero (sizeof (struct tm));
+void* tm_ptr = env-&gt;alloc_memory_block_zero (sizeof (struct tm));
 </pre>
   <p>
     Next, use the new_pointer function to create a new pointer type object with MyTimeInfo associated with it in the allocated memory.
   </ p>
 <pre>
 // Create strcut tm instance
-void * tm_obj = env-&gt;new_pointer (env, "MyTimeInfo", tm_ptr);
+void* tm_obj = env-&gt;new_pointer (env, "MyTimeInfo", tm_ptr);
 </pre>
   <p>
     If you return this as a return value, the constructor is complete.
   </ p>
 <pre>
-stack [0] .ival = tm_ptr-&gt; tm_sec;
+stack[0].ival = tm_ptr-&gt; tm_sec;
 
 return SPVM_SUCCESS;
 </pre>
@@ -630,21 +630,21 @@ return SPVM_SUCCESS;
     Next, let's get the value of tm_sec. sec method. The get_pointer function can be used to get a pointer to the memory allocated as a "struct tm" from a pointer type object.
   </ p>
 <pre>
-void * tm_obj = stack [0] .oval;
+void* tm_obj = stack[0].oval;
 
-strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
+strcut tm* tm_ptr = (struct tm*) env-&gt;get_pointer (env, tm_obj);
 
-stack [0] .ival = tm_ptr-&gt; tm_sec;
+stack[0].ival = tm_ptr-&gt; tm_sec;
 </pre>
   <p>
     The last is the destructor. Be sure to define a destructor, as the allocated memory will not be released automatically.
   </ p>
 <pre>
-int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV * env, SPVM_VALUE * stack) {
+int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV* env, SPVM_VALUE* stack) {
 
-  void * tm_obj = stack [0] .oval;
+  void* tm_obj = stack[0].oval;
 
-  strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
+  strcut tm* tm_ptr = (struct tm*) env-&gt;get_pointer (env, tm_obj);
 
   env-&gt;free_memory_block (tm_ptr);
 
@@ -780,7 +780,7 @@ int32_t SPNATIVE__MyTimeInfo__DESTROY (SPVM_ENV * env, SPVM_VALUE * stack) {
 </pre>
   <h3 id = "native-api-call">Call Native API</h3>
   <p>
-    Native API can be called from "SPVM_ENV * env" passed as an argument. Note that you have to pass env as the first argument.
+    Native API can be called from "SPVM_ENV* env" passed as an argument. Note that you have to pass env as the first argument.
   </ p>
 <pre>
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
@@ -1012,7 +1012,7 @@ int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
     Get the ID of the base type given the name of the base type. If it does not exist, a value less than 0 is returned.
   </ p>
 <pre>
-int32_t (*get_basic_type_id) (SPVM_ENV * env, const char * basic_type_name);
+int32_t (*get_basic_type_id) (SPVM_ENV* env, const char* basic_type_name);
 </pre>
   <p>
     Example:
@@ -1025,7 +1025,7 @@ int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
     Get the ID of the field given the package name, field name, and signature. If the field does not exist, a value less than 0 is returned.
   </ p>
 <pre>
-int32_t (*get_field_id) (SPVM_ENV * env, const char * package_name, const char * field_name, const char * signature);
+int32_t (*get_field_id) (SPVM_ENV* env, const char* package_name, const char* field_name, const char* signature);
 </pre>
   <p>
     The signature is the same as the field type name.
@@ -1042,14 +1042,14 @@ int32_t field_id = env-&gt;get_field_id (env, "Foo", "x", "int");
     Gets the offset of the field given the field ID. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-int32_t (*get_field_offset) (SPVM_ENV * env, int32_t field_id);
+int32_t (*get_field_offset) (SPVM_ENV* env, int32_t field_id);
 </pre>
   <h4 id = "native-api-native-sub-api-get_package_var_id">get_package_var_id</h4>
   <p>
     Get the package variable ID given the package name, package variable name and signature. If the package variable does not exist, a value less than 0 is returned.
   </ p>
 <pre>
-int32_t (*get_package_var_id) (SPVM_ENV * env, const char * package_name, const char * package_var_name, const char * signature);
+int32_t (*get_package_var_id) (SPVM_ENV* env, const char* package_name, const char* package_var_name, const char* signature);
 </pre>
   <p>
     The signature is the same as the package variable type name.
@@ -1065,7 +1065,7 @@ int32_t pkgvar_id = env-&gt;get_package_var_id (env, "Foo", "$ VAR", "int");
     Get the subroutine ID by specifying the package name, subroutine name, and signature. If no subroutine exists, a value less than 0 is returned.
   </ p>
 <pre>
-int32_t (*get_sub_id) (SPVM_ENV * env, const char * package_name, const char * sub_name, const char * signature);
+int32_t (*get_sub_id) (SPVM_ENV* env, const char* package_name, const char* sub_name, const char* signature);
 </pre>
   <p>
     The signature has the following format: Must not contain white space.
@@ -1081,7 +1081,7 @@ int32_t sub_id = env-&gt;get_sub_id (env, "Foo", "func", "int (long, string)");
 </pre>
   <h4 id = "native-api-native-sub-api-get_method_sub_id">get_method_sub_id</h4>
 <pre>
-int32_t (*get_method_sub_id) (SPVM_ENV * env, void * object, const char * method_name, const char * signature);
+int32_t (*get_method_sub_id) (SPVM_ENV* env, void* object, const char* method_name, const char* signature);
 </pre>
   <p>
     Get the subroutine ID by specifying the object and method name. If the method does not exist, a value less than 0 is returned.
@@ -1197,7 +1197,7 @@ void* int_array_obj = env-&amp;gt;new_int_array(env, 100);
     Creates a new "long [] type" object by specifying the length of the array. The initial value of all elements is 0.
   </ p>
 <pre>
-void * (*new_long_array_raw) (SPVM_ENV * env, int32_t length);
+void* (*new_long_array_raw) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     This function does not add objects to the mortal stack, so use normal_new_long_array to avoid memory leaks.
@@ -1208,13 +1208,13 @@ void * (*new_long_array_raw) (SPVM_ENV * env, int32_t length);
     Create a new "long [] type" object by specifying the length of the array and return it. The initial value of all elements is 0. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_long_array) (SPVM_ENV * env, int32_t length);
+void* (*new_long_array) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * long_array_obj = env-&gt;new_long_array (env, 100);
+void* long_array_obj = env-&gt;new_long_array (env, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_float_array_raw">new_float_array_raw</h4>
@@ -1222,7 +1222,7 @@ void * long_array_obj = env-&gt;new_long_array (env, 100);
     Create a new "float [] type" object by specifying the length of the array. The initial value of all elements is 0.
   </ p>
 <pre>
-void * (*new_float_array_raw) (SPVM_ENV * env, int32_t length);
+void* (*new_float_array_raw) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so use new_float_array for normal use to avoid memory leaks.
@@ -1233,13 +1233,13 @@ void * (*new_float_array_raw) (SPVM_ENV * env, int32_t length);
     Create a new "float [] type" object by specifying the length of the array and return it. The initial value of all elements is 0. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_float_array) (SPVM_ENV * env, int32_t length);
+void* (*new_float_array) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * float_array_obj = env-&gt;new_float_array (env, 100);
+void* float_array_obj = env-&gt;new_float_array (env, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_double_array_raw">new_double_array_raw</h4>
@@ -1247,7 +1247,7 @@ void * float_array_obj = env-&gt;new_float_array (env, 100);
     Creates a new "double []" object by specifying the length of the array. The initial value of all elements is 0.
   </ p>
 <pre>
-void * (*new_double_array_raw) (SPVM_ENV * env, int32_t length);
+void* (*new_double_array_raw) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so use normal_new_double_array to avoid memory leaks.
@@ -1258,13 +1258,13 @@ void * (*new_double_array_raw) (SPVM_ENV * env, int32_t length);
     Generate a new "double [] type" object by specifying the length of the array and return it. The initial value of all elements is 0. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_double_array) (SPVM_ENV * env, int32_t length);
+void* (*new_double_array) (SPVM_ENV* env, int32_t length);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * double_array_obj = env-&gt;new_double_array (env, 100);
+void* double_array_obj = env-&gt;new_double_array (env, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_object_array_raw">new_object_array_raw</h4>
@@ -1272,7 +1272,7 @@ void * double_array_obj = env-&gt;new_double_array (env, 100);
     Create a new object type array by specifying the basic type ID and array length and return it. The basic type ID must be the correct basic type ID obtained with the "basic_type_id function". The initial value of all elements is null.
   </ p>
 <pre>
-void * (*new_object_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t length);
+void* (*new_object_array_raw) (SPVM_ENV* env, int32_t basic_type_id, int32_t length);
 </pre>
   <p>
     This function does not add objects to the mortal stack, so use normal_new_object_array to avoid memory leaks.
@@ -1282,14 +1282,14 @@ void * (*new_object_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t l
     Create a new object type array by specifying the basic type ID and array length and return it. The basic type ID must be the correct basic type ID obtained with the "basic_type_id function". The initial value of all elements is null. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_object_array) (SPVM_ENV * env, int32_t basic_type_id, int32_t length);
+void* (*new_object_array) (SPVM_ENV* env, int32_t basic_type_id, int32_t length);
 </pre>
   <p>
     Example:
 </ p>
 <pre>
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
-void * object_array_obj = env-&gt;new_object_array (env, basic_type_id, 100);
+void* object_array_obj = env-&gt;new_object_array (env, basic_type_id, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_muldim_array_raw">new_muldim_array_raw</h4>
@@ -1297,7 +1297,7 @@ void * object_array_obj = env-&gt;new_object_array (env, basic_type_id, 100);
     Generates and returns a new multidimensional object type array by specifying the basic type ID, element type dimension, and array length. The basic type ID must be the correct basic type ID obtained with the "basic_type_id function". The initial value of all elements is null.
   </ p>
 <pre>
-void * (*new_muldim_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t element_dimension, int32_t length);
+void* (*new_muldim_array_raw) (SPVM_ENV* env, int32_t basic_type_id, int32_t element_dimension, int32_t length);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so use new_muldim_array for normal use to avoid memory leaks.
@@ -1308,7 +1308,7 @@ void * (*new_muldim_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t e
     Generates and returns a new multidimensional object type array by specifying the basic type ID, element type dimension, and array length. The basic type ID must be the correct basic type ID obtained with the "basic_type_id function". The initial value of all elements is null. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_muldim_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t element_dimension, int32_t length);
+void* (*new_muldim_array_raw) (SPVM_ENV* env, int32_t basic_type_id, int32_t element_dimension, int32_t length);
 </pre>
   <p>
     Element type dimensions must be less than 255.
@@ -1319,7 +1319,7 @@ void * (*new_muldim_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t e
 <pre>
 // new SPVM :: Int [] [] [100]
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
-void * multi_array_obj = env-&gt;new_muldim_array (env, basic_type_id, 2, 100);
+void* multi_array_obj = env-&gt;new_muldim_array (env, basic_type_id, 2, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_mulnum_array_raw">new_mulnum_array_raw</h4>
@@ -1327,7 +1327,7 @@ void * multi_array_obj = env-&gt;new_muldim_array (env, basic_type_id, 2, 100);
     Generate a new multi-numeric array by specifying the basic type ID and array length and return it. The basic type ID must be the correct basic type ID acquired by the "basic_type_id function" and must be valid as a composite numeric type. The initial value of all fields for all elements is 0.
   </ p>
 <pre>
-void * (*new_mulnum_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t length);
+void* (*new_mulnum_array_raw) (SPVM_ENV* env, int32_t basic_type_id, int32_t length);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so use new_mulnum_array for normal use to avoid memory leaks.
@@ -1338,14 +1338,14 @@ void * (*new_mulnum_array_raw) (SPVM_ENV * env, int32_t basic_type_id, int32_t l
     Generate a new multi-numeric array by specifying the basic type ID and array length and return it. The basic type ID must be the correct basic type ID acquired by the "basic_type_id function" and must be valid as a composite numeric type. The initial value of all fields for all elements is 0.
   </ p>
 <pre>
-void * (*new_mulnum_array) (SPVM_ENV * env, int32_t basic_type_id, int32_t length);
+void* (*new_mulnum_array) (SPVM_ENV* env, int32_t basic_type_id, int32_t length);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Complex_2d");
-void * value_array_obj = env-&gt;new_mulnum_array (env, basic_type_id, 100);
+void* value_array_obj = env-&gt;new_mulnum_array (env, basic_type_id, 100);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_string_raw">new_string_raw</h4>
@@ -1353,7 +1353,7 @@ void * value_array_obj = env-&gt;new_mulnum_array (env, basic_type_id, 100);
     Specify a C language string to generate a string type object and return it. The string must end with "\ 0".
   </ p>
 <pre>
-void * (*new_string_raw) (SPVM_ENV * env, const char * bytes);
+void* (*new_string_raw) (SPVM_ENV* env, const char* bytes);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so for normal use use new_string to avoid memory leaks.
@@ -1363,13 +1363,13 @@ void * (*new_string_raw) (SPVM_ENV * env, const char * bytes);
     Specify a C language string to generate a string type object and return it. The string must end with "\ 0". Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_string) (SPVM_ENV * env, const char * bytes);
+void* (*new_string) (SPVM_ENV* env, const char* bytes);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * str_obj = env-&gt;new_string (env, "Hello World");
+void* str_obj = env-&gt;new_string (env, "Hello World");
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_string_len_raw">new_string_len_raw</h4>
@@ -1377,7 +1377,7 @@ void * str_obj = env-&gt;new_string (env, "Hello World");
     Specify a C language string and length to generate a string type object and return it.
   </ p>
 <pre>
-void * (*new_string_len_raw) (SPVM_ENV * env, const char * bytes, int32_t length);
+void* (*new_string_len_raw) (SPVM_ENV* env, const char* bytes, int32_t length);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so for normal use use new_string_len to avoid memory leaks.
@@ -1387,13 +1387,13 @@ void * (*new_string_len_raw) (SPVM_ENV * env, const char * bytes, int32_t length
 <P> Generates and returns a character string type object by specifying the character string and length in C language. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_string_len) (SPVM_ENV * env, const char * bytes, int32_t length);
+void* (*new_string_len) (SPVM_ENV* env, const char* bytes, int32_t length);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * str_obj = env-&gt;new_string_len (env, "Hello \ 0World", 11);
+void* str_obj = env-&gt;new_string_len (env, "Hello \ 0World", 11);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_pointer_raw">new_pointer_raw</h4>
@@ -1401,7 +1401,7 @@ void * str_obj = env-&gt;new_string_len (env, "Hello \ 0World", 11);
     Specify a basic type ID and a C language pointer to create a pointer type object and return it. The basic type ID must be the correct basic type ID acquired by the "basic_type_id function" and valid as a pointer type.
   </ p>
 <pre>
-void * (*new_pointer_raw) (SPVM_ENV * env, int32_t basic_type_id, void * pointer);
+void* (*new_pointer_raw) (SPVM_ENV* env, int32_t basic_type_id, void* pointer);
 </pre>
   <p>
     This function does not add any objects to the mortal stack, so for normal use use new_pointer to avoid memory leaks.
@@ -1412,14 +1412,14 @@ void * (*new_pointer_raw) (SPVM_ENV * env, int32_t basic_type_id, void * pointer
     Specify a basic type ID and a C language pointer to create a pointer type object and return it. The basic type ID must be the correct basic type ID acquired by the "basic_type_id function" and valid as a pointer type. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_pointer) (SPVM_ENV * env, int32_t basic_type_id, void * pointer);
+void* (*new_pointer) (SPVM_ENV* env, int32_t basic_type_id, void* pointer);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * pointer = malloc (sizeof (struct tm));
-void * pointer_obj = env-&gt;new_pointer (env, "MyTimeInfo", pointer);
+void* pointer = malloc (sizeof (struct tm));
+void* pointer_obj = env-&gt;new_pointer (env, "MyTimeInfo", pointer);
 </pre>
   <p>
     See <a href="#native-api-use-pointer-type">Using pointer types</a> for a detailed sample.
@@ -1430,7 +1430,7 @@ void * pointer_obj = env-&gt;new_pointer (env, "MyTimeInfo", pointer);
     Returns a new byte [] type object that is a concatenation of two byte [] type strings.
   </ p>
 <pre>
-void * (*concat_raw) (SPVM_ENV * env, void * string1, void * string2);
+void* (*concat_raw) (SPVM_ENV* env, void* string1, void* string2);
 </pre>
   <p>
     This function does not add objects to the mortal stack, so use concat for normal use to avoid memory leaks.
@@ -1441,7 +1441,7 @@ void * (*concat_raw) (SPVM_ENV * env, void * string1, void * string2);
     Returns a new byte [] type object that is a concatenation of two byte [] type strings. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*concat) (SPVM_ENV * env, void * string1, void * string2);
+void* (*concat) (SPVM_ENV* env, void* string1, void* string2);
 </pre>
   
   <h4 id = "native-api-native-sub-api-new_stack_trace_raw">new_stack_trace_raw</h4>
@@ -1449,7 +1449,7 @@ void * (*concat) (SPVM_ENV * env, void * string1, void * string2);
     If you specify a byte [] type exception message and a package name, subroutine name, file name and line number, the character string of the package name, subroutine name, file name and line number is added to the end of the byte [] type exception message. The added character string will be returned.
   </ p>
 <pre>
-void * (*new_stack_trace_raw) (SPVM_ENV * env, void * exception, const char * package_name, const char * sub_name, const char * file, int32_t line);
+void* (*new_stack_trace_raw) (SPVM_ENV* env, void* exception, const char* package_name, const char* sub_name, const char* file, int32_t line);
 </pre>
   <p>
     This function does not add objects to the mortal stack, use new_stack_trace to avoid memory leaks for normal use.
@@ -1460,7 +1460,7 @@ void * (*new_stack_trace_raw) (SPVM_ENV * env, void * exception, const char * pa
     When a byte [] type exception message and a package name, subroutine name, file name and line number are specified, the string of the package name, subroutine name, file name and line number is added to the end of the string type exception message. Returns a new string type object. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*new_stack_trace) (SPVM_ENV * env, void * exception, const char * package_name, const char * sub_name, const char * file, int32_t line);
+void* (*new_stack_trace) (SPVM_ENV* env, void* exception, const char* package_name, const char* sub_name, const char* file, int32_t line);
 </pre>
   
   <h4 id = "native-api-native-sub-api-length">length</h4>
@@ -1468,7 +1468,7 @@ void * (*new_stack_trace) (SPVM_ENV * env, void * exception, const char * packag
     If you specify an array, the length of the array is returned.
   </ p>
 <pre>
-int32_t (*length) (SPVM_ENV *, void * array);
+int32_t (*length) (SPVM_ENV*, void* array);
 </pre>
   <p>
     Example:
@@ -1480,13 +1480,13 @@ int32_t length = env-&gt;length (env, array);
   <p>
     If you specify a byte [] type array, the pointer at the beginning of the internally stored C language int8_t [] type array is returned.  </p>
 <pre>
-int8_t * (*get_elems_byte) (SPVM_ENV * env, void * array);
+int8_t* (*get_elems_byte) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-int8_t * values ​​= env-&gt;get_elems_byte (env, array);
+int8_t* values ​​= env-&gt;get_elems_byte (env, array);
 values ​​[3] = 5;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elems_short">get_elems_short</h4>
@@ -1494,13 +1494,13 @@ values ​​[3] = 5;
     If a short [] type array is specified, the pointer at the beginning of the internally stored C language int16_t [] type array is returned.
   </ p>
 <pre>
-int16_t * (*get_elems_short) (SPVM_ENV * env, void * array);
+int16_t* (*get_elems_short) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-int16_t * values ​​= env-&gt;get_elems_short (env, array);
+int16_t* values ​​= env-&gt;get_elems_short (env, array);
 values ​​[3] = 5;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elems_int">get_elems_int</h4>
@@ -1508,13 +1508,13 @@ values ​​[3] = 5;
     When an int [] type array is specified, the pointer at the beginning of the internally stored C language int32_t [] type array is returned.
   </ p>
 <pre>
-int32_t * (*get_elems_int) (SPVM_ENV * env, void * array);
+int32_t* (*get_elems_int) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-int32_t * values ​​= env-&gt;get_elems_int (env, array);
+int32_t* values ​​= env-&gt;get_elems_int (env, array);
 values ​​[3] = 5;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elems_long">get_elems_long</h4>
@@ -1522,13 +1522,13 @@ values ​​[3] = 5;
     When a long [] type array is specified, the pointer at the beginning of the internally stored C language int64_t [] type array is returned.
   </ p>
 <pre>
-int64_t * (*get_elems_long) (SPVM_ENV * env, void * array);
+int64_t* (*get_elems_long) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-int64_t * values ​​= env-&gt;get_elems_long (env, array);
+int64_t* values ​​= env-&gt;get_elems_long (env, array);
 values ​​[3] = 5;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elems_float">get_elems_float</h4>
@@ -1536,13 +1536,13 @@ values ​​[3] = 5;
     When a float [] type array is specified, the pointer at the beginning of the C language float [] type array internally held is returned.
   </ p>
 <pre>
-float * (*get_elems_float) (SPVM_ENV * env, void * array);
+float* (*get_elems_float) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-float * values ​​= env-&gt;get_elems_float (env, array);
+float* values ​​= env-&gt;get_elems_float (env, array);
 values ​​[3] = 1.5f;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elems_double">get_elems_double</h4>
@@ -1550,13 +1550,13 @@ values ​​[3] = 1.5f;
     If a double [] type array is specified, the pointer at the beginning of the internally stored C double [] type array is returned.
   </ p>
 <pre>
-double * (*get_elems_double) (SPVM_ENV * env, void * array);
+double* (*get_elems_double) (SPVM_ENV* env, void* array);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-double * values ​​= env-&gt;get_elems_double (env, array);
+double* values ​​= env-&gt;get_elems_double (env, array);
 values ​​[3] = 1.5;
 </pre>
   <h4 id = "native-api-native-sub-api-get_elem_object">get_elem_object</h4>
@@ -1564,20 +1564,20 @@ values ​​[3] = 1.5;
     Gets an object of an element given an array of object types and a subscript. If the element is a weak reference, the weak reference is removed.
   </ p>
 <pre>
-void * (*get_elem_object) (SPVM_ENV * env, void * array, int32_t index);
+void* (*get_elem_object) (SPVM_ENV* env, void* array, int32_t index);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-void * object = env-&gt;get_elem_object (env, array, 3);
+void* object = env-&gt;get_elem_object (env, array, 3);
 </pre>
   <h4 id="native-api-native-sub-api-set_elem_object">set_elem_object</h4>
 <p>
     If you specify an array of object type and subscript and element objects, the element object is assigned to the corresponding subscript position. If the element's object has a weak reference, the weak reference is removed. The reference count of the originally assigned object is decremented by 1.
   </ p>
 <pre>
-void (*set_elem_object) (SPVM_ENV * env, void * array, int32_t index, void * value);
+void (*set_elem_object) (SPVM_ENV* env, void* array, int32_t index, void* value);
 </pre>
   <p>
     Example:
@@ -1590,7 +1590,7 @@ env-&gt;get_elem_object (env, array, 3, object);
     If an object and field ID are specified, the byte field value will be returned as a C language int8_t type value. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-int8_t (*get_field_byte) (SPVM_ENV * env, void * object, int32_t field_id);
+int8_t (*get_field_byte) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1604,7 +1604,7 @@ int8_t field_value = env-&gt;get_field_byte (env, object, field_id);
     If you specify the object and field ID, the value of the short type field will be returned as the int16_t type value of C language. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-int16_t (*get_field_short) (SPVM_ENV * env, void * object, int32_t field_id);
+int16_t (*get_field_short) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1618,7 +1618,7 @@ int16_t field_value = env-&gt;get_field_short (env, object, field_id);
     If an object and a field ID are specified, the value of the int type field will be returned as a C language int32_t type value. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-int32_t (*get_field_int) (SPVM_ENV * env, void * object, int32_t field_id);
+int32_t (*get_field_int) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1632,7 +1632,7 @@ int32_t field_value = env-&gt;get_field_int (env, object, field_id);
     If you specify the object and field ID, the value of the long type field will be returned as the value of int64_t type of C language. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-int64_t (*get_field_long) (SPVM_ENV * env, void * object, int32_t field_id);
+int64_t (*get_field_long) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1646,7 +1646,7 @@ int64_t field_value = env-&gt;get_field_long (env, object, field_id);
     If you specify the object and field ID, the value of the float type field will be returned as a C language float type value. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-float (*get_field_float) (SPVM_ENV * env, void * object, int32_t field_id);
+float (*get_field_float) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1660,7 +1660,7 @@ float field_value = env-&gt;get_field_float (env, object, field_id);
     If you specify the object and field ID, the value of the double type field will be returned as a double type value in C language. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-double (*get_field_double) (SPVM_ENV * env, void * object, int32_t field_id);
+double (*get_field_double) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
   <p>
     Example:
@@ -1671,21 +1671,21 @@ double field_value = env-&gt;get_field_double (env, object, field_id);
 </pre>
   <h4 id = "native-api-native-sub-api-get_field_object">get_field_object</h4>
   <p>
-    If you specify the object and field ID, the value of the object type field is returned as a void * type value in C language. The field ID must be a valid field ID obtained with the field_id function. If the field is a weak reference, it will be removed.
+    If you specify the object and field ID, the value of the object type field is returned as a void* type value in C language. The field ID must be a valid field ID obtained with the field_id function. If the field is a weak reference, it will be removed.
   </ p>
 <pre>
-void * (*get_field_object) (SPVM_ENV * env, void * object, int32_t field_id);
+void* (*get_field_object) (SPVM_ENV* env, void* object, int32_t field_id);
 </pre>
 <pre>
 int32_t field_id = env-&gt;get_field_id (env, "Foo", "x", "SPVM :: Int");
-void * field_value = env-&gt;get_field_object (env, object, field_id);
+void* field_value = env-&gt;get_field_object (env, object, field_id);
 </pre>
   <h4 id = "native-api-native-sub-api-set_field_byte">set_field_byte</h4>
   <p>
     If you specify the object and field ID and the value of the field, the value is set to the byte type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_byte) (SPVM_ENV * env, void * object, int32_t field_id, int8_t value);
+void (*set_field_byte) (SPVM_ENV* env, void* object, int32_t field_id, int8_t value);
 </pre>
   <p>
     Example:
@@ -1700,7 +1700,7 @@ env-&gt;set_field_byte (env, object, field_id, field_value);
     If you specify the object and field ID and the value of the field, the value is set to the short type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_short) (SPVM_ENV * env, void * object, int32_t field_id, int16_t value);
+void (*set_field_short) (SPVM_ENV* env, void* object, int32_t field_id, int16_t value);
 </pre>
   <p>
     Example:
@@ -1715,7 +1715,7 @@ env-&gt;set_field_short (env, object, field_id, field_value);
     If you specify the object and field ID and the value of the field, the value is set to the int type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_int) (SPVM_ENV * env, void * object, int32_t field_id, int32_t value);
+void (*set_field_int) (SPVM_ENV* env, void* object, int32_t field_id, int32_t value);
 </pre>
   <p>
     Example:
@@ -1730,7 +1730,7 @@ env-&gt;set_field_int (env, object, field_id, field_value);
     If you specify the object and field ID and the value of the field, the value is set to the long type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_long) (SPVM_ENV * env, void * object, int32_t field_id, int64_t value);
+void (*set_field_long) (SPVM_ENV* env, void* object, int32_t field_id, int64_t value);
 </pre>
   <p>
     Example:
@@ -1745,7 +1745,7 @@ env-&gt;set_field_long (env, object, field_id, field_value);
     If you specify the object and field ID and the value of the field, the value is set to the float type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_float) (SPVM_ENV * env, void * object, int32_t field_id, float value);
+void (*set_field_float) (SPVM_ENV* env, void* object, int32_t field_id, float value);
 </pre>
   <p>
     Example:
@@ -1760,7 +1760,7 @@ env-&gt;set_field_float (env, object, field_id, field_value);
     If you specify the object and field ID and the value of the field, the value is set to the double type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_field_double) (SPVM_ENV * env, void * object, int32_t field_id, double value);
+void (*set_field_double) (SPVM_ENV* env, void* object, int32_t field_id, double value);
 </pre>
   <p>
     Example:
@@ -1775,7 +1775,7 @@ env-&gt;set_field_double (env, object, field_id, field_value);
     Object and field Specify the ID and the value of the field and set the value to the object type field. The field ID must be a valid field ID obtained with the field_id function. After setting, the reference count is incremented by 1. The original value has the reference count decremented by 1.
   </ p>
 <pre>
-void (*set_field_object) (SPVM_ENV * env, void * object, int32_t field_id, void * value);
+void (*set_field_object) (SPVM_ENV* env, void* object, int32_t field_id, void* value);
 </pre>
   <p>
     Example:
@@ -1783,7 +1783,7 @@ void (*set_field_object) (SPVM_ENV * env, void * object, int32_t field_id, void 
 <pre>
 int32_t field_id = env-&gt;get_field_id (env, "Foo", "x", "SPVM :: Int");
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
-void * object = env-&gt;new_object (env, basic_type_id);
+void* object = env-&gt;new_object (env, basic_type_id);
 env-&gt;set_field_object (env, object, field_id, object);
 </pre>
   <h4 id = "native-api-native-sub-api-get_package_var_byte">get_package_var_byte</h4>
@@ -1791,7 +1791,7 @@ env-&gt;set_field_object (env, object, field_id, object);
     If an object and a package variable ID are specified, the value of the byte type package variable is returned as a C language int8_t type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-int8_t (*get_package_var_byte) (SPVM_ENV * env, int32_t pkgvar_id);
+int8_t (*get_package_var_byte) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1805,7 +1805,7 @@ int8_t pkgvar_value = env-&gt;get_package_var_byte (env, object, pkgvar_id);
     If an object and a package variable ID are specified, the value of the short type package variable will be returned as a C language int16_t type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-int16_t (*get_package_var_short) (SPVM_ENV * env, int32_t pkgvar_id);
+int16_t (*get_package_var_short) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1819,7 +1819,7 @@ int16_t pkgvar_value = env-&gt;get_package_var_short (env, object, pkgvar_id);
     If an object and a package variable ID are specified, the value of the int type package variable will be returned as a C language int32_t type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-int32_t (*get_package_var_int) (SPVM_ENV * env, int32_t pkgvar_id);
+int32_t (*get_package_var_int) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1833,7 +1833,7 @@ int32_t pkgvar_value = env-&gt;get_package_var_int (env, object, pkgvar_id);
     If an object and a package variable ID are specified, the value of the long type package variable will be returned as a C language int64_t type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-int64_t (*get_package_var_long) (SPVM_ENV * env, int32_t pkgvar_id);
+int64_t (*get_package_var_long) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1847,7 +1847,7 @@ int64_t pkgvar_value = env-&gt;get_package_var_long (env, object, pkgvar_id);
     If an object and a package variable ID are specified, the value of the float type package variable will be returned as a C language float type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-float (*get_package_var_float) (SPVM_ENV * env, int32_t pkgvar_id);
+float (*get_package_var_float) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1861,7 +1861,7 @@ float pkgvar_value = env-&gt;get_package_var_float (env, object, pkgvar_id);
     If you specify an object and a package variable ID, the value of the double type package variable is returned as a C type double type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-double (*get_package_var_double) (SPVM_ENV * env, int32_t pkgvar_id);
+double (*get_package_var_double) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
@@ -1872,24 +1872,24 @@ double pkgvar_value = env-&gt;get_package_var_double (env, object, pkgvar_id);
 </pre>
   <h4 id = "native-api-native-sub-api-get_package_var_object">get_package_var_object</h4>
   <p>
-    When an object and a package variable ID are specified, the value of the object type package variable is returned as a C language void * type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
+    When an object and a package variable ID are specified, the value of the object type package variable is returned as a C language void* type value. The package variable ID must be a valid package variable ID obtained with the field_id function.
   </ p>
 <pre>
-void * (*get_package_var_object) (SPVM_ENV * env, int32_t pkgvar_id);
+void* (*get_package_var_object) (SPVM_ENV* env, int32_t pkgvar_id);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
 int32_t pkgvar_id = env-&gt;get_package_var_id (env, "Foo", "$ VAR", "SPVM :: Int");
-void * pkgvar_value = env-&gt;get_package_var_byte (env, object, pkgvar_id);
+void* pkgvar_value = env-&gt;get_package_var_byte (env, object, pkgvar_id);
 </pre>
   <h4 id = "native-api-native-sub-api-set_package_var_byte">set_package_var_byte</h4>
   <p>
     If you specify the object and field ID and the value of the field, the value is set to the byte type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_byte) (SPVM_ENV * env, int32_t pkgvar_id, int8_t value);
+void (*set_package_var_byte) (SPVM_ENV* env, int32_t pkgvar_id, int8_t value);
 </pre>
   <p>
     Example:
@@ -1904,7 +1904,7 @@ env-&gt;set_package_var_byte (env, pkgvar_id, pkgvar_value);
     If you specify the object and field ID and the value of the field, the value is set to the short type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_short) (SPVM_ENV * env, int32_t pkgvar_id, int16_t value);
+void (*set_package_var_short) (SPVM_ENV* env, int32_t pkgvar_id, int16_t value);
 </pre>
   <p>
     Example:
@@ -1919,7 +1919,7 @@ env-&gt;set_package_var_short (env, pkgvar_id, pkgvar_value);
     If you specify the object and field ID and the value of the field, the value is set to the int type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_int) (SPVM_ENV * env, int32_t pkgvar_id, int32_t value);
+void (*set_package_var_int) (SPVM_ENV* env, int32_t pkgvar_id, int32_t value);
 </pre>
   <p>
     Example:
@@ -1934,7 +1934,7 @@ env-&gt;set_package_var_int (env, pkgvar_id, pkgvar_value);
     If you specify the object and field ID and the value of the field, the value is set to the long type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_long) (SPVM_ENV * env, int32_t pkgvar_id, int64_t value);
+void (*set_package_var_long) (SPVM_ENV* env, int32_t pkgvar_id, int64_t value);
 </pre>
   <p>
     Example:
@@ -1949,7 +1949,7 @@ env-&gt;set_package_var_long (env, pkgvar_id, pkgvar_value);
     If you specify the object and field ID and the value of the field, the value is set to the float type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_float) (SPVM_ENV * env, int32_t pkgvar_id, float value);
+void (*set_package_var_float) (SPVM_ENV* env, int32_t pkgvar_id, float value);
 </pre>
   <p>
     Example:
@@ -1964,7 +1964,7 @@ env-&gt;set_package_var_float (env, pkgvar_id, pkgvar_value);
     If you specify the object and field ID and the value of the field, the value is set to the double type field. The field ID must be a valid field ID obtained with the field_id function.
   </ p>
 <pre>
-void (*set_package_var_double) (SPVM_ENV * env, int32_t pkgvar_id, double value);
+void (*set_package_var_double) (SPVM_ENV* env, int32_t pkgvar_id, double value);
 </pre>
   <p>
     Example:
@@ -1979,7 +1979,7 @@ env-&gt;set_package_var_double (env, pkgvar_id, pkgvar_value);
     Object and field Specify the ID and the value of the field and set the value to the object type field. The field ID must be a valid field ID obtained with the field_id function. After setting, the reference count is incremented by 1. The original value has the reference count decremented by 1.
   </ p>
 <pre>
-void (*set_package_var_object) (SPVM_ENV * env, int32_t pkgvar_id, void * value);
+void (*set_package_var_object) (SPVM_ENV* env, int32_t pkgvar_id, void* value);
 </pre>
   <p>
     Example:
@@ -1987,7 +1987,7 @@ void (*set_package_var_object) (SPVM_ENV * env, int32_t pkgvar_id, void * value)
 <pre>
 int32_t pkgvar_id = env-&gt;get_package_var_id (env, "Foo", "$ VAR", "SPVM :: Int");
 int32_t basic_type_id = env-&gt;get_basic_type_id (env, "SPVM :: Int");
-void * object = env-&gt;new_object (env, basic_type_id);
+void* object = env-&gt;new_object (env, basic_type_id);
 env-&gt;set_package_var_object (env, pkgvar_id, pkgvar_value);
 </pre>
   <h4 id = "native-api-native-sub-api-get_pointer">get_pointer</h4>
@@ -1995,13 +1995,13 @@ env-&gt;set_package_var_object (env, pkgvar_id, pkgvar_value);
     Specify a pointer type object and return the C language pointer stored inside the object.
   </ p>
 <pre>
-void * (*get_pointer) (SPVM_ENV * env, void * pointer_object);
+void* (*get_pointer) (SPVM_ENV* env, void* pointer_object);
 </pre>
   <p>
     Example:
   </ p>
 <pre>
-strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
+strcut tm* tm_ptr = (struct tm*) env-&gt;get_pointer (env, tm_obj);
 </pre>
   <p>
     See <a href="#native-api-use-pointer-type">Using pointer types</a> for a detailed sample.
@@ -2011,7 +2011,7 @@ strcut tm * tm_ptr = (struct tm *) env-&gt;get_pointer (env, tm_obj);
     If you specify a pointer type object and a C language pointer, the C language pointer is saved in the internal data of the pointer type object.
   </ p>
 <pre>
-void (*set_pointer) (SPVM_ENV * env, void * pointer_object, void * pointer);
+void (*set_pointer) (SPVM_ENV* env, void* pointer_object, void* pointer);
 </pre>
   
   <h4 id = "native-api-native-sub-api-call_sub">call_sub</h4>
@@ -2019,7 +2019,7 @@ void (*set_pointer) (SPVM_ENV * env, void * pointer_object, void * pointer);
     Call the subroutine by specifying the subroutine ID and argument. The return value is non-zero when an exception occurs in the subroutine, 0 is returned when the exception does not occur.
   </ p>
 <pre>
-int32_t (*call_sub) (SPVM_ENV * env, int32_t sub_id, SPVM_VALUE * args);
+int32_t (*call_sub) (SPVM_ENV* env, int32_t sub_id, SPVM_VALUE* args);
 </pre>
   <p>
     The return value of the subroutine is set to "args [0]".
@@ -2029,7 +2029,7 @@ int32_t (*call_sub) (SPVM_ENV * env, int32_t sub_id, SPVM_VALUE * args);
     Returns the byte [] type object saved as an exception.
   </ p>
 <pre>
-void * (*get_exception) (SPVM_ENV * env);
+void* (*get_exception) (SPVM_ENV* env);
 </pre>
   
   <h4 id = "native-api-native-sub-api-set_exception">set_exception</h4>
@@ -2037,20 +2037,20 @@ void * (*get_exception) (SPVM_ENV * env);
     If you specify an object of type byte [], it will be saved as an exception.
   </ p>
 <pre>
-void (*set_exception) (SPVM_ENV * env, void * exception);
+void (*set_exception) (SPVM_ENV* env, void* exception);
 </pre>
   
   <h4 id = "native-api-native-sub-api-get_ref_count">get_ref_count</h4>
 </ p>
 <pre>
-int32_t (*get_ref_count) (SPVM_ENV * env, void * object);
+int32_t (*get_ref_count) (SPVM_ENV* env, void* object);
 </pre>
   <h4 id = "native-api-native-sub-api-inc_ref_count">inc_ref_count</h4>
   <p>
     Specifying an object increments the reference count of the object.
   </ p>
 <pre>
-void (*inc_ref_count) (SPVM_ENV * env, void * object);
+void (*inc_ref_count) (SPVM_ENV* env, void* object);
 </pre>
   <p>
     Use this method only if you have a specific reason to use it. Normally, the reference count is managed automatically.
@@ -2061,7 +2061,7 @@ void (*inc_ref_count) (SPVM_ENV * env, void * object);
     Specifying an object decrements the object's reference count by 1. When the reference count reaches 0, the object is released.
   </ p>
 <pre>
-void (*dec_ref_count) (SPVM_ENV * env, void * object);
+void (*dec_ref_count) (SPVM_ENV* env, void* object);
 </pre>
   <p>
     Use this method only if you have a specific reason to use it. Normally, the reference count is managed automatically.
@@ -2072,76 +2072,76 @@ void (*dec_ref_count) (SPVM_ENV * env, void * object);
     Create a new scope and return the scope ID.
   </ p>
 <pre>
-int32_t (*enter_scope) (SPVM_ENV * env);
+int32_t (*enter_scope) (SPVM_ENV* env);
 </pre>
   <h4 id = "native-api-native-sub-api-push_mortal">push_mortal</h4>
   <p>
     Add an object to the mortal stack.
   </ p>
 <pre>
-void (*push_mortal) (SPVM_ENV * env, void * object);
+void (*push_mortal) (SPVM_ENV* env, void* object);
 </pre>
   <h4 id = "native-api-native-sub-api-leave_scope">leave_scope</h4>
   <p>
     Specify a scope ID to exit that scope and decrement the object's reference count stored in the mortal stack. Objects with a reference count of 0 are released. The scope ID must be the ID obtained by the enter_scope function.
   </ p>
 <pre>
-void (*leave_scope) (SPVM_ENV * env, int32_t scope_id);
+void (*leave_scope) (SPVM_ENV* env, int32_t scope_id);
 </pre>
   <h4 id = "native-api-native-sub-api-remove_mortal">remove_mortal</h4>
   <p>
     Given a scope ID and an object, delete the specified object from the mortal stack.
   </ p>
 <pre>
-int32_t (*remove_mortal) (SPVM_ENV * env, int32_t scope_id, void * remove_object);
+int32_t (*remove_mortal) (SPVM_ENV* env, int32_t scope_id, void* remove_object);
 </pre>
   <h4 id = "native-api-native-sub-api-is_type">is_type</h4>
   <p>
     Given an object and a base type ID and a type dimension, returns a nonzero value if the object matches both the base type ID and the type dimension, and 0 otherwise.
   </ p>
 <pre>
-int32_t (*is_type) (SPVM_ENV * env, void * object, int32_t basic_type_id, int32_t type_dimension);
+int32_t (*is_type) (SPVM_ENV* env, void* object, int32_t basic_type_id, int32_t type_dimension);
 </pre>
   <h4 id = "native-api-native-sub-api-has_callback">has_callback</h4>
   <p>
     Given a base type id for the object and the callback type, returns a non-zero value if the object conforms to the callback type, and zero otherwise.
   </ p>
 <pre>
-int32_t (*has_callback) (SPVM_ENV * env, void * object, int32_t callback_basic_type_id);
+int32_t (*has_callback) (SPVM_ENV* env, void* object, int32_t callback_basic_type_id);
 </pre>
   <h4 id = "native-api-native-sub-api-get_object_basic_type_id">get_object_basic_type_id</h4>
   <p>
     Gets the base type ID of the object.
   </ p>
 <pre>
-int32_t (*get_object_basic_type_id) (SPVM_ENV * env, void * object);
+int32_t (*get_object_basic_type_id) (SPVM_ENV* env, void* object);
 </pre>
   <h4 id = "native-api-native-sub-api-get_object_type_dimension">get_object_type_dimension</h4>
   <p>
     Gets the dimension of the type of object.
   </ p>
 <pre>
-int32_t (*get_object_type_dimension) (SPVM_ENV * env, void * object);
+int32_t (*get_object_type_dimension) (SPVM_ENV* env, void* object);
 </pre>
   <h4 id = "native-api-native-sub-api-weaken">weaken</h4>
   <p>
     Specifying the address of an object makes it a weak reference.
   </ p>
 <pre>
-void (*weaken) (SPVM_ENV * env, void ** object_address);
+void (*weaken) (SPVM_ENV* env, void** object_address);
 </pre>
 <h4 id = "native-api-native-sub-api-isweak">isweak</h4> <p>
     Given the address of an object, returns non-zero if the object is a weak reference, 0 otherwise.
   </ p>
 <pre>
-int32_t (*isweak) (SPVM_ENV * env, void ** object);
+int32_t (*isweak) (SPVM_ENV* env, void** object);
 </pre>
   <h4 id = "native-api-native-sub-api-unweaken">unweaken</h4>
   <p>
     Specifying the address of the object releases the weak reference to the object.
   </ p>
 <pre>
-void (*unweaken) (SPVM_ENV * env, void ** object_address);
+void (*unweaken) (SPVM_ENV* env, void** object_address);
 </pre>
   
   <h4 id = "native-api-native-sub-api-alloc_memory_block_zero">alloc_memory_block_zero</h4>
@@ -2149,21 +2149,21 @@ void (*unweaken) (SPVM_ENV * env, void ** object_address);
     If you specify the size in bytes, the memory block is allocated and the pointer of the allocated memory block is returned. All bits in the memory block are initialized with 0s. The memory block count is incremented by 1.
   </ p>
 <pre>
-void * (*alloc_memory_block_zero) (SPVM_ENV * env, int64_t byte_size);
+void* (*alloc_memory_block_zero) (SPVM_ENV* env, int64_t byte_size);
 </pre>
   <h4 id = "native-api-native-sub-api-free_memory_block">free_memory_block</h4>
   <p>
     Specify a memory block to free it. The memory block count is decremented by 1.
   </ p>
 <pre>
-void (*free_memory_block) (SPVM_ENV * env, void * block);
+void (*free_memory_block) (SPVM_ENV* env, void* block);
 </pre>
   <h4 id = "native-api-native-sub-api-get_memory_blocks_count">get_memory_blocks_count</h4>
   <p>
     Returns the current number of memory blocks.
   </ p>
 <pre>
-int32_t (*get_memory_blocks_count) (SPVM_ENV * env);
+int32_t (*get_memory_blocks_count) (SPVM_ENV* env);
 </pre>
   <p>
     The memory block is increased by 1 when an object is created, when the alloc_memory_block_zero function is called, and when a back reference is added by the weaken function.
@@ -2173,7 +2173,7 @@ int32_t (*get_memory_blocks_count) (SPVM_ENV * env);
     If you specify an object, a new byte [] type object that stores the type name is returned.
   </ p>
 <pre>
-void * (*get_type_name_raw) (SPVM_ENV * env, void * object);
+void* (*get_type_name_raw) (SPVM_ENV* env, void* object);
 </pre>
   <p>
     This function does not add objects to the mortal stack, so use type_name for normal use to avoid memory leaks.
@@ -2183,14 +2183,14 @@ void * (*get_type_name_raw) (SPVM_ENV * env, void * object);
     If you specify an object, a new byte [] type object that stores the type name is returned. Add the newly created object to the mortal stack.
   </ p>
 <pre>
-void * (*get_type_name) (SPVM_ENV * env, void * object);
+void* (*get_type_name) (SPVM_ENV* env, void* object);
 </pre>
   <h4 id = "native-api-native-sub-api-new_env">new_env</h4>
   <p>
     Create a new execution environment based on the current execution environment.
   </ p>
 <pre>
-SPVM_ENV * (*new_env) (SPVM_ENV * env);
+SPVM_ENV* (*new_env) (SPVM_ENV* env);
 </pre>
   <p>
     Use this function when you want to create a new execution environment in a new thread.
@@ -2209,7 +2209,7 @@ SPVM_ENV * (*new_env) (SPVM_ENV * env);
     Release the execution environment.
   </ p>
 <pre>
-void (*free_env) (SPVM_ENV * env);
+void (*free_env) (SPVM_ENV* env);
 </pre>
 </div>
 
