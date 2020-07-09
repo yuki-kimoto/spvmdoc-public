@@ -59,9 +59,6 @@ use lib "$FindBin::Bin/lib";
 
 use SPVM 'MyMath';
 
-# Initialize SPVM
-UNITCHECK { SPVM::init() }
-
 # Call subroutine
 my $total = MyMath-&gt;sum([3, 6, 8, 9]);
 
@@ -102,9 +99,6 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 
 use SPVM 'MyMath';
-
-# Initialize SPVM
-UNITCHECK { SPVM::init() }
 
 # Call precompile subroutine
 my $total_precompile = MyMath-&gt;sum_precompile([3, 6, 8, 9]);
@@ -162,9 +156,6 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 
 use SPVM 'MyMath';
-
-# Initialize SPVM
-UNITCHECK { SPVM::init() }
 
 # Call native subroutine
 my $total_native = MyMath-&gt;sum_native([3, 6, 8, 9]);
