@@ -2132,17 +2132,38 @@ int32_t (*get_object_basic_type_id)(SPVM_ENV* env, void* object);
 int32_t (*get_object_type_dimension)(SPVM_ENV* env, void* object);
 </pre>
 <h4 id = "native-api-native-sub-api-weaken">weaken</h4>
-  <p>
-    Specifying the address of an object makes it a weak reference.
-  </p>
 <pre>
-void (*weaken)(SPVM_ENV* env, void** object_address);
+int32_t (*weaken)(SPVM_ENV* env, void** object_address);
 </pre>
+<p>
+  Create weak reference to the object which is specified by object address.
+</p>
+<p>
+  The reference count of the object is decrimented by 1 and weaken flag is added to the object address.
+</p>
+<p>
+  If the reference count is 1, "dec_ref_count" is called to the object.
+</p>
+<p>
+  If object_address is NULL, this method do nothing.
+</p>
+<p>
+  If the object is already weaken, this method do nothing.
+</p>
+<p>
+  This method allocate memory internally to add the back reference from the object to the object address.
+</p>
+<p>
+  This method success return 0.
+</p>
+<p>
+  If failing memory allocation of back reference, return 1.
+</p>
 <h4 id = "native-api-native-sub-api-isweak">isweak</h4> <p>
     Given the address of an object, returns non-zero if the object is a weak reference, 0 otherwise.
   </p>
 <pre>
-int32_t (*isweak)(SPVM_ENV* env, void** object);
+int32_t (*isweak()SPVM_ENV* env, void** object);
 </pre>
 <h4 id = "native-api-native-sub-api-unweaken">unweaken</h4>
   <p>
