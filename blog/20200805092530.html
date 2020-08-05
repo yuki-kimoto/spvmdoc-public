@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/spvmdoc-public/images/spvm-logo.png">
+<link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
+
+<title>Matrix Tutorial - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
+<meta name="description" content="SPVM has Matrix modules.">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- header -->
+<div class="main">
+  <h1>
+    <a href="/spvmdoc-public/">SPVM Document</a>
+  </h1>
+</div>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/spvmdoc-public/blog/20200805092530.html">Matrix Tutorial</a></h2>
+<p>
+  SPVM has Matrix modules. 
+</p>
+<h3>Numeric Type Matrix</h3>
+<p>
+  Matrix element can be byte, short, int, long, float, double types in numeric types.
+</p>
+<p>
+  Corresponding modules are <a href="https://metacpan.org/pod/SPVM::Matrix::Byte">SPVM::Matrix::Byte</a>, <a href="https://metacpan.org/pod/SPVM::Matrix::Short">SPVM::Matrix::Short</a>, <a href="https://metacpan.org/pod/SPVM::Matrix::Int">SPVM::Matrix::Int</a>, <a href="https://metacpan.org/pod/SPVM::Matrix::Long">SPVM::Matrix::Long</a>, <a href="https://metacpan.org/pod/SPVM::Matrix::Float">SPVM::Matrix::Float</a>, <a href="https://metacpan.org/pod/SPVM::Matrix::Double">SPVM::Matrix::Double</a>.
+</p>
+<p>
+  These modules have matrix elements, number of rows, and number of columns as fields.
+</p>
+<p>
+  These modules also have methods to do additions, subtractions, multiplications, scalar multiplys, transpositions, and string conversions.
+</p>
+<h3>Matrix Examples</h3>
+<p>
+  You can find a sample matrix here.
+</p>
+<p>
+  <a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/matrix">Matrix Examples</a>
+</p>
+<h3>Matrix Tutorial</h3>
+<p>
+  When do we use a numerci matrix?
+</p>
+<p>
+  One example is when you want to solve a system of simultaneous equations.
+</p>
+<p>
+  Solving simultaneous equations using a matrix can also be used in deep learning calculations.
+</p>
+<p>
+  Let's calculate the matrix using the float type in anticipation of calculating with CUDA.
+</p>
+<p>
+  The following is a Perl program. Calling SPVM subroutine.
+</p>
+<pre>
+use strict;
+use warnings;
+
+use FindBin;
+use lib "$FindBin::Bin/lib";
+
+use SPVM 'MyMatrix';
+
+MyMatrix-&gt;add_float_matrix;
+
+MyMatrix-&gt;sub_float_matrix;
+
+MyMatrix-&gt;scamal_float_matrix;
+
+MyMatrix-&gt;mal_float_matrix;
+</pre>
+<p>
+  The following are SPVM modules.
+</p>
+<p>
+  The addition, subtract, multiply, scalar multiply, and convert matrix to string.
+</p>
+<p>
+  Note that the SPVM matrix module is column-major.
+</p>
+<pre>
+package MyMatrix {
+  use SPVM::Matrix::Float;
+  
+  sub add_float_matrix : void () {
+    # 1 3 5
+    # 2 4 6
+    my $mat1 = SPVM::Matrix::Float-&gt;new([1f, 2f, 3f, 4f, 5f, 6f], 2, 3);
+    
+    # 2 4 6
+    # 3 5 7
+    my $mat2 = SPVM::Matrix::Float-&gt;new([2f, 3f, 4f, 5f, 6f, 7f], 2, 3);
+    
+    my $mat3 = $mat1-&gt;add($mat2);
+    
+    print $mat3-&gt;str . "\n";
+  }
+
+  sub sub_float_matrix : void () {
+    # 1 3 5
+    # 2 4 6
+    my $mat1 = SPVM::Matrix::Float-&gt;new([1f, 2f, 3f, 4f, 5f, 6f], 2, 3);
+    
+    # 2 4 6
+    # 3 5 7
+    my $mat2 = SPVM::Matrix::Float-&gt;new([2f, 3f, 4f, 5f, 6f, 7f], 2, 3);
+    
+    my $mat3 = $mat1-&gt;sub($mat2);
+    
+    print $mat3-&gt;str . "\n";
+  }
+
+  sub scamul_float_matrix : void () {
+    # 1 3 5
+    # 2 4 6
+    my $mat1 = SPVM::Matrix::Float-&gt;new([1f, 2f, 3f, 4f, 5f, 6f], 2, 3);
+    
+    my $mat3 = $mat1-&gt;scamul(3f);
+    
+    print $mat3-&gt;str . "\n";
+  }
+
+  sub mul_float_matrix : void () {
+    # 1 3 5
+    # 2 4 6
+    my $mat1 = SPVM::Matrix::Float-&gt;new([1f, 2f, 3f, 4f, 5f, 6f], 2, 3);
+    
+    # 2 5
+    # 3 6
+    # 4 7
+    my $mat2 = SPVM::Matrix::Float-&gt;new([2f, 3f, 4f, 5f, 6f, 7f], 3, 2);
+    
+    my $mat3 = $mat1-&gt;mul($mat2);
+    
+    print $mat3-&gt;str . "\n";
+  }
+}
+</pre>
+<p>
+  Output are:
+</p>
+<pre>
+3 7 11
+5 9 13
+
+-1 -1 -1
+-1 -1 -1
+
+3 9 15
+6 12 18
+
+31 58
+40 76
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <div class="side-list">
+  <div class="side-list-title">
+    Documents
+  </div>
+  <ul>
+    <li><a href="/spvmdoc-public/benchmark.html">SPVM Performance Benchmark</a></li>
+    <li><a href="/spvmdoc-public/tutorial.html">SPVM Tutorial</a></li>
+    <li><a href="/spvmdoc-public/language.html">SPVM Language Specification</a></li>
+    <li><a href="/spvmdoc-public/exchange-api.html">SPVM Exchange API</a></li>
+    <li><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></li>
+    <li><a href="/spvmdoc-public/modules.html">SPVM Core Modules</a></li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <!-- footer -->
+<span style="color:white">Copyright © Yuki Kimoto</span>
+
+      </div>
+    </div>
+  </body>
+</html>
