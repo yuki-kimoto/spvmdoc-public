@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/spvmdoc-public/images/spvm-logo.png">
+<link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
+
+<title>Complex Tutorial - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
+<meta name="description" content="SPVM provides common arithmetic for complex numbers at the same level as C99.">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <!-- header -->
+<div class="main">
+  <h1>
+    <a href="/spvmdoc-public/">SPVM Document</a>
+  </h1>
+</div>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/spvmdoc-public/blog/20200821151908.html">Complex Tutorial</a></h2>
+<p>
+  SPVM provides common arithmetic for complex numbers at the same level as C99.
+</p>
+<h3>Complex Type</h3>
+<p>
+  Complex Type is SPVM::Complex_2f for complex float and SPVM::Complex_2d for complex double.
+</p>
+<p>
+  SPVM::Complex_2f and SPVM::Complex_2d is <a href="/spvmdoc-public/language.html#language-type-multi-numeric">Multi Numeric Type</a>. This is allocated on Subroutine Call Stack.
+</p>
+<p>
+  This is not Object Type which is allocated on Heap Memory.
+</p>
+<h4>SPVM::Complex_2f</h4>
+<pre>
+# Complex float type
+use SPVM::Complex_2f;
+
+my $z : SPVM::Complex_2f;
+$z-&gt;{x} = 1.5f;
+$z-&gt;{y} = 1.7f;
+</pre>
+<h4>SPVM::Complex_2d</h4>
+<pre>
+# Complex double type
+use SPVM::Complex_2d;
+
+my $z : SPVM::Complex_2d;
+$z-&gt;{x} = 1.5;
+$z-&gt;{y} = 1.7;
+</pre>
+<h3>New Complex</h3>
+<p>
+  New Complex.
+</p>
+<pre>
+# SPVM::Complex_2f
+my $z = complexf(1.5f, 1.7f);
+
+# SPVM::Complex_2d
+my $z = complex(1.5, 1.7);
+</pre>
+<h3>Complex Operation</h3>
+<h4>float Complex Addition, Subtract, Multiply, Scalar Multiply, Division</h4>
+<p>
+  float Complex Addition, Subtract, Multiply, Scalar Multiply, Division.
+</p>
+<pre>
+# float Addition, Subtract, Multiply, Scalar Multiply, Division functions
+use SPVM::Math(caddf, csubf, cmulf, cscamulf, cdivf);
+
+my $z1 = complexf(1.5f, 1.7f);
+my $z2 = complexf(2.5f, 2.7f);
+
+# Addition
+my $z_add = caddf($z1, $z2);
+
+# Subtract
+my $z_sub = csubf($z1, $z2);
+
+# Multiply
+my $z_mul = cmulf($z1, $z2);
+
+# Scalar Multiply
+my $z_scamul = cscamulf($z1, $z2);
+
+# Division
+my $z_div = cdivf($z1, $z2);
+</pre>
+<h4>double Complex Addition, Subtract, Multiply, Scalar Multiply, Division</h4>
+<pre>
+# double Addition, Subtract, Multiply, Scalar Multiply, Division functions
+use SPVM::Math(cadd, csub, cmul, cscamul, cdiv);
+
+my $z1 = complex(1.5, 1.7);
+my $z2 = complex(2.5, 2.7);
+
+# Addition
+my $z_add = cadd($z1, $z2);
+
+# Subtract
+my $z_sub = csub($z1, $z2);
+
+# Multiply
+my $z_mul = cmul($z1, $z2);
+
+# Scalar Multiply
+my $z_scamul = cscamul($z1, $z2);
+
+# Division
+my $z_div = cdiv($z1, $z2);
+</pre>
+<h3>Trigonometric functions</h3>
+<p>
+  Trigonometric functions.
+</p>
+<h4>float Trigonometric functions</h4>
+<p>
+  float Trigonometric functions.
+</p>
+<pre>
+# float Trigonometric functions
+use SPVM::Math(csinf, ccosf, ctanf);
+
+my $z = complexf(1.5f, 1.7f);
+
+# Addition
+my $z_sin = csinf($z);
+
+# Subtract
+my $z_cos = ccosf($z);
+
+# Multiply
+my $z_tan = ctanf($z);
+</pre>
+<h4>double Trigonometric functions</h4>
+<p>
+  double Trigonometric functions.
+</p>
+<pre>
+# double Trigonometric functions
+use SPVM::Math(csin, ccos, ctan);
+
+my $z = complex(1.5, 1.7);
+
+# Addition
+my $z_sin = csin($z);
+
+# Subtract
+my $z_cos = ccos($z);
+
+# Multiply
+my $z_tan = ctan($z);
+</pre>
+<h3>Complex Array</h3>
+<p>
+  SPVM Array of Complex has values arranged in contiguous memory areas.
+</p>
+<h4>SPVM::Complex_2f[]</h4>
+<pre>
+# Complex float type
+use SPVM::Complex_2f;
+
+my $zs = SPVM::Complex_2f[100];
+
+for (my $i = 0; $i &lt; @$za; $i++) {
+  my $z = $zs-&gt;[$i];
+  $z-&gt;{x} = 1.5f;
+  $z-&gt;{y} = 1.7f;
+}
+</pre>
+<h4>SPVM::Complex_2d</h4>
+<pre>
+# Complex double type
+use SPVM::Complex_2d;
+
+my $zs = SPVM::Complex_2d[100];
+
+for (my $i = 0; $i &lt; @$za; $i++) {
+  my $z = $zs-&gt;[$i];
+  $z-&gt;{x} = 1.5;
+  $z-&gt;{y} = 1.7;
+}
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <div class="side-list">
+  <div class="side-list-title">
+    Documents
+  </div>
+  <ul>
+    <li><a href="/spvmdoc-public/benchmark.html">SPVM Performance Benchmark</a></li>
+    <li><a href="/spvmdoc-public/tutorial.html">SPVM Tutorial</a></li>
+    <li><a href="/spvmdoc-public/language.html">SPVM Language Specification</a></li>
+    <li><a href="/spvmdoc-public/exchange-api.html">SPVM Exchange API</a></li>
+    <li><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></li>
+    <li><a href="/spvmdoc-public/modules.html">SPVM Core Modules</a></li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <!-- footer -->
+<span style="color:white">Copyright © Yuki Kimoto</span>
+
+      </div>
+    </div>
+  </body>
+</html>
