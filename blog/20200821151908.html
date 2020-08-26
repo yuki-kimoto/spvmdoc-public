@@ -43,6 +43,9 @@
 <p>
   This is not Object Type which is allocated on Heap Memory.
 </p>
+<p>
+  See <a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/matrix">SPVM Complex Examples</a> at first.
+</p>
 <h4>SPVM::Complex_2f</h4>
 <pre>
 # Complex float type
@@ -61,11 +64,13 @@ my $z : SPVM::Complex_2d;
 $z-&gt;{x} = 1.5;
 $z-&gt;{y} = 1.7;
 </pre>
-<h3>New Complex</h3>
+<h3>New Complex Functions</h3>
 <p>
-  New Complex.
+  New Complex functions
 </p>
 <pre>
+use SPVM::Math (complexf, complex);
+
 # SPVM::Complex_2f
 my $z = complexf(1.5f, 1.7f);
 
@@ -94,7 +99,7 @@ my $z_sub = csubf($z1, $z2);
 my $z_mul = cmulf($z1, $z2);
 
 # Scalar Multiply
-my $z_scamul = cscamulf($z1, $z2);
+my $z_scamul = cscamulf(3, $z2);
 
 # Division
 my $z_div = cdivf($z1, $z2);
@@ -117,7 +122,7 @@ my $z_sub = csub($z1, $z2);
 my $z_mul = cmul($z1, $z2);
 
 # Scalar Multiply
-my $z_scamul = cscamul($z1, $z2);
+my $z_scamul = cscamul(3, $z2);
 
 # Division
 my $z_div = cdiv($z1, $z2);
@@ -164,6 +169,9 @@ my $z_cos = ccos($z);
 # Multiply
 my $z_tan = ctan($z);
 </pre>
+<p>
+  See SPVM::Math for more complex functions
+</p>
 <h3>Complex Array</h3>
 <p>
   SPVM Array of Complex has values arranged in contiguous memory areas.
@@ -173,9 +181,9 @@ my $z_tan = ctan($z);
 # Complex float type
 use SPVM::Complex_2f;
 
-my $zs = SPVM::Complex_2f[100];
+my $zs = new SPVM::Complex_2f[100];
 
-for (my $i = 0; $i &lt; @$za; $i++) {
+for (my $i = 0; $i &lt; @$zs; $i++) {
   my $z = $zs-&gt;[$i];
   $z-&gt;{x} = 1.5f;
   $z-&gt;{y} = 1.7f;
@@ -186,13 +194,27 @@ for (my $i = 0; $i &lt; @$za; $i++) {
 # Complex double type
 use SPVM::Complex_2d;
 
-my $zs = SPVM::Complex_2d[100];
+my $zs = new SPVM::Complex_2d[100];
 
-for (my $i = 0; $i &lt; @$za; $i++) {
+for (my $i = 0; $i &lt; @$zs; $i++) {
   my $z = $zs-&gt;[$i];
   $z-&gt;{x} = 1.5;
   $z-&gt;{y} = 1.7;
 }
+</pre>
+<h3>Call complex function from Perl</h3>
+<p>
+  Call complex function from Perl. Argument is passed and return value is return.
+</p>
+<pre>
+use SPVM 'MyComplex';
+
+my $z1 = {x =&gt; 1.7, y =&gt; 2.7};
+my $z2 = {x =&gt; 7.5, y =&gt; 2.5};
+
+my $z_ret = MyComplex-&gt;complex_call_from_perl($z1, $z2);
+
+print "($z_ret-&gt;{x}, $z_ret-&gt;{y})\n";
 </pre>
 
   </div>
