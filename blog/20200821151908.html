@@ -52,8 +52,8 @@
 use SPVM::Complex_2f;
 
 my $z : SPVM::Complex_2f;
-$z-&gt;{x} = 1.5f;
-$z-&gt;{y} = 1.7f;
+$z-&gt;{re} = 1.5f;
+$z-&gt;{im} = 1.7f;
 </pre>
 <h4>SPVM::Complex_2d</h4>
 <pre>
@@ -61,8 +61,8 @@ $z-&gt;{y} = 1.7f;
 use SPVM::Complex_2d;
 
 my $z : SPVM::Complex_2d;
-$z-&gt;{x} = 1.5;
-$z-&gt;{y} = 1.7;
+$z-&gt;{re} = 1.5;
+$z-&gt;{im} = 1.7;
 </pre>
 <h3>New Complex Functions</h3>
 <p>
@@ -185,8 +185,8 @@ my $zs = new SPVM::Complex_2f[100];
 
 for (my $i = 0; $i &lt; @$zs; $i++) {
   my $z = $zs-&gt;[$i];
-  $z-&gt;{x} = 1.5f;
-  $z-&gt;{y} = 1.7f;
+  $z-&gt;{re} = 1.5f;
+  $z-&gt;{im} = 1.7f;
 }
 </pre>
 <h4>SPVM::Complex_2d</h4>
@@ -198,8 +198,8 @@ my $zs = new SPVM::Complex_2d[100];
 
 for (my $i = 0; $i &lt; @$zs; $i++) {
   my $z = $zs-&gt;[$i];
-  $z-&gt;{x} = 1.5;
-  $z-&gt;{y} = 1.7;
+  $z-&gt;{re} = 1.5;
+  $z-&gt;{im} = 1.7;
 }
 </pre>
 <h3>Call complex function from Perl</h3>
@@ -209,12 +209,12 @@ for (my $i = 0; $i &lt; @$zs; $i++) {
 <pre>
 use SPVM 'MyComplex';
 
-my $z1 = {x =&gt; 1.7, y =&gt; 2.7};
-my $z2 = {x =&gt; 7.5, y =&gt; 2.5};
+my $z1 = {re =&gt; 1.7, im =&gt; 2.7};
+my $z2 = {re =&gt; 7.5, im =&gt; 2.5};
 
 my $z_ret = MyComplex-&gt;complex_call_from_perl($z1, $z2);
 
-print "($z_ret-&gt;{x}, $z_ret-&gt;{y})\n";
+print "($z_ret-&gt;{re}, $z_ret-&gt;{im})\n";
 </pre>
 
   </div>
