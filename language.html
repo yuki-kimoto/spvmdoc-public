@@ -246,39 +246,45 @@
 <p>
   Identifiers in SPVM are <a href="#language-lex-identifier-package-name">Package Name</a>, <a href="#language-lex-identifier-sub-name">Subroutine Name</a>, <a href="#language-lex-identifier-field-name">Field Name</a>, <a href="#language-lex-identifier-package-var-name">Package Variable Name</a>, and <a href="#language-lex-identifier-lex-var-name">Lexical Variable Name</a>.
 </p>
-<h4 id="language-lex-identifier-package-name">Package Name</h4><!-- 2019/2/27 almost ok-->
+<h4 id="language-lex-identifier-package-name">Package Name</h4><!-- 2021-02-08 updated -->
 <p>
   Package Name is one or more alphabet(a-zA-Z), number(0-9), underscore(_) or "::" of ASCII Code.
 </p>
 <p>
-  It is not necessary to include "::" in the Package Name.
+  Package Name must start a uppercase letter.
 </p>
 <p>
-  Package Name must start a uppercase letter in ASCII Code
+  The part name of Package name must start uppercase letter. Part name of Package name means "Foo", "Bar", "Baz" in Package Name "Foo:Bar::Baz".
 </p>
 <p>
   "::" cannot be continued twice. Last characters cannot end with "::".
 </p>
 <p>
-  Underscore cannot be continued twice.
+  Underscore "_" cannot be continued twice.
+</p>
+<p>
+  If Package Name is invalid, Compilation Error occurs.
+</p>
+<p>
+  <b>Valid Package Name Examples</b>
 </p>
 <pre>
-# Valid Package Name
 Foo
 Foo::Bar
 Foo::Bar::Baz3
 Foo::bar
 Foo_Bar::Baz_Baz
-
-# Invalid Package Name
+</pre>
+<p>
+  <b>Invalid Package Name Examples</b>
+</p>
+<pre>
 foo
 _Foo
 Foo::Bar::
 Foo__Bar
+Foo::bar
 </pre>
-<p>
-  If Package Name is invalid, Compilation Error occurs.
-</p>
 <h4 id="language-lex-identifier-sub-name">Subroutine Name</h4><!-- 2019/2/27 almost ok-->
 <p>
   Subroutine Name is one or more alphabet(a-zA-Z), number(0-9), or underscore(_) of ASCII Code.
