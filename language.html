@@ -37,7 +37,7 @@
   Last modified 2021-02-08
 </p>
 <ul>
-  <li><a href="#language-c99">C99 compliant</a></li>
+  <li><a href="#language-c99">C99 Compliant</a></li>
   <li><a href="#language-lex">Lexical Analysis</a></li>
   <li><a href="#language-parsing">Syntax Parsing</a></li>
   <li><a href="#language-comment">Comment</a></li>
@@ -1997,18 +1997,7 @@ sprintf("aaa %p", (object)[(object)1, 2.0]);
       This Subroutine is <a href="#language-sub-native">Native Subroutine</a>. 
     </td>
   </tr>
-  <tr>
-    <td>
-      <b>precompile</b>
-    </td>
-    <td>
-      This Subroutine is <a href="#language-sub-precompiled">Precompiled Subroutine</a>. 
-    </td>
-  </tr>
 </table>
-<p>
-  If both "native" and "precompile" Descriptors are specified, Compile Error occurs
-</p>
 <h4 id="language-sub-native">Native Subroutine</h4>
 <p>
   Native Subroutine is Subroutine that call function written in Native Language(C, C++, etc).
@@ -2018,7 +2007,13 @@ sprintf("aaa %p", (object)[(object)1, 2.0]);
 </p>
 <h4 id="language-sub-precompiled">Precompiled Subroutine</h4>
 <p>
-  Precompiled Subroutine is a subroutine translated into C language and converted into machine code.
+  If the Package has "precompile" descriptor, the subroutines of the package become Precompiled Subroutine.
+</p>
+<p>
+  Precompiled Subroutine is translated into C99 Compliant source code and converted into machine code.
+</p>
+<p>
+  The precompiled subroutines are C code, so you can get performance of C language.
 </p>
 <p>
   Precompiled Subroutine needs Build Directory described in <a href="/spvmdoc-public/native-api.html">SPVM Native API</a>
