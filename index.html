@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
 <title>SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
-<meta name="description" content="SPVM transpiles Perl program to C program with minor modifications and runs it with the fast performance of C language "-O3" optimization.">
+<meta name="description" content="SPVM is a Programming launguage which has Perl-like syntax. You can install SPMV from CPAN. Linux/UNIX, Mac, Windows is supported.">
   </head>
   <body>
     <div class="container">
@@ -31,43 +31,84 @@
   <div class="middle">
     <h2><a href="/spvmdoc-public/">SPVM Document</a></h2>
 <p>
-  SPVM transpiles Perl program to C program with minor modifications and runs it with the fast performance of C language "-O3" optimization.
+  SPVM is a Programming launguage which has <a href="/spvmdoc-public/language.html">Perl-like syntax</a>. You can <a href="/spvmdoc-public/blog/20200630071424.html">install SPMV from CPAN</a>. Linux/UNIX, Mac, Windows is supported.
+</p>
+<pre>
+cpan SPVM
+</pre>
+<p>
+  or
+</p>
+<pre>
+cpanm SPVM
+</pre>
+<p>
+  Perl-like source code is converted to <a href="/spvmdoc-public/blog/20200702071424.html">C shared library</a>. This example is <a href="/spvmdoc-public/blog/20200629071424.html">numeric array operation</a>.
+</p>
+<pre>
+package MyMath : precompile {
+  sub sum : int ($nums : int[]) {
+    
+    my $total = 0;
+    for (my $i = 0; $i &lt; @$nums; $i++) {
+      $total += $nums-&gt;[$i];
+    }
+    
+    return $total;
+  }
+}
+</pre>
+<p>
+  You can call this SPVM subroutine from Perl easily. Note that "~/.spvm_build" directory is needed.
+</p>
+<pre>
+use strict;
+use warnings;
+use FindBin;
+use lib "$FindBin::Bin/lib";
+
+use SPVM 'MyMath';
+
+# Call subroutine
+my $total = MyMath-&gt;sum([3, 6, 8, 9]);
+
+print "Total: $total\n";
+</pre>
+<p>
+  Try the <a href="/spvmdoc-public/benchmark.html">SPVM Benchmark</a> once. The result is amazing.
 </p>
 <p>
-  SPVM has utilities for running native languages such as C/C++/Cuda for even faster peformance and parallelization.
+  SPVM also has utilities to <a href="/spvmdoc-public/blog/20200727153549.html">bind C/C++/Cuda</a> functions for even faster peformance. See also <a href="/spvmdoc-public/native-api.html">Native API</a>.
 </p>
-<p>
-  Try the SPVM benchmark once. The result is amazing.
-</p>
-<h3 id="tutorial">SPVM Performance Benchmark</h3>
-<ul class="toc">
-  <li><a href="/spvmdoc-public/benchmark.html">SPVM Performance Benchmark</a></li>
-</ul>
 <h3 id="tutorial">SPVM Tutorial</h3>
 <ul class="toc">
   <li><a href="/spvmdoc-public/blog/20200630071424.html">SPVM Installation</a></li>
   <li><a href="/spvmdoc-public/blog/20200629071424.html">SPVM Getting Started - Numeric Array Operations</a></li>
-  <li><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance - Precompile and Native API</a></li>
+  <li><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance using Precompile and Native API</a></li>
   <li><a href="/spvmdoc-public/blog/20200727153549.html">How to Bind C/C++/CUDA Library to SPVM</a></li>
   <li><a href="/spvmdoc-public/blog/20200821151908.html">Complex Tutorial</a></li>
-  <li><a href="/spvmdoc-public/blog/20200805092530.html">Matrix Tutorial</a></li>
-  <li><a href="/spvmdoc-public/tutorial.html">All of SPVM Tutorial</a></li>
-</ul>
-<h3 id="advantage">SPVM Adbanced</h3>
-<ul class="toc">
-  <li><a href="/spvmdoc-public/blog/20200805092530.html">Matrix Tutorial for AI programming</a></li>
 </ul>
 <h3 id="tutorial">SPVM Language Specification</h3>
+<p>
+  You can see SPVM Language Specification.
+</p>
 <ul class="toc">
   <li><a href="/spvmdoc-public/language.html">SPVM Language Specification</a></li>
+</ul>
+<h3 id="native-api">SPVM Native API</h3>
+<p>
+  You can see SPVM Language Specification.
+</p>
+<ul class="toc">
+  <li><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></li>
+</ul>
+<h3 id="tutorial">SPVM Performance Benchmark</h3>
+<ul class="toc">
+  <li><a href="/spvmdoc-public/benchmark.html">SPVM Performance Benchmark</a></li>
 </ul>
 <h3 id="exchange-api">SPVM Exchange API</h3>
 <ul class="toc">
   <li><a href="/spvmdoc-public/exchange-api.html">SPVM Exchange API</a></li>
-</ul>
-<h3 id="native-api">SPVM Native API</h3>
-<ul class="toc">
-  <li><a href="/spvmdoc-public/native-api.html">SPVM Native API</a></li>
 </ul>
 
   </div>

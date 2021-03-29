@@ -7,7 +7,7 @@
 <link rel="icon" type="image/x-icon" href="/spvmdoc-public/images/spvm-logo.png">
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
-<title>How to improve SPVM Performance - SPVM Precompile and SPVM Native API - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
+<title>How to improve SPVM Performance using SPVM Precompile and SPVM Native API - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
 <meta name="description" content="SPVM Module:">
   </head>
   <body>
@@ -29,7 +29,7 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance - SPVM Precompile and SPVM Native API</a></h2>
+    <h2><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance using SPVM Precompile and SPVM Native API</a></h2>
 <p>
   SPVM Module:
 </p>
@@ -76,8 +76,8 @@ print "Total Packed: $total_packed\n";
 </p>
 <pre>
 # lib/MyMath.spvm
-package MyMath {
-  precompile sub sum_precompile : int ($nums : int[]) {
+package MyMath : precompile {
+  sub sum_precompile : int ($nums : int[]) {
     
     my $total = 0;
     for (my $i = 0; $i &lt; @$nums; $i++) {
