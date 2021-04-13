@@ -37,7 +37,7 @@
   Currently SPVM version is 1.0-beta. some of SPVM Native API will be changed without warnings.
 </p>
 <p>
-  Last Updated: 2020-12-11
+  Last Updated: 2021-04-02
 </p>
 <ul class="toc">
   <li><a href="#native-api-summary">What is SPVM Native API</a></li>
@@ -212,7 +212,7 @@ int32_t SPNATIVE__Foo__Bar__sum(SPVM_ENV* env, SPVM_VALUE* stack) {
 
   stack[0].ival = total;
 
-  return SPVM_SUCCESS;
+  return 0;
 }
 </pre>
 <h4>Include spvm_native.h</h4>
@@ -237,7 +237,7 @@ SPVM_VALUE
 </p>
 <h4>Return Value</h4>
 <p>
-  The return type is "int32_t". If the subroutine raises an exception, "SPVM_EXCEPTION" is returned, otherwise "SPVM_SUCCESS" is returned.
+  The return type is "int32_t". If the subroutine raises an exception, "1" is returned, otherwise "0" is returned.
 </p>
 <h4>Function Name</h4>
 <p>
@@ -633,22 +633,22 @@ env-&gt;remove_mortal(env, scope_id, object);
     In the Native Subroutine, it is the return value that indicates whether an exception has occurred.
   </p>
 <pre>
-return SPVM_SUCCESS;
+return 0;
 
-return SPVM_EXCEPTION;
+return 1;
 </pre>
   <p>
-    If no exception occurs, "SPVM_SUCCESS" is returned. This is defined as "0".
+    If no exception occurs, "0" is returned. This is defined as "0".
   <p>
   <p>
-    If an exception occurs, "SPVM_EXCEPTION" is returned. It is defined as a value other than "0".
+    If an exception occurs, "1" is returned. It is defined as a value other than "0".
   <p>
   <p>
     If you want to set the exception message yourself, you can create an exception message with "new_string_nolen" and set it with "set_exception".
   </p>
 <pre>
 env-&gt;set_exception(env, env-&gt;new_string_nolen(env, "Exception occur");
-return SPVM_EXCEPTION;
+return 1;
 </pre>
   <p>
     If no exception message is set, a default exception message will be set.
@@ -705,7 +705,7 @@ int32_t SPNATIVE__MyTimeInfo__new(SPVM_ENV* env, SPVM_VALUE* stack) {
 
   stack[0].oval = tm_obj;
 
-  return SPVM_SUCCESS;
+  return 0;
 }
 
 int32_t SPNATIVE__MyTimeInfo__sec(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -715,7 +715,7 @@ int32_t SPNATIVE__MyTimeInfo__sec(SPVM_ENV* env, SPVM_VALUE* stack) {
 
   stack[0].ival = tm_ptr-&gt; tm_sec;
 
-  return SPVM_SUCCESS;
+  return 0;
 }
 
 int32_t SPNATIVE__MyTimeInfo__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
@@ -725,7 +725,7 @@ int32_t SPNATIVE__MyTimeInfo__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
 
   env-&gt;free_memory_block (tm_ptr);
 
-  return SPVM_SUCCESS;
+  return 0;
 }
 </pre>
   <p>
@@ -748,7 +748,7 @@ void* tm_obj = env-&gt;new_pointer(env, "MyTimeInfo", tm_ptr);
 <pre>
 stack[0].ival = tm_ptr-&gt; tm_sec;
 
-return SPVM_SUCCESS;
+return 0;
 </pre>
   <p>
     Next, let's get the value of tm_sec. sec method. The get_pointer function can be used to get a pointer to the memory allocated as a "struct tm" from a pointer type object.
@@ -772,7 +772,7 @@ int32_t SPNATIVE__MyTimeInfo__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
 
   env-&gt;free_memory_block (tm_ptr);
 
-  return SPVM_SUCCESS;
+  return 0;
 }
 </pre>
   <p>
@@ -903,6 +903,42 @@ int32_t SPNATIVE__MyTimeInfo__DESTROY(SPVM_ENV* env, SPVM_VALUE* stack) {
 118 free_env
 119 memry_blocks_count
 120 get_chars
+121 die
+122 new_object_by_name
+123 new_pointer_by_name
+124 set_field_byte_by_name
+125 set_field_short_by_name
+126 set_field_int_by_name
+127 set_field_long_by_name
+128 set_field_float_by_name
+129 set_field_double_by_name
+130 set_field_object_by_name
+131 get_field_byte_by_name
+132 get_field_short_by_name
+133 get_field_int_by_name
+134 get_field_long_by_name
+135 get_field_float_by_name
+136 get_field_double_by_name
+137 get_field_object_by_name
+138 set_package_var_byte_by_name
+139 set_package_var_short_by_name
+140 set_package_var_int_by_name
+141 set_package_var_long_by_name
+142 set_package_var_float_by_name
+143 set_package_var_double_by_name
+144 set_package_var_object_by_name
+145 get_package_var_byte_by_name
+146 get_package_var_short_by_name
+147 get_package_var_int_by_name
+148 get_package_var_long_by_name
+149 get_package_var_float_by_name
+150 get_package_var_double_by_name
+151 get_package_var_object_by_name
+152 call_sub_by_name
+153 call_poly_sub_by_name
+154 get_field_string_chars_by_name
+154 get_field_string_chars_by_name
+155 any_object_basic_type_id
 </pre>
   <h3 id="native-api-call">Call Native API</h3>
   <p>
@@ -1035,6 +1071,41 @@ int32_t basic_type_id = env-&gt;get_basic_type_id(env, "SPVM::Int");
     <li><a href="#native-api-native-sub-api-free_env">free_env</a></li>
     <li><a href="#native-api-native-sub-api-memry_blocks_count">memry_blocks_count</a></li>
     <li><a href="#native-api-native-sub-api-get_chars">get_chars</a></li>
+    <li><a href="#native-api-native-sub-api-die">die</a></li>
+    <li><a href="#native-api-native-sub-api-new_object_by_name">new_object_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-new_pointer_by_name">new_pointer_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_byte_by_name">set_field_byte_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_short_by_name">set_field_short_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_int_by_name">set_field_int_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_long_by_name">set_field_long_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_float_by_name">set_field_float_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_double_by_name">set_field_double_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_field_object_by_name">set_field_object_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_byte_by_name">get_field_byte_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_short_by_name">get_field_short_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_int_by_name">get_field_int_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_long_by_name">get_field_long_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_float_by_name">get_field_float_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_double_by_name">get_field_double_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_object_by_name">get_field_object_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_byte_by_name">set_package_var_byte_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_short_by_name">set_package_var_short_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_int_by_name">set_package_var_int_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_long_by_name">set_package_var_long_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_float_by_name">set_package_var_float_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_double_by_name">set_package_var_double_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-set_package_var_object_by_name">set_package_var_object_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_byte_by_name">get_package_var_byte_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_short_by_name">get_package_var_short_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_int_by_name">get_package_var_int_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_long_by_name">get_package_var_long_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_float_by_name">get_package_var_float_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_double_by_name">get_package_var_double_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_package_var_object_by_name">get_package_var_object_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-call_sub_by_name">call_sub_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-call_poly_sub_by_name">call_poly_sub_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-get_field_string_chars_by_name">get_field_string_chars_by_name</a></li>
+    <li><a href="#native-api-native-sub-api-any_object_basic_type_id">any_object_basic_type_id</a></li>
   </ul>
 <h4 id="native-api-native-sub-api-package_vars_heap">package_vars_heap</h4>
   <p>
@@ -2389,195 +2460,145 @@ const char* (*get_chars)(SPVM_ENV* env, void* string_object);
 <pre>
 const char* bytes = env-&gt;get_chars(env, string_object);
 </pre>
-<h3 id="native-api-list">List of Macro Constants</h3>
-<ul class="list">
-  <li><a href="#native-api-native-macro-constants-SPVM_SUCCESS">SPVM_SUCCESS</a></li>
-  <li><a href="#native-api-native-macro-constants-SPVM_EXCEPTION">SPVM_EXCEPTION</a></li>
-</ul>
-<h4 id="native-api-native-macro-constants-SPVM_SUCCESS">SPVM_SUCCESS</h4>
-<p>
-  Indicate this function don't raise any exception. This value is C<0>.
-</p>
+<h4 id="native-api-native-sub-api-die">die</h4>
 <pre>
-SPVM_SUCCESS
+int32_t (*die)(SPVM_ENV* env, const char* message, ...);
 </pre>
-<h4 id="native-api-native-macro-constants-SPVM_EXCEPTION">SPVM_EXCEPTION</h4>
-<p>
-  Indicate this function don't raise any exception. This value is C<1>.
-</p>
+<h4 id="native-api-native-sub-api-new_object_by_name">new_object_by_name</h4>
 <pre>
-SPVM_EXCEPTION
+void* (*new_object_by_name)(SPVM_ENV* env, const char* package_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<p>
-  SPVM_DIE is useful macro function which can set exception message and return SPVM_EXCEPTION.
-</p>
-<h3 id="native-api-list">List of Macro Functions</h3>
-<ul>
-  <li><a href="#native-api-macro-functions-SPVM_DIE">SPVM_DIE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_NEW_OBJECT">SPVM_NEW_OBJECT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_NEW_POINTER">SPVM_NEW_POINTER</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_BYTE">SPVM_SET_FIELD_BYTE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_SHORT">SPVM_SET_FIELD_SHORT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_INT">SPVM_SET_FIELD_INT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_LONG">SPVM_SET_FIELD_LONG</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_FLOAT">SPVM_SET_FIELD_FLOAT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_DOUBLE">SPVM_SET_FIELD_DOUBLE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_FIELD_OBJECT">SPVM_SET_FIELD_OBJECT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_BYTE">SPVM_GET_FIELD_BYTE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_SHORT">SPVM_GET_FIELD_SHORT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_INT">SPVM_GET_FIELD_INT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_LONG">SPVM_GET_FIELD_LONG</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_FLOAT">SPVM_GET_FIELD_FLOAT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_DOUBLE">SPVM_GET_FIELD_DOUBLE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_FIELD_OBJECT">SPVM_GET_FIELD_OBJECT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_BYTE">SPVM_SET_PACKAGE_VAR_BYTE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_SHORT">SPVM_SET_PACKAGE_VAR_SHORT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_INT">SPVM_SET_PACKAGE_VAR_INT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_LONG">SPVM_SET_PACKAGE_VAR_LONG</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_FLOAT">SPVM_SET_PACKAGE_VAR_FLOAT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_DOUBLE">SPVM_SET_PACKAGE_VAR_DOUBLE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_SET_PACKAGE_VAR_OBJECT">SPVM_SET_PACKAGE_VAR_OBJECT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_BYTE">SPVM_GET_PACKAGE_VAR_BYTE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_SHORT">SPVM_GET_PACKAGE_VAR_SHORT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_INT">SPVM_GET_PACKAGE_VAR_INT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_LONG">SPVM_GET_PACKAGE_VAR_LONG</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_FLOAT">SPVM_GET_PACKAGE_VAR_FLOAT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_DOUBLE">SPVM_GET_PACKAGE_VAR_DOUBLE</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_GET_PACKAGE_VAR_OBJECT">SPVM_GET_PACKAGE_VAR_OBJECT</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_CALL_SUB">SPVM_CALL_SUB</a></li>
-  <li><a href="#native-api-macro-functions-SPVM_CALL_METHOD">SPVM_CALL_METHOD</a></li>
-</ul>
-<h4>SPVM_DIE</h4>
+<h4 id="native-api-native-sub-api-new_pointer_by_name">new_pointer_by_name</h4>
 <pre>
-SPVM_DIE(message, ...)
+void* (*new_pointer_by_name)(SPVM_ENV* env, const char* package_name, void* pointer, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_NEW_OBJECT</h4>
+<h4 id="native-api-native-sub-api-set_field_byte_by_name">set_field_byte_by_name</h4>
 <pre>
-SPVM_NEW_OBJECT(env, package_name, object_address, file, line)
+void (*set_field_byte_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int8_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_NEW_POINTER</h4>
+<h4 id="native-api-native-sub-api-set_field_short_by_name">set_field_short_by_name</h4>
 <pre>
-SPVM_NEW_POINTER(env, package_name, pointer, object_address, file, line)
+void (*set_field_short_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int16_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_BYTE</h4>
+<h4 id="native-api-native-sub-api-set_field_int_by_name">set_field_int_by_name</h4>
 <pre>
-SPVM_SET_FIELD_BYTE(env, obj, package_name, sub_name, value, file, line)
+void (*set_field_int_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_SHORT</h4>
+<h4 id="native-api-native-sub-api-set_field_long_by_name">set_field_long_by_name</h4>
 <pre>
-SPVM_SET_FIELD_SHORT(env, obj, package_name, sub_name, value, file, line)
+void (*set_field_long_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int64_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_INT</h4>
+<h4 id="native-api-native-sub-api-set_field_float_by_name">set_field_float_by_name</h4>
 <pre>
-SPVM_SET_FIELD_INT(env, obj, package_name, sub_name, value, file, line)
+void (*set_field_float_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, float value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_LONG</h4>
+<h4 id="native-api-native-sub-api-set_field_double_by_name">set_field_double_by_name</h4>
 <pre>
-SPVM_SET_FIELD_LONG(env, obj, package_name, sub_name, value, file, line)
+void (*set_field_double_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, double value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_FLOAT</h4>
+<h4 id="native-api-native-sub-api-set_field_object_by_name">set_field_object_by_name</h4>
 <pre>
-SPVM_SET_FIELD_FLOAT(env, obj, package_name, sub_name, value, file, line)
+void (*set_field_object_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, const char* signature, void* value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_DOUBLE</h4>
+<h4 id="native-api-native-sub-api-get_field_byte_by_name">get_field_byte_by_name</h4>
 <pre>
-SPVM_SET_FIELD_DOUBLE(env, obj, package_name, sub_name, value, file, line)
+int8_t (*get_field_byte_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_FIELD_OBJECT/h4>
+<h4 id="native-api-native-sub-api-get_field_short_by_name">get_field_short_by_name</h4>
 <pre>
-SPVM_SET_FIELD_OBJECT(env, obj, package_name, sub_name, signature, value, file, line)
+int16_t (*get_field_short_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_BYTE</h4>
+<h4 id="native-api-native-sub-api-get_field_int_by_name">get_field_int_by_name</h4>
 <pre>
-SPVM_GET_FIELD_BYTE(env, obj, package_name, sub_name, value_address, file, line)
+int32_t (*get_field_int_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_SHORT</h4>
+<h4 id="native-api-native-sub-api-get_field_long_by_name">get_field_long_by_name</h4>
 <pre>
-SPVM_GET_FIELD_SHORT(env, obj, package_name, sub_name, value_address, file, line)
+int64_t (*get_field_long_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_INT</h4>
+<h4 id="native-api-native-sub-api-get_field_float_by_name">get_field_float_by_name</h4>
 <pre>
-SPVM_GET_FIELD_INT(env, obj, package_name, sub_name, value_address, file, line)
+float (*get_field_float_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_LONG</h4>
+<h4 id="native-api-native-sub-api-get_field_double_by_name">get_field_double_by_name</h4>
 <pre>
-SPVM_GET_FIELD_LONG(env, obj, package_name, sub_name, value_address, file, line)
+double (*get_field_double_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_FLOAT</h4>
+<h4 id="native-api-native-sub-api-get_field_object_by_name">get_field_object_by_name</h4>
 <pre>
-SPVM_GET_FIELD_FLOAT(env, obj, package_name, sub_name, value_address, file, line)
+void* (*get_field_object_by_name)(SPVM_ENV* env, void* object, const char* package_name, const char* field_name, const char* signature, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_DOUBLE</h4>
+<h4 id="native-api-native-sub-api-set_package_var_byte_by_name">set_package_var_byte_by_name</h4>
 <pre>
-SPVM_GET_FIELD_DOUBLE(env, obj, package_name, sub_name, value_address, file, line)
+void (*set_package_var_byte_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int8_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_FIELD_OBJECT</h4>
+<h4 id="native-api-native-sub-api-set_package_var_short_by_name">set_package_var_short_by_name</h4>
 <pre>
-SPVM_GET_FIELD_OBJECT(env, obj, package_name, sub_name, signature, value_address, file, line)
+void (*set_package_var_short_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int16_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_BYTE</h4>
+<h4 id="native-api-native-sub-api-set_package_var_int_by_name">set_package_var_int_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_BYTE(env, package_name, package_var_name, value, file, line)
+void (*set_package_var_int_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_SHORT</h4>
+<h4 id="native-api-native-sub-api-set_package_var_long_by_name">set_package_var_long_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_SHORT(env, package_name, package_var_name, value, file, line)
+void (*set_package_var_long_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int64_t value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_INT</h4>
+<h4 id="native-api-native-sub-api-set_package_var_float_by_name">set_package_var_float_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_INT(env, package_name, package_var_name, value, file, line)
+void (*set_package_var_float_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, float value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_LONG</h4>
+<h4 id="native-api-native-sub-api-set_package_var_double_by_name">set_package_var_double_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_LONG(env, package_name, package_var_name, value, file, line)
+void (*set_package_var_double_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, double value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_FLOAT</h4>
+<h4 id="native-api-native-sub-api-set_package_var_object_by_name">set_package_var_object_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_FLOAT(env, package_name, package_var_name, value, file, line)
+void (*set_package_var_object_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, const char* signature, void* value, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_DOUBLE</h4>
+<h4 id="native-api-native-sub-api-get_package_var_byte_by_name">get_package_var_byte_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_DOUBLE(env, package_name, package_var_name, value, file, line)
+int8_t (*get_package_var_byte_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_SET_PACKAGE_VAR_OBJECT</h4>
+<h4 id="native-api-native-sub-api-get_package_var_short_by_name">get_package_var_short_by_name</h4>
 <pre>
-SPVM_SET_PACKAGE_VAR_OBJECT(env, package_name, package_var_name, signature, value, file, line)
+int16_t (*get_package_var_short_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_BYTE</h4>
+<h4 id="native-api-native-sub-api-get_package_var_int_by_name">get_package_var_int_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_BYTE(env, package_name, package_var_name, value_address, file, line)
+int32_t (*get_package_var_int_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_SHORT</h4>
+<h4 id="native-api-native-sub-api-get_package_var_long_by_name">get_package_var_long_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_SHORT(env, package_name, package_var_name, value_address, file, line)
+int64_t (*get_package_var_long_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_INT</h4>
+<h4 id="native-api-native-sub-api-get_package_var_float_by_name">get_package_var_float_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_INT(env, package_name, package_var_name, value_address, file, line)
+float (*get_package_var_float_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_LONG</h4>
+<h4 id="native-api-native-sub-api-get_package_var_double_by_name">get_package_var_double_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_LONG(env, package_name, package_var_name, value_address, file, line)
+double (*get_package_var_double_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_FLOAT</h4>
+<h4 id="native-api-native-sub-api-get_package_var_object_by_name">get_package_var_object_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_FLOAT(env, package_name, package_var_name, value_address, file, line)
+void* (*get_package_var_object_by_name)(SPVM_ENV* env, const char* package_name, const char* package_var_name, const char* signature, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_DOUBLE</h4>
+<h4 id="native-api-native-sub-api-call_sub_by_name">call_sub_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_DOUBLE(env, package_name, package_var_name, value_address, file, line)
+int32_t (*call_sub_by_name)(SPVM_ENV* env, const char* package_name, const char* sub_name, const char* signature, SPVM_VALUE* stack, const char* file, int32_t line);
 </pre>
-<h4>SPVM_GET_PACKAGE_VAR_OBJECT</h4>
+<h4 id="native-api-native-sub-api-call_poly_sub_by_name">call_poly_sub_by_name</h4>
 <pre>
-SPVM_GET_PACKAGE_VAR_OBJECT(env, package_name, package_var_name, signature, value_address, file, line)
+int32_t (*call_poly_sub_by_name)(SPVM_ENV* env, void* object, const char* sub_name, const char* signature, SPVM_VALUE* stack, const char* file, int32_t line);
 </pre>
-<h4>SPVM_CALL_SUB</h4>
+<h4 id="native-api-native-sub-api-get_field_string_chars_by_name">get_field_string_chars_by_name</h4>
 <pre>
-SPVM_CALL_SUB(env, package_name, sub_name, signature, stack, file, line)
+const char* (*get_field_string_chars_by_name)(SPVM_ENV* env, void* obj, const char* package_name, const char* field_name, int32_t* exception_flag, const char* file, int32_t line);
 </pre>
-<h4>SPVM_CALL_METHOD</h4>
+<h4 id="native-api-native-sub-api-any_object_basic_type_id">any_object_basic_type_id</h4>
 <pre>
-SPVM_CALL_METHOD(env, object, sub_name, signature, stack, file, line)
+void* any_object_basic_type_id;
 </pre>
 
   </div>
