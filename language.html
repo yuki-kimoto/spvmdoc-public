@@ -463,7 +463,7 @@ weaken wo __END__ __PACKAGE__ __FILE__ __LINE__
 %type &lt;opval&gt; opt_statements statements statement if_statement else_statement 
 %type &lt;opval&gt; for_statement while_statement switch_statement case_statement default_statement
 %type &lt;opval&gt; block eval_block begin_block switch_block if_require_statement
-%type &lt;opval&gt; unary_op binary_op num_comparison_op str_comparison_op isa logical_op
+%type &lt;opval&gt; unary_op binary_op comparison_op isa logical_op
 %type &lt;opval&gt; call_sub opt_vaarg
 %type &lt;opval&gt; array_access field_access weaken_field unweaken_field isweak_field convert array_length
 %type &lt;opval&gt; assign inc dec allow
@@ -707,8 +707,7 @@ expression
 | '(' expressions ')'
 | CURRENT_PACKAGE
 | isweak_field
-| num_comparison_op
-| str_comparison_op
+| comparison_op
 | isa
 | logical_op
 
@@ -747,16 +746,14 @@ binary_op
 | expression SHIFT expression
 | expression '.' expression
 
-num_comparison_op
+comparison_op
 : expression NUMEQ expression
 | expression NUMNE expression
 | expression NUMGT expression
 | expression NUMGE expression
 | expression NUMLT expression
 | expression NUMLE expression
-
-str_comparison_op
-: expression STREQ expression
+| expression STREQ expression
 | expression STRNE expression
 | expression STRGT expression
 | expression STRGE expression
