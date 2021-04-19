@@ -479,7 +479,7 @@ weaken wo __END__ __PACKAGE__ __FILE__ __LINE__
 %left &lt;opval&gt; BIT_OR BIT_XOR
 %left &lt;opval&gt; '&amp;'
 %nonassoc &lt;opval&gt; NUMEQ NUMNE STREQ STRNE
-%nonassoc &lt;opval&gt; NUMGT NUMGE NUMLT NUMLE STRGT STRGE STRLT STRLE ISA
+%nonassoc &lt;opval&gt; NUMGT NUMGE NUMLT NUMLE STRGT STRGE STRLT STRLE ISA NUMERIC_CMP STRING_CMP
 %left &lt;opval&gt; SHIFT
 %left &lt;opval&gt; '+' '-' '.'
 %left &lt;opval&gt; MULTIPLY DIVIDE REMAINDER
@@ -753,12 +753,14 @@ comparison_op
 | expression NUMGE expression
 | expression NUMLT expression
 | expression NUMLE expression
+| expression NUMERIC_CMP expression
 | expression STREQ expression
 | expression STRNE expression
 | expression STRGT expression
 | expression STRGE expression
 | expression STRLT expression
 | expression STRLE expression
+| expression STRING_CMP expression
 
 isa
 : expression ISA type
@@ -1063,12 +1065,6 @@ sub_names
     <td>NUMNE</td><td>!=</td>
   </tr>
   <tr>
-    <td>STREQ</td><td>eq</td>
-  </tr>
-  <tr>
-    <td>STRNE</td><td>ne</td>
-  </tr>
-  <tr>
     <td>NUMGT</td><td>&gt;</td>
   </tr>
   <tr>
@@ -1081,6 +1077,15 @@ sub_names
     <td>NUMLE</td><td>&lt;=</td>
   </tr>
   <tr>
+    <td>NUMERIC_CMP</td><td>&lt;=&gt;</td>
+  </tr>
+  <tr>
+    <td>STREQ</td><td>eq</td>
+  </tr>
+  <tr>
+    <td>STRNE</td><td>ne</td>
+  </tr>
+  <tr>
     <td>STRGT</td><td>gt</td>
   </tr>
   <tr>
@@ -1091,6 +1096,9 @@ sub_names
   </tr>
   <tr>
     <td>STRLE</td><td>le</td>
+  </tr>
+  <tr>
+    <td>SRING_CMP</td><td>cmp</td>
   </tr>
   <tr>
     <td>ISA</td><td>isa</td>
@@ -4981,6 +4989,17 @@ LEFT_EXPRESSION NUMERIC_COMPARISON_OPERATOR RIGHT_EXPRESSION
       Left Expression is less than or equal to Right Expression
     </td>
   </tr>
+  <tr>
+    <td>
+      LEFT_EXPRESSION <=> RIGHT_EXPRESSION
+    </td>
+    <td>
+      Left Expression and Right Expression are Numeric Type
+    </td>
+    <td>
+      If Left Expression is greater than Right expression, return 1. If Left Expression is lower than Right expression, return -1. If Left Expression is equals to Right expression, return 0.
+    </td>
+  </tr>
 </table>
 <p>
   The Types of Left Expression and Right Expression Comparable Types, otherwise Compile Error occurs.
@@ -5001,6 +5020,7 @@ LEFT_EXPRESSION NUMERIC_COMPARISON_OPERATOR RIGHT_EXPRESSION
 (int32_t)(x &gt;= y);
 (int32_t)(x &lt; y);
 (int32_t)(x &lt;= y);
+(int32_t)(x &gt; y ? 1 : x &lt; y ? -1 : 0);
 </pre>
 <p>
   For Numeric Type Operation(==, !=, >, >=, <, <=), <a href="#language-type-int">int Type</a> Operation, <a href="#language-type-long">long Type</a> Operation, <a href="#language-type-float">float Type</a> Operation, <a href="#language-type-double">double Type</a> Operation is defined.
@@ -5078,6 +5098,14 @@ LEFT_EXPRESSION STRING_COMPARISON_OPERATOR RIGHT_EXPRESSION
     </td>
     <td>
       Left Expression is less than or equal to Right Expression compared in dictionary Expression order
+    </td>
+  </tr>
+  <tr>
+    <td>
+      LEFT_EXPRESSION cmp RIGHT_EXPRESSION
+    </td>
+    <td>
+      If Left Expression is greater than Right expression, return 1. If Left Expression is lower than Right expression, return -1. If Left Expression is equals to Right expression, return 0.
     </td>
   </tr>
 </table>
