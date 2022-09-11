@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
 <title>How to improve SPVM Performance using SPVM Precompile and SPVM Native API - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
-<meta name="description" content="SPVM Module:">
+<meta name="description" content="The "How to improve SPVM Performance using SPVM Precompile and SPVM Native API" is moved into SPVM::Document::Tutorial">
   </head>
   <body>
     <div class="container">
@@ -31,144 +31,8 @@
   <div class="middle">
     <h2><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance using SPVM Precompile and SPVM Native API</a></h2>
 <p>
-  SPVM Module:
+  The "How to improve SPVM Performance using SPVM Precompile and SPVM Native API" is moved into <a href="https://metacpan.org/pod/SPVM::Document::Tutorial">SPVM::Document::Tutorial</a>
 </p>
-<pre>
-# lib/MyMath.spvm
-package MyMath {
-  sub sum : int ($nums : int[]) {
-    
-    my $total = 0;
-    for (my $i = 0; $i &lt; @$nums; $i++) {
-      $total += $nums-&gt;[$i];
-    }
-    
-    return $total;
-  }
-}
-</pre>
-<p>
-  Use SPVM Module from Perl
-</p>
-<pre>
-# spvm.pl
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
-use SPVM 'MyMath';
-
-# Call subroutine
-my $total = MyMath-&gt;sum([3, 6, 8, 9]);
-
-print "Total: $total\n";
-
-# Call subroutine with packed data
-my $nums_packed = pack('l*', 3, 6, 8, 9);
-my $sv_nums = SPVM::new_int_array_from_bin($nums_packed);
-my $total_packed = MyMath-&gt;sum($sv_nums);
-
-print "Total Packed: $total_packed\n";
-</pre>
-<p>
-  Precompiled SPVM Subroutine. This means SPVM code is converted to Machine Code:
-</p>
-<pre>
-# lib/MyMath.spvm
-package MyMath : precompile {
-  sub sum_precompile : int ($nums : int[]) {
-    
-    my $total = 0;
-    for (my $i = 0; $i &lt; @$nums; $i++) {
-      $total += $nums-&gt;[$i];
-    }
-    
-    return $total;
-  }
-}
-</pre>
-<p>
-  Call SPVM Precompile Subroutine from Perl
-</p>
-<pre>
-# spvm.pl
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
-use SPVM 'MyMath';
-
-# Call precompile subroutine
-my $total_precompile = MyMath-&gt;sum_precompile([3, 6, 8, 9]);
-
-print "Total Precompile: $total_precompile\n";
-</pre>
-<p>
-  SPVM Native Subroutine. This means SPVM subroutine call C/C++ native subroutine:
-</p>
-<pre>
-# lib/MyMath.spvm
-package MyMath {
-  native sub sum_native : int ($nums : int[]);
-}
-
-// lib/MyMath.c
-#include "spvm_native.h"
-
-int32_t SPNATIVE__MyMath__sum_native(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  void* sv_nums = stack[0].oval;
-  
-  int32_t length = env-&gt;length(env, sv_nums);
-  
-  int32_t* nums = env-&gt;get_elems_int(env, sv_nums);
-  
-  int32_t total = 0;
-  for (int32_t i = 0; i &lt; length; i++) {
-    total += nums[i];
-  }
-  
-  stack[0].ival = total;
-  
-  return 0;
-}
-
-# lib/MyMath.config
-
-use strict;
-use warnings;
-
-use SPVM::Builder::Config;
-my $bconf = SPVM::Builder::Config-&gt;new_c99;
-
-$bconf;
-</pre>
-<p>
-  Use SPVM Native Subroutine from Perl
-</p>
-<pre>
-# spvm.pl
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
-use SPVM 'MyMath';
-
-# Call native subroutine
-my $total_native = MyMath-&gt;sum_native([3, 6, 8, 9]);
-
-print "Total Native: $total_native\n";
-</pre>
-<p>
-  Environment Variable "SPVM_BUILD_DIR" must be set for precompile and native subroutine
-</p>
-<pre>
-# bash example
-export SPVM_BUILD_DIR=~/.spvm_build
-</pre>
 
   </div>
   <div class="bottom">

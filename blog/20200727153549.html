@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
 <title>How to Bind C/C++/CUDA Library to SPVM - SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
-<meta name="description" content="The advantage of SPVM is that you can easily bind C/C++/CUDA.">
+<meta name="description" content="The "How to Bind C/C++/CUDA Library to SPVM" is moved into SPVM::Document::Tutorial">
   </head>
   <body>
     <div class="container">
@@ -31,152 +31,8 @@
   <div class="middle">
     <h2><a href="/spvmdoc-public/blog/20200727153549.html">How to Bind C/C++/CUDA Library to SPVM</a></h2>
 <p>
-  The advantage of SPVM is that you can easily bind C/C++/CUDA.
+  The "How to Bind C/C++/CUDA Library to SPVM" is moved into <a href="https://metacpan.org/pod/SPVM::Document::Tutorial">SPVM::Document::Tutorial</a>
 </p>
-<p>
-  Subroutines bound with SPVM can be easily called from Perl.
-</p>
-<p>
-  Before reading this page, you need to understand Native API.
-</p>
-<ul>
-  <li><a href="/spvmdoc-public/blog/20200702071424.html">How to improve SPVM Performance - Precompile and Native API</a></li>
-</ul>
-<h3>Binding your own C language library</h3>
-<p>
-  First, let's bind our own C library.
-</p>
-<p>
-  The following source code is the completed source code.
-</p>
-<p>
-  I will explain using this source code.
-</p>
-<p>
-  <a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/bind_clib">SPVM Native Example - Bind C Library</a>
-</p>
-<p>
-  Create a C language library for summation and call it from Perl.
-</p>
-<pre>
-# bind_clib.pl
-use strict;
-use warnings;
-
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
-use SPVM 'BindCLib';
-
-my $total = BindCLib-&gt;sum([1, 2, 3, 4]);
-
-print "Total: $total\n";
-</pre>
-<p>
-  SPVM Subroutine Definition.
-</p>
-<pre>
-# lib/BindCLib.spvm
-package BindCLib {
-  native sub sum : int ($nums : int[]);
-}
-</pre>
-<p>
-  Native Config.
-</p>
-<pre>
-# lib/BindCLib.config
-use strict;
-use warnings;
-
-use SPVM::Builder::Config;
-my $bconf = SPVM::Builder::Config-&gt;new_c99;
-
-$bconf;
-</pre>
-<p>
-  Call C library from C program.
-</p>
-<pre>
-// lib/BindCLib.c
-#include "spvm_native.h"
-
-#include "bind_clib.h"
-
-int32_t SPNATIVE__BindCLib__sum(SPVM_ENV* env, SPVM_VALUE* stack) {
-  
-  void* sv_nums = stack[0].oval;
-  
-  int32_t length = env-&gt;length(env, sv_nums);
-  
-  int32_t* nums = env-&gt;get_elems_int(env, sv_nums);
-  
-  int32_t total = bind_clib_sum(nums, length);
-  
-  stack[0].ival = total;
-  
-  return 0;
-}
-</pre>
-<p>
-  Notice the line reading the header.
-</p>
-<pre>
-#include "bind_clib.h"
-</pre>
-<p>
-  This header is included from "lib/BindCLib.native/include/bind_clib.h". This is pure C header file.
-</p>
-<pre>
-#include &lt;inttypes.h&gt;
-
-int32_t bind_clib_sum(int32_t* nums, int32_t length);
-</pre>
-<p>
-  SPVM sets the include directory("BindCLib.native/include") as the default header file read path.
-</p>
-<p>
-  C library source file is "lib/BindCLib.native/src/bind_clib.c". This is pure C source file.
-</p>
-<pre>
-#include "bind_clib.h"
-
-int32_t bind_clib_sum(int32_t* nums, int32_t length) {
-  
-  int32_t total = 0;
-  for (int32_t i = 0; i &lt; length; i++) {
-    total += nums[i];
-  }
-  
-  return total;
-}
-</pre>
-<p>
-  SPVM compiles all source files in the source directory("BindCLib.native/src"). It can contain multiple source files.
-</p>
-<h3>How to bind other C Library to SPVM</h3>
-<p>
-  If you want to know more about the bindings of other C libraries, see the example below.
-</p>
-<ul>
-  <li><a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/zlib">Bind zlib to SPVM</a></li>
-  <li><a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/gsl">Bind GSL to SPVM</a></li>
-  <li><a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/openmp">Bind OpenMP to SPVM</a></li>
-</ul>
-<h3>How to bind C++ Library to SPVM</h3>
-<p>
-  If you want to know more about the bindings of C++ libraries to SPVM, see the example below.
-</p>
-<ul>
-  <li><a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/eigen">Bind Eigen to SPVM</a></li>
-</ul>
-<h3>How to bind CUDA to SPVM</h3>
-<p>
-  If you want to know more about the bindings of CUDA to SPVM, see the example below.
-</p>
-<ul>
-  <li><a href="https://github.com/yuki-kimoto/SPVM/tree/master/examples/native/cuda_add">Bind CUDA to SPVM</a></li>
-</ul>
 
   </div>
   <div class="bottom">

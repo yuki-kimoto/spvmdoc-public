@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/spvmdoc-public/css/common.css">
 
 <title>SPVM Document - Static Perl Virtual Machine. Fast Calculation, Fast Array Operation, and Easy C/C++ Binding.</title>
-<meta name="description" content="SPVM is a Programming launguage which has Perl-like syntax. You can install SPMV from CPAN. Linux/UNIX, Mac, Windows is supported.">
+<meta name="description" content="SPVM Document is moved to SPVM on CPAN.">
   </head>
   <body>
     <div class="container">
@@ -31,54 +31,7 @@
   <div class="middle">
     <h2><a href="/spvmdoc-public/">SPVM Document</a></h2>
 <p>
-  SPVM is a Programming launguage which has <a href="/spvmdoc-public/language.html">Perl-like syntax</a>. You can <a href="/spvmdoc-public/blog/20200630071424.html">install SPMV from CPAN</a>. Linux/UNIX, Mac, Windows is supported.
-</p>
-<pre>
-cpan SPVM
-</pre>
-<p>
-  or
-</p>
-<pre>
-cpanm SPVM
-</pre>
-<p>
-  Perl-like source code is converted to <a href="/spvmdoc-public/blog/20200702071424.html">C shared library</a>. This example is <a href="/spvmdoc-public/blog/20200629071424.html">numeric array operation</a>.
-</p>
-<pre>
-package MyMath : precompile {
-  sub sum : int ($nums : int[]) {
-    
-    my $total = 0;
-    for (my $i = 0; $i &lt; @$nums; $i++) {
-      $total += $nums-&gt;[$i];
-    }
-    
-    return $total;
-  }
-}
-</pre>
-<p>
-  You can call this SPVM subroutine from Perl easily. Note that "~/.spvm_build" directory is needed.
-</p>
-<pre>
-use strict;
-use warnings;
-use FindBin;
-use lib "$FindBin::Bin/lib";
-
-use SPVM 'MyMath';
-
-# Call subroutine
-my $total = MyMath-&gt;sum([3, 6, 8, 9]);
-
-print "Total: $total\n";
-</pre>
-<p>
-  Try the <a href="/spvmdoc-public/benchmark.html">SPVM Benchmark</a> once. The result is amazing.
-</p>
-<p>
-  SPVM also has utilities to <a href="/spvmdoc-public/blog/20200727153549.html">bind C/C++/Cuda</a> functions for even faster peformance. See also <a href="/spvmdoc-public/native-api.html">Native API</a>.
+  SPVM Document is moved to <a href="https://metacpan.org/pod/SPVM">SPVM on CPAN</a>.
 </p>
 <h3 id="tutorial">SPVM Tutorial</h3>
 <ul class="toc">
